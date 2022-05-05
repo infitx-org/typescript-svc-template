@@ -16,7 +16,8 @@
     "lint": "eslint --ext .js,.ts src --color",
     "lint:fix": "eslint --ext .js,.ts src --color --fix",
     "prepare": "npx husky install",
-    "release": "standard-version --releaseCommitMessageFormat 'chore(release): {{currentTag}} [skip ci]'"
+    "release": "standard-version --no-verify --releaseCommitMessageFormat 'chore(release): {{currentTag}} [skip ci]'",
+    "snapshot": "standard-version --no-verify --skip.changelog --prerelease snapshot --releaseCommitMessageFormat 'chore(snapshot): {{currentTag}}'"
   },
   "author": "Shashikant Hirugade",
   "license": "ISC",
@@ -33,5 +34,10 @@
   },
   "dependencies": {
     "standard-version": "^9.3.2"
+  },
+  "standard-version": {
+    "scripts": {
+      "postchangelog": "replace '\\[mojaloop/#(\\d+)\\]\\(https://github.com/mojaloop/(.*)/issues/(\\d+)\\)' '[mojaloop/#$1](https://github.com/mojaloop/project/issues/$1)' CHANGELOG.md"
+    }
   }
 }
