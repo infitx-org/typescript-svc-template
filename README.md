@@ -1,8 +1,8 @@
-# typescript-svc-template
+# typescript-svc-templateddddd
 
 ## Configuration
-
-Here are the options that can be configured through environment variables.
+dsdsds
+Here are the options that cdsdsan be configured through environment variables.
 
 | Environment variable | Description | Example values |
 | -------------------- | ----------- | ------ |
@@ -10,7 +10,7 @@ Here are the options that can be configured through environment variables.
 
 ## Pre-requisites
 
-Install NodejS dependencies:
+Install NodejS dependencies:dsdsds
 
 ```bash
 npm install
