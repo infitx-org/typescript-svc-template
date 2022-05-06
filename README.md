@@ -1,8 +1,8 @@
 # typescript-svc-template
 
-## Configuration
+## Configurationddddd
 
-Here are the options that can be configured through environment variables.
+Here are the options that can be confiddgured through environment variables.
 
 | Environment variable | Description | Example values |
 | -------------------- | ----------- | ------ |
