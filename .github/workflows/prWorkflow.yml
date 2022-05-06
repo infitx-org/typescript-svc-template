@@ -17,5 +17,8 @@ jobs:
   test_unit:
     uses: ./.github/workflows/testUnitJob.yml
 
+  test_coverage:
+    uses: ./.github/workflows/testCoverageJob.yml
+
   test_int:
     uses: ./.github/workflows/testIntJob.yml
