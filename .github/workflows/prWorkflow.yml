@@ -13,3 +13,6 @@ jobs:
 
   test_unit:
     uses: ./.github/workflows/testUnitJob.yml
+
+  test_audit:
+    uses: ./.github/workflows/testAuditJob.yml
