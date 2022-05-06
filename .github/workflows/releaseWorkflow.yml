@@ -12,18 +12,22 @@ jobs:
   test_dependencies:
     uses: ./.github/workflows/testDependencyJob.yml
 
+  test_audit:
+    uses: ./.github/workflows/testAuditJob.yml
+
   test_unit:
     uses: ./.github/workflows/testUnitJob.yml
 
-  test_audit:
-    uses: ./.github/workflows/testAuditJob.yml
+  test_int:
+    uses: ./.github/workflows/testIntJob.yml
 
   release_tag:
     needs:
       - test_lint
       - test_dependencies
-      - test_unit
       - test_audit
+      - test_unit
+      - test_int
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3

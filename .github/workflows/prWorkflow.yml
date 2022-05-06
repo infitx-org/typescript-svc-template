@@ -11,8 +11,11 @@ jobs:
   test_dependencies:
     uses: ./.github/workflows/testDependencyJob.yml
 
+  test_audit:
+    uses: ./.github/workflows/testAuditJob.yml
+
   test_unit:
     uses: ./.github/workflows/testUnitJob.yml
 
-  test_audit:
-    uses: ./.github/workflows/testAuditJob.yml
+  test_int:
+    uses: ./.github/workflows/testIntJob.yml
