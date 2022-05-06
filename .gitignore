@@ -75,3 +75,9 @@ docs/
 
 # OS files
 .DS_Store
+
+# Env files
+**/*.env
+
+# IGNORE files
+**/*IGNORE*

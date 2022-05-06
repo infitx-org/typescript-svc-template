@@ -2,6 +2,12 @@
   "name": "typescript-svc-template",
   "version": "0.0.5",
   "description": "Template for typescript nodejs projects",
+  "license": "Apache-2.0",
+  "author": "ModusBox",
+  "contributors": [
+    "Shashikant Hirugade <shashikant.hirugade@modusbox.com>",
+    "Miguel de Barros <miguel.debarros@modusbox.com>"
+  ],
   "main": "src/index.js",
   "scripts": {
     "pretest": "npm run build",
@@ -19,8 +25,8 @@
     "release": "standard-version --no-verify --releaseCommitMessageFormat 'chore(release): {{currentTag}} [skip ci]'",
     "snapshot": "standard-version --no-verify --skip.changelog --prerelease snapshot --releaseCommitMessageFormat 'chore(snapshot): {{currentTag}}'"
   },
-  "author": "Shashikant Hirugade",
-  "license": "ISC",
+  "dependencies": {
+  },
   "devDependencies": {
     "@commitlint/cli": "^16.2.4",
     "@commitlint/config-conventional": "^16.2.4",
@@ -30,10 +36,8 @@
     "eslint-plugin-react": "^7.29.4",
     "husky": "^7.0.4",
     "jest": "^27.5.1",
+    "standard-version": "^9.3.2",
     "ts-jest": "^27.1.4"
-  },
-  "dependencies": {
-    "standard-version": "^9.3.2"
   },
   "standard-version": {
     "scripts": {
