@@ -23,8 +23,8 @@ COPY package.json package-lock.json* /opt/app/
 RUN npm ci --production
 
 # Copy of dist directory from builder
-COPY --from=builder /opt/app/dist .
+COPY --from=builder /opt/app/dist ./dist
 
 # EXPOSE 3000
 
-CMD [ npm , start ]
+CMD [ "npm" , "start" ]
