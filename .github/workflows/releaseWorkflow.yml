@@ -30,6 +30,7 @@ jobs:
       - test_dependencies
       - test_audit
       - test_unit
+      - test_coverage
       - test_int
     runs-on: ubuntu-latest
     steps:
