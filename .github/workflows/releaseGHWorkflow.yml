@@ -1,9 +1,9 @@
-name: Create github release
+name: Create Github Release
 
 on:
   push:
     tags: 
-      - 'v*'
+      - 'v[12].[0-9]+.[0-9]+'
 
 jobs:
   build:

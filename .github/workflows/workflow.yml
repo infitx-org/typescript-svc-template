@@ -1,9 +1,0 @@
-name: Node Continuous Integration
-
-on:
-  pull_request:
-    branches: [ main ]
-
-jobs:
-  test_pull_request:
-    uses: ./.github/workflows/unitTestJob.yml

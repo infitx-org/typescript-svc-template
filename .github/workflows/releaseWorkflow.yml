@@ -1,4 +1,4 @@
-name: Create the release
+name: Create Tagged Release
 
 on:
   push:
@@ -6,17 +6,26 @@ on:
       - main
 
 jobs:
+  test_lint:
+    uses: ./.github/workflows/testLintJob.yml
+
+  test_dependencies:
+    uses: ./.github/workflows/testDependencyJob.yml
+
   test_unit:
-    uses: ./.github/workflows/unitTestJob.yml
+    uses: ./.github/workflows/testUnitJob.yml
 
   release_tag:
-    needs: test_unit
+    needs:
+      - test_lint
+      - test_dependencies
+      - test_unit
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v1
         with:
-          node-version: 16
+          node-version: lts/*
       - name: Configure git
         run: | 
           git config user.name "${{ github.event.pusher.name }}"

@@ -15,25 +15,28 @@
  *  limitations under the License                                             *
  ******************************************************************************/
 
-import MathLib from './lib/math';
-
-/* Instructions
+/* Example
  * 
- * 1. Choose one of the following styles below, either an APPLICATION or a LIBRARY
- * 2. Removed the application block and comments.
+ * This is an example Jest test for the MathLib example module.
  * 
  */
 
-//* APPLICATION: {
+import MathLib from "../../../src/lib/math";
 
-console.log(`1+1=${MathLib.add(1, 1)}`);
+describe ('MathLib', () => {
+  describe("test add function", () => {
+    it("should return 15 for add(10,5)", () => {
+      expect(MathLib.add(10, 5)).toBe(15);
+    });
+  
+    it("should return 5 for add(2,3)", () => {
+      expect(MathLib.add(2, 3)).toBe(5);
+    });
+  });
 
-console.log(`3x3=${MathLib.mul(3, 3)}`);
-
-//* }
-
-//* LIBRARY: {
-
-export default MathLib;
-
-//* }
+  describe("test mul function", () => {
+    it("should return 15 for mul(3,5)", () => {
+      expect(MathLib.mul(3, 5)).toBe(15);
+    });
+  });
+})

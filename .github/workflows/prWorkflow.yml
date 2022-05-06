@@ -1,0 +1,15 @@
+name: PR Checks
+
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test_lint:
+    uses: ./.github/workflows/testLintJob.yml
+
+  test_dependencies:
+    uses: ./.github/workflows/testDependencyJob.yml
+
+  test_unit:
+    uses: ./.github/workflows/testUnitJob.yml
