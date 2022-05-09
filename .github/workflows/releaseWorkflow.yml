@@ -33,5 +33,5 @@ jobs:
       - test_coverage
       - test_int
     uses: ./.github/workflows/createReleaseTagJob.yml
-    with:
+    secrets:
       OVERRIDE_GITHUB_TOKEN:  ${{ secrets.PSO_GITHUB_TOKEN }}
