@@ -1,0 +1,74 @@
+name: Create Release Tag
+
+on:
+  workflow_call: {}
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install dependencies
+        run: |
+          sudo apt install -y jq
+      - uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.PSO_GITHUB_TOKEN }}
+      - name: Read .nvmrc
+        run: echo ::set-output name=NVMRC::$(cat .nvmrc)
+        id: nvm
+      - name: Setup Node@${{ steps.nvm.outputs.NVMRC }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: '${{ steps.nvm.outputs.NVMRC }}'
+      - name: Configure git
+        run: | 
+          git config user.name "${{ github.event.pusher.name }}"
+          git config user.email "${{ github.event.pusher.email }}"     
+      - name: Create the release      
+        run: |
+          npm ci
+          npm run release
+        # env:
+        #   GITHUB_TOKEN: ${{ secrets.PSO_GITHUB_TOKEN }}
+      - name: Fetch changelog
+        run: |
+          git diff --no-indent-heuristic main~1 HEAD CHANGELOG.md | sed -n '/^+[^+]/ s/^+//p' > /tmp/changes
+          echo "RELEASE_CHANGES=$(cat /tmp/changes)" >> $GITHUB_ENV
+          echo "RELEASE_TAG=$(cat package-lock.json | jq -r .version)" >> $GITHUB_ENV
+      - name: DEBUG
+        run: |
+          echo "---=== cat /tmp/changes ===---"
+          cat /tmp/changes
+          echo "------------------------------"
+          echo "RELEASE_CHANGES=$RELEASE_CHANGES"
+          echo "RELEASE_TAG=$RELEASE_TAG"
+      # - name: Push the release @${{ env.RELEASE_TAG }}
+      #   run: git push --follow-tags
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Push the release @${{ env.RELEASE_TAG }}
+        run: git push --follow-tags
+        env:
+          GITHUB_TOKEN: ${{ secrets.PSO_GITHUB_TOKEN }}
+      # - name: Create Release @${{ env.RELEASE_TAG }}
+      #   id: create_release
+      #   uses: actions/create-release@v1
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+      #   with:
+      #     tag_name: ${{ env.RELEASE_TAG }}
+      #     release_name: Release v${{ env.RELEASE_TAG }}
+      #     body: ${{ env.RELEASE_CHANGES }}
+      #     draft: false
+      #     prerelease: false
+      # - name: Upload Release Asset
+      #   id: upload-release-asset 
+      #   uses: actions/upload-release-asset@v1
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   with:
+      #     upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+      #     asset_path: ./CHANGELOG.md
+      #     asset_name: CHANGELOG.md
+      #     asset_content_type: text/markdown
+
