@@ -15,17 +15,17 @@ jobs:
         uses: actions/checkout@v3
       - name: Fetch changelog
         run: |
-          git diff --no-indent-heuristic master~1 HEAD CHANGELOG.md | sed -n '/^+[^+]/ s/^+//p' > /tmp/changes
-          echo 'RELEASE_CHANGES=`cat /tmp/changes`' >> $GITHUB_ENV
-          echo 'RELEASE_TAG=`cat package-lock.json | jq -r .version`' >> $GITHUB_ENV 
-      - name: Create Release
+          git diff --no-indent-heuristic main~1 HEAD CHANGELOG.md | sed -n '/^+[^+]/ s/^+//p' > /tmp/changes
+          echo "RELEASE_CHANGES=$(cat /tmp/changes)" >> $GITHUB_ENV
+          echo "RELEASE_TAG=$(cat package-lock.json | jq -r .version)" >> $GITHUB_ENV
+      - name: Create Release @${{ env.RELEASE_TAG }}
         id: create_release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
         with:
-          tag_name: ${{ env.RELEASE_TAG }}
-          release_name: Release ${{ env.RELEASE_TAG }}
+          tag_name: v${{ env.RELEASE_TAG }}
+          release_name: Release v${{ env.RELEASE_TAG }}
           body: ${{ env.RELEASE_CHANGES }}
           draft: false
           prerelease: false
