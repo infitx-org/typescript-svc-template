@@ -1,7 +1,11 @@
 name: Create Release Tag
 
 on:
-  workflow_call: {}
+  workflow_call:
+    secrets:
+      OVERRIDE_GITHUB_TOKEN:
+        description: 'Github CI-CD Token'
+        required: true
 
 jobs:
   test:
@@ -12,7 +16,7 @@ jobs:
           sudo apt install -y jq
       - uses: actions/checkout@v3
         with:
-          token: ${{ secrets.PSO_GITHUB_TOKEN }}
+          token: ${{ secrets.OVERRIDE_GITHUB_TOKEN }}
       - name: Read .nvmrc
         run: echo ::set-output name=NVMRC::$(cat .nvmrc)
         id: nvm
@@ -29,7 +33,7 @@ jobs:
           npm ci
           npm run release
         # env:
-        #   GITHUB_TOKEN: ${{ secrets.PSO_GITHUB_TOKEN }}
+        #   GITHUB_TOKEN: ${{ secrets.OVERRIDE_GITHUB_TOKEN }}
       - name: Fetch changelog
         run: |
           git diff --no-indent-heuristic main~1 HEAD CHANGELOG.md | sed -n '/^+[^+]/ s/^+//p' > /tmp/changes
@@ -49,7 +53,7 @@ jobs:
       - name: Push the release @${{ env.RELEASE_TAG }}
         run: git push --follow-tags
         env:
-          GITHUB_TOKEN: ${{ secrets.PSO_GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.OVERRIDE_GITHUB_TOKEN }}
       # - name: Create Release @${{ env.RELEASE_TAG }}
       #   id: create_release
       #   uses: actions/create-release@v1
