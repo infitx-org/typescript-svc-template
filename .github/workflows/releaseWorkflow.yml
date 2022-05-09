@@ -34,6 +34,9 @@ jobs:
       - test_int
     runs-on: ubuntu-latest
     steps:
+      - name: Install dependencies
+        run: |
+          sudo apt install -y jq
       - uses: actions/checkout@v3
       - name: Read .nvmrc
         run: echo ::set-output name=NVMRC::$(cat .nvmrc)
