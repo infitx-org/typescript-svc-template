@@ -32,7 +32,7 @@ jobs:
       - test_unit
       - test_coverage
       - test_int
-    uses: ./.github/workflows/createReleaseTagJob.yml
+    uses:  modusbox/github-actions/.github/workflows/createReleaseTagJob.yml@main
     secrets:
       GIT_KEY: ${{ secrets.PSO_GIT_KEY }}
       GIT_USER: ${{ secrets.PSO_GIT_USER }}
@@ -41,7 +41,7 @@ jobs:
   notify_release_tag:
     needs:
       - release_tag
-    uses: ./.github/workflows/notiyReleaseJob.yml
+    uses:  modusbox/github-actions/.github/workflows/notiyReleaseJob.yml@main
     with:
       TYPE: tag
       RELEASE_VERSION: v${{ needs.release_tag.outputs.VERSION }}
@@ -53,7 +53,7 @@ jobs:
   release_gh:
     needs:
       - release_tag
-    uses: ./.github/workflows/createReleaseGHJob.yml
+    uses:  modusbox/github-actions/.github/workflows/createReleaseGHJob.yml@main
     with:
       RELEASE_VERSION: v${{ needs.release_tag.outputs.VERSION }}
     secrets:
@@ -63,7 +63,7 @@ jobs:
     needs:
       - release_tag
       - release_gh
-    uses: ./.github/workflows/notiyReleaseJob.yml
+    uses:  modusbox/github-actions/.github/workflows/notiyReleaseJob.yml@main
     with:
       TYPE: Github Release
       RELEASE_VERSION: v${{ needs.release_tag.outputs.VERSION }}
