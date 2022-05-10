@@ -6,19 +6,19 @@ on:
 
 jobs:
   test_lint:
-    uses: ./.github/workflows/testLintJob.yml
+    uses: modusbox/github-actions/.github/workflows/testLintJob.yml@main
 
   test_dependencies:
-    uses: ./.github/workflows/testDependencyJob.yml
+    uses: modusbox/github-actions/.github/workflows/testDependencyJob.yml@main
 
   test_audit:
-    uses: ./.github/workflows/testAuditJob.yml
+    uses: modusbox/github-actions/.github/workflows/testAuditJob.yml@main
 
   test_unit:
-    uses: ./.github/workflows/testUnitJob.yml
+    uses: modusbox/github-actions/.github/workflows/testUnitJob.yml@main
 
   test_coverage:
-    uses: ./.github/workflows/testCoverageJob.yml
+    uses: modusbox/github-actions/.github/workflows/testCoverageJob.yml@main
 
   test_int:
-    uses: ./.github/workflows/testIntJob.yml
+    uses: modusbox/github-actions/.github/workflows/testIntJob.yml@main
