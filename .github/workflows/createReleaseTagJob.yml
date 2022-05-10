@@ -63,7 +63,7 @@ jobs:
           git push
       - name: Push tag for release @ v${{ env.RELEASE_TAG }}
         run: |
-          git push v${{ env.RELEASE_TAG }}
+          git push origin v${{ env.RELEASE_TAG }}
       # - name: Create Release @${{ env.RELEASE_TAG }}
       #   id: create_release
       #   uses: actions/create-release@v1
