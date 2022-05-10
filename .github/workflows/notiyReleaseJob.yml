@@ -6,11 +6,22 @@ on:
       PROJECT:
         description: 'Name of project'
         type: string
-        required: true
+        required: false
+        default: ${{ github.repository }}
       TYPE:
         description: 'Type of release Notification, e.g. Tag, Github, NPM, Docker, etc'
         type: string
         required: true
+      CHANGE_URL:
+        description: 'URL for commit or pr'
+        type: string
+        required: false
+        default: ${{ github.event.pull_request.html_url || github.event.head_commit.url }}
+      JOB_URL:
+        description: 'URL for Job'
+        type: string
+        required: false
+        default: ${{ github.event.pull_request.html_url || github.event.head_commit.url }}
       RELEASE_VERSION:
         description: 'Release information, e.g. v{{version}}'
         type: string
@@ -78,7 +89,7 @@ jobs:
                         "type": "section",
                         "text": {
                             "type": "mrkdwn",
-                            "text": "Status: *${{ job.status }}* @ ${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
+                            "text": "Status: *${{ job.status }}* @ ${{ inputs.CHANGE_URL }}"
                         },
                         "accessory": {
                             "type": "button",
@@ -88,7 +99,7 @@ jobs:
                                 "emoji": true
                             },
                             "value": "visit_job_btn",
-                            "url": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}",
+                            "url": "${{ inputs.JOB_URL }}",
                             "action_id": "button-action"
                         }
                     },
