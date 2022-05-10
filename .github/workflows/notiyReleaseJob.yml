@@ -2,6 +2,19 @@ name: Notify
 
 on:
   workflow_call:
+    inputs:
+      TYPE:
+        description: 'Type of release Notification, e.g. Tag, Github, NPM, Docker, etc'
+        type: string
+        required: true
+      RELEASE_TAG:
+        description: 'Release information, e.g. v12.1.0, etc'
+        type: string
+        required: true
+      RELEASE_URL:
+        description: 'Release URL, e.g. http://docker/tag, etc'
+        type: string
+        required: true
     secrets:
       SLACK_BOT_TOKEN:
         description: 'Slack Bot Token'

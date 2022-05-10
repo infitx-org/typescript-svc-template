@@ -41,7 +41,11 @@ jobs:
   notify_tag:
     needs:
       - release_tag
-    uses: ./.github/workflows/notiyReleaseJob.yml 
+    uses: ./.github/workflows/notiyReleaseJob.yml
+    with:
+      TYPE: tag
+      RELEASE_TAG: v${{ needs.release_tag.outputs.VERSION }}
+      RELEASE_URL: http://test.local
     secrets:
       SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
       SLACK_CHANEL: ${{ secrets.SLACK_CHANNEL_PSO_RELEASE }}

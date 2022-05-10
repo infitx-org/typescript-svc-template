@@ -12,10 +12,16 @@ on:
       GIT_EMAIL:
         description: 'User email address'
         required: true
+    outputs:
+      VERSION:
+        description: "Tagged release version"
+        value: ${{ jobs.release.outputs.VERSION }}
 
 jobs:
   release:
     runs-on: ubuntu-latest
+    outputs:
+      VERSION: ${{ steps.output-version.outputs.version }}
     steps:
       - name: Install dependencies
         run: |
@@ -64,6 +70,8 @@ jobs:
       - name: Push tag for release @ v${{ env.RELEASE_TAG }}
         run: |
           git push origin v${{ env.RELEASE_TAG }}
+      - id: output-version
+        run: echo "::set-output name=version::${{ env.RELEASE_TAG }}"
       # - name: Create Release @${{ env.RELEASE_TAG }}
       #   id: create_release
       #   uses: actions/create-release@v1
