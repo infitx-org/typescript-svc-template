@@ -46,7 +46,7 @@ jobs:
       - release_tag
     uses:  modusbox/github-actions-node/.github/workflows/notiyReleaseJob.yml@main
     with:
-      # CONDITION: ${{ failure() }}
+      CONDITION: failure
       TYPE: tag
       RELEASE_VERSION: v${{ needs.release_tag.outputs.VERSION }}
       RELEASE_URL: ${{ github.server_url }}/${{ github.repository }}/releases/tag/v${{ needs.release_tag.outputs.VERSION }}
