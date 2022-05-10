@@ -133,7 +133,7 @@ jobs:
         id: docker_build
         uses: docker/build-push-action@v3
         with:
-          push: ${{ github.event_name == 'release' }}
+          push: true
           # The following two lines are required in concert with the checkout action above, because
           # the Dockerfile is in a subdirectory in the repo.
           context: .
