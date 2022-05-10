@@ -10,19 +10,19 @@ jobs:
     uses: modusbox/github-actions/.github/workflows/reusable-workflow.yml@main
 
   test_dependencies:
-    uses: modusbox/github-actions/.github/workflows/testDependencyJob.yml
+    uses: modusbox/github-actions/.github/workflows/testDependencyJob.yml@main
 
   test_audit:
-    uses: modusbox/github-actions/.github/workflows/testAuditJob.yml
+    uses: modusbox/github-actions/.github/workflows/testAuditJob.yml@main
 
   test_unit:
-    uses: modusbox/github-actions/.github/workflows/testUnitJob.yml
+    uses: modusbox/github-actions/.github/workflows/testUnitJob.yml@main
 
   test_coverage:
-    uses: modusbox/github-actions/.github/workflows/testCoverageJob.yml
+    uses: modusbox/github-actions/.github/workflows/testCoverageJob.yml@main
 
   test_int:
-    uses: modusbox/github-actions/.github/workflows/testIntJob.yml
+    uses: modusbox/github-actions/.github/workflows/testIntJob.yml@main
 
   release_tag:
     needs:
