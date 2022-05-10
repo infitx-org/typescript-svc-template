@@ -20,7 +20,7 @@ on:
         type: string
         required: true
       CUSTOM_MSG:
-        description: 'General custom message'
+        description: 'Optional custom message'
         type: string
         required: false
     secrets:
