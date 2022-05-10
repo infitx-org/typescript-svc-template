@@ -21,23 +21,23 @@
 
 name: Publish image
 
-on:
-  # The build will run on all of the following event types, however an image will _only_ be
-  # published for a release.
-  release:
-    types: [published]
-
 # on:
-#   workflow_call:
-#     inputs:
-#       RELEASE_VERSION:
-#         description: 'Release information, e.g. v{{version}}'
-#         type: string
-#         required: true
-#     secrets:
-#       GH_TOKEN:
-#         description: 'Github API Token'
-#         required: true
+#   # The build will run on all of the following event types, however an image will _only_ be
+#   # published for a release.
+#   release:
+#     types: [published]
+
+on:
+  workflow_call:
+    inputs:
+      RELEASE_VERSION:
+        description: 'Release information, e.g. v{{version}}'
+        type: string
+        required: true
+    secrets:
+      GH_TOKEN:
+        description: 'Github API Token'
+        required: true
 
 env:
   REGISTRY: ghcr.io
@@ -53,7 +53,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-
+        with:
+          ref: ${{ inputs.RELEASE_VERSION }}
       - name: Log in to the Container registry
         uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
         with:

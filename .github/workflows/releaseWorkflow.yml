@@ -77,3 +77,28 @@ jobs:
     secrets:
       SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
       SLACK_CHANEL: ${{ secrets.SLACK_CHANNEL_PSO_RELEASE }}
+
+  publish_image:
+    needs:
+      - release_tag
+      - release_gh
+    uses:  ./.github/workflows/publishImageJob.yml
+    with:
+      RELEASE_VERSION: v${{ needs.release_tag.outputs.VERSION }}
+    secrets:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  notify_publish_image:
+    needs:
+      - release_tag
+      - release_gh
+      - publish_image
+    uses:  modusbox/github-actions-node/.github/workflows/notiyReleaseJob.yml@main
+    with:
+      CONDITION: always
+      TYPE: Image Release
+      RELEASE_VERSION: v${{ needs.release_tag.outputs.VERSION }}
+      RELEASE_URL: ${{ github.server_url }}/${{ github.repository }}/releases/tag/v${{ needs.release_tag.outputs.VERSION }}
+    secrets:
+      SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+      SLACK_CHANEL: ${{ secrets.SLACK_CHANNEL_PSO_RELEASE }}
