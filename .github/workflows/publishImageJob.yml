@@ -133,7 +133,7 @@ jobs:
           # the Dockerfile is in a subdirectory in the repo.
           context: .
           file: Dockerfile
-          tags: ${{ steps.docker_meta.outputs.tags }}
+          tags: ghcr.io/${{ github.repository }}:latest,ghcr.io/${{ github.repository }}:${{ inputs.RELEASE_VERSION }}
           labels: ${{ steps.docker_meta.outputs.labels }}
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
