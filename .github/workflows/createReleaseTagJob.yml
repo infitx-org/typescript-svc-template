@@ -1,10 +1,16 @@
-name: Create Release Tag
+name: Create Release Tag Job
 
 on:
   workflow_call:
     secrets:
-      OVERRIDE_GITHUB_TOKEN:
-        description: 'Github CI-CD Token'
+      GIT_KEY:
+        description: 'SSH Private Key'
+        required: true
+      GIT_USER:
+        description: 'User identifier'
+        required: true
+      GIT_EMAIL:
+        description: 'User email address'
         required: true
 
 jobs:
@@ -16,7 +22,7 @@ jobs:
           sudo apt install -y jq
       - uses: actions/checkout@v3
         with:
-          token: ${{ secrets.OVERRIDE_GITHUB_TOKEN }}
+          ssh-key: ${{ secrets.GIT_KEY }}
       - name: Read .nvmrc
         run: echo ::set-output name=NVMRC::$(cat .nvmrc)
         id: nvm
@@ -41,19 +47,19 @@ jobs:
           echo "RELEASE_TAG=$(cat package-lock.json | jq -r .version)" >> $GITHUB_ENV
       - name: DEBUG
         run: |
-          echo "---=== cat /tmp/changes ===---"
+          echo "CHANGES INCLUDED IN THIS TAGGED RELEASE:"
           cat /tmp/changes
           echo "------------------------------"
           echo "RELEASE_CHANGES=$RELEASE_CHANGES"
           echo "RELEASE_TAG=$RELEASE_TAG"
-      # - name: Push the release @${{ env.RELEASE_TAG }}
-      #   run: git push --follow-tags
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Push the release @${{ env.RELEASE_TAG }}
-        run: git push --follow-tags
+      - name: Push the release @ v${{ env.RELEASE_TAG }}
+        run: |
+          git config user.email ${GIT_CI_EMAIL}}
+          git config user.name ${{GIT_CI_USER}}
+          git push --follow-tags
         env:
-          GITHUB_TOKEN: ${{ secrets.OVERRIDE_GITHUB_TOKEN }}
+          GIT_CI_EMAIL: ${{ secrets.GIT_EMAIL }}
+          GIT_CI_USER: ${{ secrets.GIT_USER }}
       # - name: Create Release @${{ env.RELEASE_TAG }}
       #   id: create_release
       #   uses: actions/create-release@v1
@@ -75,4 +81,3 @@ jobs:
       #     asset_path: ./CHANGELOG.md
       #     asset_name: CHANGELOG.md
       #     asset_content_type: text/markdown
-
