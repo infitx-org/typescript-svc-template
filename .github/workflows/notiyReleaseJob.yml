@@ -3,6 +3,10 @@ name: Notify
 on:
   workflow_call:
     inputs:
+      PROJECT:
+        description: 'Name of project'
+        type: string
+        required: true
       TYPE:
         description: 'Type of release Notification, e.g. Tag, Github, NPM, Docker, etc'
         type: string
@@ -15,6 +19,14 @@ on:
         description: 'Release URL, e.g. http://docker/tag, etc'
         type: string
         required: true
+      # RELEASE_URL:
+      #   description: 'Release URL, e.g. http://docker/tag, etc'
+      #   type: string
+      #   required: true
+      CUSTOM_MSG:
+        description: 'General custom message'
+        type: string
+        required: false
     secrets:
       SLACK_BOT_TOKEN:
         description: 'Slack Bot Token'
@@ -35,17 +47,76 @@ jobs:
         # See also: https://api.slack.com/methods/chat.postMessage#channels
         channel-id: ${{ secrets.SLACK_CHANEL }}
         # For posting a rich message using Block Kit
+          #         {
+          #   "text": "GitHub Action build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}",
+          #   "blocks": [
+          #     {
+          #       "type": "section",
+          #       "text": {
+          #         "type": "mrkdwn",
+          #         "text": "GitHub Action build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
+          #       }
+          #     }
+          #   ]
+          # }
+          # ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         payload: |
           {
-            "text": "GitHub Action build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}",
+            "color": "#5abc54",
             "blocks": [
-              {
-                "type": "section",
-                "text": {
-                  "type": "mrkdwn",
-                  "text": "GitHub Action build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
+                {
+                    "type": "header",
+                    "text": {
+                        "type": "plain_text",
+                        "text": "${{ inputs.PROJECT }}",
+                        "emoji": true
+                    }
+                },
+                {
+                    "type": "divider"
+                },
+                {
+                    "type": "section",
+                    "text": {
+                        "type": "mrkdwn",
+                        "text": "Type: `"${{ inputs.TYPE }}`\nTag: `"${{ inputs.RELEASE_TAG }}`"
+                    }
+                },
+                {
+                    "type": "section",
+                    "text": {
+                        "type": "mrkdwn",
+                        "text": ":shipit: ${{ inputs.RELEASE_URL }}"
+                    }
+                },
+                {
+                    "type": "section",
+                    "text": {
+                        "type": "mrkdwn",
+                        "text": "Status: *${{ job.status }}* @ ${{ github.event.head_commit.url }}"
+                    },
+                    "accessory": {
+                        "type": "button",
+                        "text": {
+                            "type": "plain_text",
+                            "text": "View",
+                            "emoji": true
+                        },
+                        "value": "visit_job_btn",
+                        "url": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}",
+                        "action_id": "button-action"
+                    }
+                },
+                {
+                    "type": "divider"
+                },
+                {
+                    "type": "section",
+                    "text": {
+                        "type": "mrkdwn",
+                        "text": "${{ inputs.CUSTOM_MSG }} "
+                    }
                 }
-              }
             ]
           }
       env:
