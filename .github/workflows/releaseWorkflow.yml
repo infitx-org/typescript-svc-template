@@ -15,6 +15,9 @@ jobs:
   test_audit:
     uses: modusbox/github-actions-node/.github/workflows/testAuditJob.yml@main
 
+  test_license:
+    uses: modusbox/github-actions-node/.github/workflows/testLicenseJob.yml@main
+
   test_unit:
     uses: modusbox/github-actions-node/.github/workflows/testUnitJob.yml@main
 
