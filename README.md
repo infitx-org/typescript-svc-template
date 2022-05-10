@@ -7,7 +7,6 @@ Here are the options that can be configured through environment variables.
 | Environment variable | Description | Example values |
 | -------------------- | ----------- | ------ |
 | ...   | ... | ... |
-| ...   | ... | ... |
 
 ## Pre-requisites
 
