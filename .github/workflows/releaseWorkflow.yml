@@ -46,8 +46,7 @@ jobs:
       PROJECT: ${{ github.repository }}
       TYPE: tag
       RELEASE_TAG: v${{ needs.release_tag.outputs.VERSION }}
-      RELEASE_URL: http://test.local
-      # RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+      RELEASE_URL: ${{ github.server_url }}/${{ github.repository }}/releases/tag/v${{ needs.release_tag.outputs.VERSION }}
     secrets:
       SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
       SLACK_CHANEL: ${{ secrets.SLACK_CHANNEL_PSO_RELEASE }}
