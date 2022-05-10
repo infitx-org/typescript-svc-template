@@ -7,22 +7,22 @@ on:
 
 jobs:
   test_lint:
-    uses: ./.github/workflows/testLintJob.yml
+    uses: modusbox/github-actions/.github/workflows/reusable-workflow.yml@main
 
   test_dependencies:
-    uses: ./.github/workflows/testDependencyJob.yml
+    uses: modusbox/github-actions/.github/workflows/testDependencyJob.yml
 
   test_audit:
-    uses: ./.github/workflows/testAuditJob.yml
+    uses: modusbox/github-actions/.github/workflows/testAuditJob.yml
 
   test_unit:
-    uses: ./.github/workflows/testUnitJob.yml
+    uses: modusbox/github-actions/.github/workflows/testUnitJob.yml
 
   test_coverage:
-    uses: ./.github/workflows/testCoverageJob.yml
+    uses: modusbox/github-actions/.github/workflows/testCoverageJob.yml
 
   test_int:
-    uses: ./.github/workflows/testIntJob.yml
+    uses: modusbox/github-actions/.github/workflows/testIntJob.yml
 
   release_tag:
     needs:
@@ -34,4 +34,6 @@ jobs:
       - test_int
     uses: ./.github/workflows/createReleaseTagJob.yml
     secrets:
-      OVERRIDE_GITHUB_TOKEN:  ${{ secrets.PSO_GITHUB_TOKEN }}
+      GIT_KEY: ${{ secrets.PSO_GIT_KEY }}
+      GIT_USER: ${{ secrets.PSO_GIT_USER }}
+      GIT_EMAIL: ${{ secrets.PSO_GIT_EMAIL }}
