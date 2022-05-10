@@ -38,6 +38,14 @@ jobs:
       GIT_USER: ${{ secrets.PSO_GIT_USER }}
       GIT_EMAIL: ${{ secrets.PSO_GIT_EMAIL }}
 
+  notify_tag:
+    needs:
+      - release_tag
+    uses: ./.github/workflows/notiyReleaseJob.yml 
+    secrets:
+      SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+      SLACK_CHANEL: ${{ secrets.SLACK_CHANNEL_PSO_RELEASE }}
+
   # release_gh:
   #   needs:
   #     - release_tag
