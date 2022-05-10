@@ -92,33 +92,33 @@ jobs:
         uses: actions/checkout@v3
         with:
           ref: ${{ inputs.RELEASE_VERSION }}
-      - name: Docker meta
-        id: docker_meta
-        uses: crazy-max/ghaction-docker-meta@v1
-        with:
-          # Except for Dockerhub, which is the default, tags need to have the registry name in
-          # them, e.g. ghcr.io for Github container registry, or gcr.io for Google container
-          # registry.
-          # Note that the generated tags will look like:
-          #   ghcr.io/{owner}/{repo}:version
-          images: ghcr.io/${{ github.repository }}
-          # For a release v1.2.3, we'll produce the following image tags
-          #   v1.2.3
-          #   1.2.3
-          #   1.2
-          #   latest
-          # Semver pre-release versions are also supported
-          # See also:
-          # https://github.com/crazy-max/ghaction-docker-meta/tree/0a412843f87333854fa03a809b74056b64c6f31a#handle-semver-tag
-          tag-semver: |
-            {{raw}}
-            {{version}}
-            {{major}}.{{minor}}
-          label-custom: |
-            org.opencontainers.image.vendor=ModusBox Inc.
-            org.opencontainers.image.licenses=Apache-2.0
-            org.opencontainers.image.version=${{ inputs.RELEASE_VERSION }}
-            org.opencontainers.image.source=https://github.com/${{ github.repository }}/tree/${{ github.sha }}
+      # - name: Docker meta
+      #   id: docker_meta
+      #   uses: crazy-max/ghaction-docker-meta@v1
+      #   with:
+      #     # Except for Dockerhub, which is the default, tags need to have the registry name in
+      #     # them, e.g. ghcr.io for Github container registry, or gcr.io for Google container
+      #     # registry.
+      #     # Note that the generated tags will look like:
+      #     #   ghcr.io/{owner}/{repo}:version
+      #     images: ghcr.io/${{ github.repository }}
+      #     # For a release v1.2.3, we'll produce the following image tags
+      #     #   v1.2.3
+      #     #   1.2.3
+      #     #   1.2
+      #     #   latest
+      #     # Semver pre-release versions are also supported
+      #     # See also:
+      #     # https://github.com/crazy-max/ghaction-docker-meta/tree/0a412843f87333854fa03a809b74056b64c6f31a#handle-semver-tag
+      #     tag-semver: |
+      #       {{raw}}
+      #       {{version}}
+      #       {{major}}.{{minor}}
+      #     label-custom: |
+      #       org.opencontainers.image.vendor=ModusBox Inc.
+      #       org.opencontainers.image.licenses=Apache-2.0
+      #       org.opencontainers.image.version=${{ inputs.RELEASE_VERSION }}
+      #       org.opencontainers.image.source=https://github.com/${{ github.repository }}/tree/${{ github.sha }}
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
       - name: Set up Docker Buildx
