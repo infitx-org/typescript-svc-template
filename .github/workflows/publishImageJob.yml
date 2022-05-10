@@ -101,7 +101,10 @@ jobs:
             org.opencontainers.image.vendor=ModusBox Inc.
             org.opencontainers.image.licenses=Apache-2.0
             org.opencontainers.image.version=${{ inputs.RELEASE_VERSION }}
-            org.opencontainers.image.source=https://github.com/${{ github.repository }}/tree/${{ github.sha }}
+            org.opencontainers.image.source= ${{ github.server_url }}/${{ github.repository }}/releases/tag/${{ inputs.RELEASE_VERSION }}
+          tags: |
+            # set latest tag for master branch
+            type=raw,value=latest,enable=${{ github.ref == format('refs/heads/{0}', 'main') }}
       # - name: Docker meta
       #   id: docker_meta
       #   uses: crazy-max/ghaction-docker-meta@v1
@@ -129,6 +132,7 @@ jobs:
       #       org.opencontainers.image.licenses=Apache-2.0
       #       org.opencontainers.image.version=${{ inputs.RELEASE_VERSION }}
       #       org.opencontainers.image.source=https://github.com/${{ github.repository }}/tree/${{ github.sha }}
+      #       https://github.com/modusbox/typescript-svc-template/releases/tag/v0.0.54
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
       - name: Set up Docker Buildx
