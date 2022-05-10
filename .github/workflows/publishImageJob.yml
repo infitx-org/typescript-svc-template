@@ -96,7 +96,7 @@ jobs:
           # registry.
           # Note that the generated tags will look like:
           #   ghcr.io/{owner}/{repo}:version
-          images: ghcr.io/${{ github.repository }
+          images: ghcr.io/${{ github.repository }]
           # For a release v1.2.3, we'll produce the following image tags
           #   v1.2.3
           #   1.2.3
