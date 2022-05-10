@@ -45,7 +45,7 @@ jobs:
     with:
       PROJECT: ${{ github.repository }}
       TYPE: tag
-      RELEASE_TAG: v${{ needs.release_tag.outputs.VERSION }}
+      RELEASE_VERSION: v${{ needs.release_tag.outputs.VERSION }}
       RELEASE_URL: ${{ github.server_url }}/${{ github.repository }}/releases/tag/v${{ needs.release_tag.outputs.VERSION }}
     secrets:
       SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
