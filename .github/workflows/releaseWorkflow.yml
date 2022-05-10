@@ -7,7 +7,7 @@ on:
 
 jobs:
   test_lint:
-    uses: modusbox/github-actions/.github/workflows/reusable-workflow.yml@main
+    uses: modusbox/github-actions/.github/workflows/testLintJob.yml@main
 
   test_dependencies:
     uses: modusbox/github-actions/.github/workflows/testDependencyJob.yml@main
