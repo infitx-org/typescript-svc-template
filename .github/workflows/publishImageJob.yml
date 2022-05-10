@@ -36,11 +36,9 @@ on:
         required: true
       RELEASE_LABEL:
         description: 'Release label, e.g. latest, snapshot'
-        type: choice
+        type: string
         default: latest
-        options:
-        - latest
-        - snapshot
+        required: false
     secrets:
       GH_TOKEN:
         description: 'Github API Token'
