@@ -79,7 +79,7 @@ jobs:
                     "type": "section",
                     "text": {
                         "type": "mrkdwn",
-                        "text": "Type: `"${{ inputs.TYPE }}`\nTag: `"${{ inputs.RELEASE_TAG }}`"
+                        "text": "Type: `${{ inputs.TYPE }}`\nTag: `${{ inputs.RELEASE_TAG }}`"
                     }
                 },
                 {
