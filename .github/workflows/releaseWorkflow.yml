@@ -85,6 +85,7 @@ jobs:
     uses:  ./.github/workflows/publishImageJob.yml
     with:
       RELEASE_VERSION: v${{ needs.release_tag.outputs.VERSION }}
+      SOURCE_URL: ${{ github.server_url }}/${{ github.repository }}/releases/tag/${{ inputs.RELEASE_VERSION }}
     secrets:
       USER: ${{ github.actor }}
       PASSWORD: ${{ secrets.GITHUB_TOKEN }}
