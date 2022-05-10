@@ -38,12 +38,11 @@ jobs:
       GIT_USER: ${{ secrets.PSO_GIT_USER }}
       GIT_EMAIL: ${{ secrets.PSO_GIT_EMAIL }}
 
-  notify_tag:
+  notify_release_tag:
     needs:
       - release_tag
     uses: ./.github/workflows/notiyReleaseJob.yml
     with:
-      PROJECT: ${{ github.repository }}
       TYPE: tag
       RELEASE_VERSION: v${{ needs.release_tag.outputs.VERSION }}
       RELEASE_URL: ${{ github.server_url }}/${{ github.repository }}/releases/tag/v${{ needs.release_tag.outputs.VERSION }}
@@ -51,7 +50,19 @@ jobs:
       SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
       SLACK_CHANEL: ${{ secrets.SLACK_CHANNEL_PSO_RELEASE }}
 
-  # release_gh:
-  #   needs:
-  #     - release_tag
-  #   uses: ./.github/workflows/createReleaseGHJob.yml
+  release_gh:
+    needs:
+      - release_tag
+    uses: ./.github/workflows/createReleaseGHJob.yml
+
+  notify_release_gh:
+    needs:
+      - release_tag
+    uses: ./.github/workflows/notiyReleaseJob.yml
+    with:
+      TYPE: Github Release
+      RELEASE_VERSION: v${{ needs.release_tag.outputs.VERSION }}
+      RELEASE_URL: ${{ github.server_url }}/${{ github.repository }}/releases/tag/v${{ needs.release_tag.outputs.VERSION }}
+    secrets:
+      SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+      SLACK_CHANEL: ${{ secrets.SLACK_CHANNEL_PSO_RELEASE }}
