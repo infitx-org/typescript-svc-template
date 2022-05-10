@@ -54,6 +54,8 @@ jobs:
     needs:
       - release_tag
     uses: ./.github/workflows/createReleaseGHJob.yml
+    with:
+      RELEASE_VERSION: v${{ needs.release_tag.outputs.VERSION }}
     secrets:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
