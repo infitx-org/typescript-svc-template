@@ -31,9 +31,16 @@ on:
   workflow_call:
     inputs:
       RELEASE_VERSION:
-        description: 'Release information, e.g. v{{version}}'
+        description: 'Release version, e.g. v{{version}}'
         type: string
         required: true
+      RELEASE_LABEL:
+        description: 'Release label, e.g. latest, snapshot'
+        type: choice
+        default: latest
+        options:
+        - latest
+        - snapshot
     secrets:
       GH_TOKEN:
         description: 'Github API Token'
@@ -133,7 +140,7 @@ jobs:
           # the Dockerfile is in a subdirectory in the repo.
           context: .
           file: Dockerfile
-          tags: ghcr.io/${{ github.repository }}:latest,ghcr.io/${{ github.repository }}:${{ inputs.RELEASE_VERSION }}
+          tags: ghcr.io/${{ github.repository }}:${{ inputs.RELEASE_LABEL }},ghcr.io/${{ github.repository }}:${{ inputs.RELEASE_VERSION }}
           labels: ${{ steps.docker_meta.outputs.labels }}
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
