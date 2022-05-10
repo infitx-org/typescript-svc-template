@@ -11,7 +11,7 @@ on:
         required: true
 
 jobs:
-  release:
+  notification:
     runs-on: ubuntu-latest
     steps:
     - name: Post to a Slack channel
