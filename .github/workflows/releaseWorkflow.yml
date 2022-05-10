@@ -59,6 +59,7 @@ jobs:
 
   notify_release_gh:
     needs:
+      - release_tag
       - release_gh
     uses: ./.github/workflows/notiyReleaseJob.yml
     with:
