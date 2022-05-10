@@ -10,4 +10,4 @@ jobs:
     name: Create Release
     uses: ./.github/workflows/createReleaseGHJob.yml
     secrets:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

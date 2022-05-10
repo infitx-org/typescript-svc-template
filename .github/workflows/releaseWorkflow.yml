@@ -37,3 +37,8 @@ jobs:
       GIT_KEY: ${{ secrets.PSO_GIT_KEY }}
       GIT_USER: ${{ secrets.PSO_GIT_USER }}
       GIT_EMAIL: ${{ secrets.PSO_GIT_EMAIL }}
+
+  # release_gh:
+  #   needs:
+  #     - release_tag
+  #   uses: ./.github/workflows/createReleaseGHJob.yml
