@@ -86,7 +86,8 @@ jobs:
     with:
       RELEASE_VERSION: v${{ needs.release_tag.outputs.VERSION }}
     secrets:
-      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      USER: ${{ github.actor }}
+      PASSWORD: ${{ secrets.GITHUB_TOKEN }}
 
   notify_publish_image:
     needs:
