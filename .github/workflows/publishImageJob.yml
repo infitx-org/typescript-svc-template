@@ -105,10 +105,10 @@ jobs:
           # Semver pre-release versions are also supported
           # See also:
           # https://github.com/crazy-max/ghaction-docker-meta/tree/0a412843f87333854fa03a809b74056b64c6f31a#handle-semver-tag
-          # tag-semver: |
-          #   {{raw}}
-          #   {{version}}
-          #   {{major}}.{{minor}}
+          tag-semver: |
+            {{raw}}
+            {{version}}
+            {{major}}.{{minor}}
           label-custom: |
             org.opencontainers.image.vendor=ModusBox Inc.
             org.opencontainers.image.licenses=Apache-2.0
