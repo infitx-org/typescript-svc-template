@@ -14,7 +14,7 @@ on:
         required: true
 
 jobs:
-  test:
+  release:
     runs-on: ubuntu-latest
     steps:
       - name: Install dependencies
@@ -48,7 +48,7 @@ jobs:
           git diff --no-indent-heuristic main~1 HEAD CHANGELOG.md | sed -n '/^+[^+]/ s/^+//p' > /tmp/changes
           echo "RELEASE_CHANGES=$(cat /tmp/changes)" >> $GITHUB_ENV
           echo "RELEASE_TAG=$(cat package-lock.json | jq -r .version)" >> $GITHUB_ENV
-      - name: DEBUG
+      - name: Release info
         run: |
           echo "CHANGES INCLUDED IN THIS TAGGED RELEASE:"
           cat /tmp/changes

@@ -1,10 +1,14 @@
 name: Create Release Github Job
 
 on:
-  workflow_call: {}
+  workflow_call:
+    secrets:
+      GITHUB_TOKEN:
+        description: 'Github API Token'
+        required: true
 
 jobs:
-  test:
+  release:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
