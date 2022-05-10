@@ -54,8 +54,8 @@ jobs:
           echo "RELEASE_TAG=$RELEASE_TAG"
       - name: Push the release @ v${{ env.RELEASE_TAG }}
         run: |
-          git config user.email ${GIT_EMAIL}}
-          git config user.name ${{GIT_USER}}
+          git config user.email ${secrets.GIT_EMAIL}}
+          git config user.name ${{secrets.GIT_USER}}
           git push --follow-tags
         env:
           GIT_EMAIL: ${{ secrets.GIT_EMAIL }}
