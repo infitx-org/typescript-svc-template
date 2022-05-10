@@ -2,6 +2,11 @@ name: Create Release Github Job
 
 on:
   workflow_call:
+    inputs:
+      RELEASE_VERSION:
+        description: 'Release information, e.g. v{{version}}'
+        type: string
+        required: true
     secrets:
       GH_TOKEN:
         description: 'Github API Token'
@@ -13,6 +18,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+        with:
+          ref: ${{ inputs.RELEASE_VERSION }}
       - name: Fetch changelog
         run: |
           git diff --no-indent-heuristic main~1 HEAD CHANGELOG.md | sed -n '/^+[^+]/ s/^+//p' > /tmp/changes
