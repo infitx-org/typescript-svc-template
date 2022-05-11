@@ -27,6 +27,10 @@ jobs:
   test_int:
     uses: modusbox/github-actions-node/.github/workflows/testIntJob.yml@main
 
+  # TODO: example for standard TTK Functional tests
+  # test_func:
+  #   uses: modusbox/github-actions-node/.github/workflows/testFunTTKJob.yml@main
+
   release_tag:
     needs:
       - test_lint
@@ -89,6 +93,10 @@ jobs:
     secrets:
       USER: ${{ github.actor }}
       PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+
+  # TODO: publish npm library and add instructions
+  # publich_lib:
+    # .. TBD
 
   notify_publish_image:
     needs:
