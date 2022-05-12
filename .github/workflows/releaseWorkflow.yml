@@ -99,8 +99,6 @@ jobs:
     secrets:
       USER: ${{ github.actor }}
       PASSWORD: ${{ secrets.GITHUB_TOKEN }}
-      SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
-      SLACK_CHANEL: ${{ secrets.SLACK_CHANNEL_PSO_RELEASE }}
 
   # TODO: publish npm library and add instructions
   # publich_lib:
