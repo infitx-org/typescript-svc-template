@@ -77,7 +77,8 @@ jobs:
       - release_tag
       - release_gh
     if: ${{ always() && (needs.release_gh.result == 'failure') }} # Here we report only if 'release_gh' job failed
-    uses:  modusbox/github-actions-node/.github/workflows/notiyReleaseJob.yml@main
+    # uses:  modusbox/github-actions-node/.github/workflows/notiyReleaseJob.yml@main
+    uses:  ./.github/workflows/notifyReleaseJob.yml
     with:
       JOB_STATUS: ${{ needs.release_tag.result }}
       TYPE: Github Release
@@ -111,7 +112,8 @@ jobs:
       - release_gh
       - publish_image
     if: ${{ always() && (needs.publish_image.result) }} # Here we report on the final state of the workflow!
-    uses:  modusbox/github-actions-node/.github/workflows/notiyReleaseJob.yml@main
+    # uses:  modusbox/github-actions-node/.github/workflows/notiyReleaseJob.yml@main
+    uses:  ./.github/workflows/notifyReleaseJob.yml
     with:
       JOB_STATUS: ${{ needs.release_tag.result }}
       TYPE: Image Release
