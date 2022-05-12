@@ -51,7 +51,7 @@ jobs:
   notify_release_tag:
     needs:
       - release_tag
-    if: ${{ always() && (needs.release_tag.result == 'failure') }}
+    if: ${{ always() && (needs.release_tag.result == 'failure') }} # Here we report only if 'release_tag' job failed
     # uses:  modusbox/github-actions-node/.github/workflows/notiyReleaseJob.yml@main
     uses:  ./.github/workflows/notifyReleaseJob.yml
     with:
@@ -76,7 +76,7 @@ jobs:
     needs:
       - release_tag
       - release_gh
-    if: ${{ always() && (needs.release_gh.result == 'failure') }}
+    if: ${{ always() && (needs.release_gh.result == 'failure') }} # Here we report only if 'release_gh' job failed
     uses:  modusbox/github-actions-node/.github/workflows/notiyReleaseJob.yml@main
     with:
       JOB_STATUS: ${{ needs.release_tag.result }}
@@ -110,7 +110,7 @@ jobs:
       - release_tag
       - release_gh
       - publish_image
-    if: ${{ always() }}
+    if: ${{ always() && (needs.publish_image.result) }} # Here we report on the final state of the workflow!
     uses:  modusbox/github-actions-node/.github/workflows/notiyReleaseJob.yml@main
     with:
       JOB_STATUS: ${{ needs.release_tag.result }}
