@@ -7,7 +7,7 @@ on:
         description: 'Type of release Notification, e.g. Tag, Github, NPM, Docker, etc'
         type: string
         required: false
-        default: 'Tag'
+        default: 'Tag Release'
       PROJECT:
         description: 'Name of project'
         type: string
@@ -27,7 +27,7 @@ on:
         description: 'URL for Job'
         type: string
         required: false
-        default: ${{ github.server_url }}/${{ github.repository }}/runs/${{ github.run_id }}
+        default: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
       CUSTOM_MSG:
         description: 'Optional custom message'
         type: string
@@ -131,6 +131,8 @@ jobs:
         if: ${{ github.action_status == inputs.CONDITION || inputs.CONDITION == 'always' }}
         id: slack
         uses: slackapi/slack-github-action@v1.19.0
+        env:
+          RELEASE_URL: ${{ github.server_url }}/${{ github.repository }}/releases/tag/v${{ env.RELEASE_TAG }}
         with:
           # Slack channel id, channel name, or user id to post message.
           # See also: https://api.slack.com/methods/chat.postMessage#channels
@@ -164,7 +166,7 @@ jobs:
                           "type": "section",
                           "text": {
                               "type": "mrkdwn",
-                              "text": ":shipit: ${{ inputs.RELEASE_URL }}"
+                              "text": ":shipit: ${{ env.RELEASE_URL }}"
                           }
                       },
                       {

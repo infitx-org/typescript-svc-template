@@ -72,7 +72,7 @@ on:
         description: 'URL for Job'
         type: string
         required: false
-        default: ${{ github.server_url }}/${{ github.repository }}/runs/${{ github.run_id }}
+        default: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
       CHANGE_URL:
         description: 'URL for commit or pr'
         type: string
