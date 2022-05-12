@@ -57,7 +57,7 @@ jobs:
     if: ${{ always() && (needs.release_tag.result == 'failure') }}
     # if: failure()
     # uses:  modusbox/github-actions-node/.github/workflows/notiyReleaseJob.yml@main
-    uses:  ./.github/workflows/notiyReleaseJob.yml
+    uses:  ./.github/workflows/notifyReleaseJob.yml
     with:
       CONDITION: failure
       JOB_STATUS: ${{ needs.release_tag.result }}
