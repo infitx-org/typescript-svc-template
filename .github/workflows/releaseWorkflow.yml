@@ -48,7 +48,7 @@ jobs:
       # SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
       # SLACK_CHANEL: ${{ secrets.SLACK_CHANNEL_PSO_RELEASE }}
 
-  notify_release_tag:
+  notify_release_tag_on_failure:
     needs:
       - release_tag
     if: ${{ always() && (needs.release_tag.result == 'failure') }} # Here we report only if 'release_tag' job failed
@@ -72,7 +72,7 @@ jobs:
     secrets:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  notify_release_gh:
+  notify_release_gh_on_failure:
     needs:
       - release_tag
       - release_gh
