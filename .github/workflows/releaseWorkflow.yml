@@ -42,8 +42,8 @@ jobs:
     #   - test_int
     uses:  modusbox/github-actions-node/.github/workflows/createReleaseTagJob.yml@main
     # uses:  ./.github/workflows/createReleaseTagJob.yml
-    with:
-      CONDITION: always
+    # with:
+    #   CONDITION: always
     secrets:
       GIT_KEY: ${{ secrets.PSO_GIT_KEY }}
       GIT_USER: ${{ secrets.PSO_GIT_USER }}
