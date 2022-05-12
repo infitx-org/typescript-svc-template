@@ -48,6 +48,8 @@ jobs:
       GIT_KEY: ${{ secrets.PSO_GIT_KEY }}
       GIT_USER: ${{ secrets.PSO_GIT_USER }}
       GIT_EMAIL: ${{ secrets.PSO_GIT_EMAIL }}
+      SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+      SLACK_CHANEL: ${{ secrets.SLACK_CHANNEL_PSO_RELEASE }}
 
   # notify_release_tag:
   #   needs:
