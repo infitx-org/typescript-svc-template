@@ -95,6 +95,12 @@ on:
       PASSWORD:
         description: 'REPOSITORY Password'
         required: true
+      SLACK_BOT_TOKEN:
+        description: 'Slack Bot Token'
+        required: true
+      SLACK_CHANEL:
+        description: 'Slack channel'
+        required: true
 
 jobs:
   build-and-push-image:

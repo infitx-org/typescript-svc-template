@@ -40,7 +40,10 @@ jobs:
     #   - test_unit
     #   - test_coverage
     #   - test_int
-    uses:  modusbox/github-actions-node/.github/workflows/createReleaseTagJob.yml@main
+    # uses:  modusbox/github-actions-node/.github/workflows/createReleaseTagJob.yml@main
+    uses:  .github/workflows/createReleaseTagJob.yml
+    with:
+      CONDITION: always
     secrets:
       GIT_KEY: ${{ secrets.PSO_GIT_KEY }}
       GIT_USER: ${{ secrets.PSO_GIT_USER }}
@@ -59,14 +62,14 @@ jobs:
   #     SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
   #     SLACK_CHANEL: ${{ secrets.SLACK_CHANNEL_PSO_RELEASE }}
 
-  release_gh:
-    needs:
-      - release_tag
-    uses:  modusbox/github-actions-node/.github/workflows/createReleaseGHJob.yml@main
-    with:
-      RELEASE_VERSION: v${{ needs.release_tag.outputs.VERSION }}
-    secrets:
-      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  # release_gh:
+  #   needs:
+  #     - release_tag
+  #   uses:  modusbox/github-actions-node/.github/workflows/createReleaseGHJob.yml@main
+  #   with:
+  #     RELEASE_VERSION: v${{ needs.release_tag.outputs.VERSION }}
+  #   secrets:
+  #     GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   # notify_release_gh:
   #   needs:
@@ -82,17 +85,19 @@ jobs:
   #     SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
   #     SLACK_CHANEL: ${{ secrets.SLACK_CHANNEL_PSO_RELEASE }}
 
-  publish_image:
-    needs:
-      - release_tag
-      - release_gh
-    uses:  ./.github/workflows/publishImageJob.yml
-    with:
-      RELEASE_VERSION: v${{ needs.release_tag.outputs.VERSION }}
-      RELEASE_URL: ${{ github.server_url }}/${{ github.repository }}/releases/tag/v${{ needs.release_tag.outputs.VERSION }}
-    secrets:
-      USER: ${{ github.actor }}
-      PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+  # publish_image:
+  #   needs:
+  #     - release_tag
+  #     - release_gh
+  #   uses:  ./.github/workflows/publishImageJob.yml
+  #   with:
+  #     RELEASE_VERSION: v${{ needs.release_tag.outputs.VERSION }}
+  #     RELEASE_URL: ${{ github.server_url }}/${{ github.repository }}/releases/tag/v${{ needs.release_tag.outputs.VERSION }}
+  #   secrets:
+  #     USER: ${{ github.actor }}
+  #     PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+  #     SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+  #     SLACK_CHANEL: ${{ secrets.SLACK_CHANNEL_PSO_RELEASE }}
 
   # TODO: publish npm library and add instructions
   # publich_lib:
