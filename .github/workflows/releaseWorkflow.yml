@@ -85,7 +85,7 @@ jobs:
     with:
       IS_SUCCESS: ${{ (needs.release_tag.result  == 'success') && (needs.release_gh.result  == 'success') && (needs.publish_image.result  == 'success') }}
       TYPE: Release
-      RELEASE_VERSION: v${{ needs.release_tag.outputs.VERSION }}
+      RELEASE_VERSION: ${{ needs.release_tag.outputs.VERSION }}
       RELEASE_URL: ${{ github.server_url }}/${{ github.repository }}/releases/tag/v${{ needs.release_tag.outputs.VERSION }}
     secrets:
       SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
