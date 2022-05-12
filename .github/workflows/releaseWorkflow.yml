@@ -41,7 +41,7 @@ jobs:
     #   - test_coverage
     #   - test_int
     # uses:  modusbox/github-actions-node/.github/workflows/createReleaseTagJob.yml@main
-    uses:  .github/workflows/createReleaseTagJob.yml
+    uses:  ./.github/workflows/createReleaseTagJob.yml
     with:
       CONDITION: always
     secrets:
