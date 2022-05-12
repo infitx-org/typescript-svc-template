@@ -6,60 +6,44 @@ on:
       - main
 
 jobs:
-  # test_lint:
-  #   uses: modusbox/github-actions-node/.github/workflows/testLintJob.yml@main
+  test_lint:
+    uses: modusbox/github-actions-node/.github/workflows/testLintJob.yml@main
 
-  # test_dependencies:
-  #   uses: modusbox/github-actions-node/.github/workflows/testDependencyJob.yml@main
+  test_dependencies:
+    uses: modusbox/github-actions-node/.github/workflows/testDependencyJob.yml@main
 
-  # test_audit:
-  #   uses: modusbox/github-actions-node/.github/workflows/testAuditJob.yml@main
+  test_audit:
+    uses: modusbox/github-actions-node/.github/workflows/testAuditJob.yml@main
 
-  # test_license:
-  #   uses: modusbox/github-actions-node/.github/workflows/testLicenseJob.yml@main
+  test_license:
+    uses: modusbox/github-actions-node/.github/workflows/testLicenseJob.yml@main
 
-  # test_unit:
-  #   uses: modusbox/github-actions-node/.github/workflows/testUnitJob.yml@main
+  test_unit:
+    uses: modusbox/github-actions-node/.github/workflows/testUnitJob.yml@main
 
-  # test_coverage:
-  #   uses: modusbox/github-actions-node/.github/workflows/testCoverageJob.yml@main
+  test_coverage:
+    uses: modusbox/github-actions-node/.github/workflows/testCoverageJob.yml@main
 
-  # test_int:
-  #   uses: modusbox/github-actions-node/.github/workflows/testIntJob.yml@main
+  test_int:
+    uses: modusbox/github-actions-node/.github/workflows/testIntJob.yml@main
 
-  # TODO: example for standard TTK Functional tests
-  # test_func:
-  #   uses: modusbox/github-actions-node/.github/workflows/testFunTTKJob.yml@main
+  test_func:
+    uses: modusbox/github-actions-node/.github/workflows/testFuncJob.yml@main
 
   release_tag:
-    # needs:
-    #   - test_lint
-    #   - test_dependencies
-    #   - test_audit
-    #   - test_license
-    #   - test_unit
-    #   - test_coverage
-    #   - test_int
+    needs:
+      - test_lint
+      - test_dependencies
+      - test_audit
+      - test_license
+      - test_unit
+      - test_coverage
+      - test_int
     uses:  modusbox/github-actions-node/.github/workflows/createReleaseTagJob.yml@main
     secrets:
       GIT_KEY: ${{ secrets.PSO_GIT_KEY }}
       GIT_USER: ${{ secrets.PSO_GIT_USER }}
       GIT_EMAIL: ${{ secrets.PSO_GIT_EMAIL }}
-
-  # notify_release_tag_on_failure:
-  #   needs:
-  #     - release_tag
-  #   if: ${{ always() && (needs.release_tag.result == 'failure') }} # Here we report only if 'release_tag' job failed
-  #   # uses:  modusbox/github-actions-node/.github/workflows/notiyReleaseJob.yml@main
-  #   uses:  ./.github/workflows/notifyReleaseJob.yml
-  #   with:
-  #     JOB_STATUS: ${{ needs.release_tag.result }}
-  #     TYPE: tag
-  #     RELEASE_VERSION: v${{ needs.release_tag.outputs.VERSION }}
-  #     RELEASE_URL: ${{ github.server_url }}/${{ github.repository }}/releases/tag/v${{ needs.release_tag.outputs.VERSION }}
-  #   secrets:
-  #     SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
-  #     SLACK_CHANEL: ${{ secrets.SLACK_CHANNEL_PSO_RELEASE }}
 
   release_gh:
     needs:
@@ -69,22 +53,6 @@ jobs:
       RELEASE_VERSION: v${{ needs.release_tag.outputs.VERSION }}
     secrets:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-  # notify_release_gh_on_failure:
-  #   needs:
-  #     - release_tag
-  #     - release_gh
-  #   if: ${{ always() && (needs.release_gh.result == 'failure') }} # Here we report only if 'release_gh' job failed
-  #   # uses:  modusbox/github-actions-node/.github/workflows/notiyReleaseJob.yml@main
-  #   uses:  ./.github/workflows/notifyReleaseJob.yml
-  #   with:
-  #     JOB_STATUS: ${{ needs.release_tag.result }}
-  #     TYPE: Github Release
-  #     RELEASE_VERSION: v${{ needs.release_tag.outputs.VERSION }}
-  #     RELEASE_URL: ${{ github.server_url }}/${{ github.repository }}/releases/tag/v${{ needs.release_tag.outputs.VERSION }}
-  #   secrets:
-  #     SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
-  #     SLACK_CHANEL: ${{ secrets.SLACK_CHANNEL_PSO_RELEASE }}
 
   publish_image:
     needs:
@@ -108,8 +76,8 @@ jobs:
       - release_gh
       - publish_image
     if: ${{ always() }} # Here we report on the final state of the workflow!
-    # uses:  modusbox/github-actions-node/.github/workflows/notiyReleaseJob.yml@main
-    uses:  ./.github/workflows/notifyReleaseJob.yml
+    uses:  modusbox/github-actions-node/.github/workflows/notiyReleaseJob.yml@main
+    # uses:  ./.github/workflows/notifyReleaseJob.yml
     with:
       JOB_STATUS: ${{ (needs.release_tag.result  == 'success') && (needs.release_gh.result  == 'success') && (needs.publish_image.result  == 'success') }}
       TYPE: Release
