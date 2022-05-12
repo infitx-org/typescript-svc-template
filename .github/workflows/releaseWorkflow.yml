@@ -40,29 +40,30 @@ jobs:
     #   - test_unit
     #   - test_coverage
     #   - test_int
-    # uses:  modusbox/github-actions-node/.github/workflows/createReleaseTagJob.yml@main
-    uses:  ./.github/workflows/createReleaseTagJob.yml
+    uses:  modusbox/github-actions-node/.github/workflows/createReleaseTagJob.yml@main
+    # uses:  ./.github/workflows/createReleaseTagJob.yml
     with:
       CONDITION: always
     secrets:
       GIT_KEY: ${{ secrets.PSO_GIT_KEY }}
       GIT_USER: ${{ secrets.PSO_GIT_USER }}
       GIT_EMAIL: ${{ secrets.PSO_GIT_EMAIL }}
+      # SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+      # SLACK_CHANEL: ${{ secrets.SLACK_CHANNEL_PSO_RELEASE }}
+
+  notify_release_tag:
+    needs:
+      - release_tag
+    if: always() && (needs.release_tag.result == 'failure')
+    uses:  modusbox/github-actions-node/.github/workflows/notiyReleaseJob.yml@main
+    with:
+      CONDITION: failure
+      TYPE: tag
+      RELEASE_VERSION: v${{ needs.release_tag.outputs.VERSION }}
+      RELEASE_URL: ${{ github.server_url }}/${{ github.repository }}/releases/tag/v${{ needs.release_tag.outputs.VERSION }}
+    secrets:
       SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
       SLACK_CHANEL: ${{ secrets.SLACK_CHANNEL_PSO_RELEASE }}
-
-  # notify_release_tag:
-  #   needs:
-  #     - release_tag
-  #   uses:  modusbox/github-actions-node/.github/workflows/notiyReleaseJob.yml@main
-  #   with:
-  #     CONDITION: failure
-  #     TYPE: tag
-  #     RELEASE_VERSION: v${{ needs.release_tag.outputs.VERSION }}
-  #     RELEASE_URL: ${{ github.server_url }}/${{ github.repository }}/releases/tag/v${{ needs.release_tag.outputs.VERSION }}
-  #   secrets:
-  #     SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
-  #     SLACK_CHANEL: ${{ secrets.SLACK_CHANNEL_PSO_RELEASE }}
 
   # release_gh:
   #   needs:
