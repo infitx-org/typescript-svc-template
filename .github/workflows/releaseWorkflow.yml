@@ -6,40 +6,40 @@ on:
       - main
 
 jobs:
-  test_lint:
-    uses: modusbox/github-actions-node/.github/workflows/testLintJob.yml@main
+  # test_lint:
+  #   uses: modusbox/github-actions-node/.github/workflows/testLintJob.yml@main
 
-  test_dependencies:
-    uses: modusbox/github-actions-node/.github/workflows/testDependencyJob.yml@main
+  # test_dependencies:
+  #   uses: modusbox/github-actions-node/.github/workflows/testDependencyJob.yml@main
 
-  test_audit:
-    uses: modusbox/github-actions-node/.github/workflows/testAuditJob.yml@main
+  # test_audit:
+  #   uses: modusbox/github-actions-node/.github/workflows/testAuditJob.yml@main
 
-  test_license:
-    uses: modusbox/github-actions-node/.github/workflows/testLicenseJob.yml@main
+  # test_license:
+  #   uses: modusbox/github-actions-node/.github/workflows/testLicenseJob.yml@main
 
-  test_unit:
-    uses: modusbox/github-actions-node/.github/workflows/testUnitJob.yml@main
+  # test_unit:
+  #   uses: modusbox/github-actions-node/.github/workflows/testUnitJob.yml@main
 
-  test_coverage:
-    uses: modusbox/github-actions-node/.github/workflows/testCoverageJob.yml@main
+  # test_coverage:
+  #   uses: modusbox/github-actions-node/.github/workflows/testCoverageJob.yml@main
 
-  test_int:
-    uses: modusbox/github-actions-node/.github/workflows/testIntJob.yml@main
+  # test_int:
+  #   uses: modusbox/github-actions-node/.github/workflows/testIntJob.yml@main
 
   # TODO: example for standard TTK Functional tests
   # test_func:
   #   uses: modusbox/github-actions-node/.github/workflows/testFunTTKJob.yml@main
 
   release_tag:
-    needs:
-      - test_lint
-      - test_dependencies
-      - test_audit
-      - test_license
-      - test_unit
-      - test_coverage
-      - test_int
+    # needs:
+    #   - test_lint
+    #   - test_dependencies
+    #   - test_audit
+    #   - test_license
+    #   - test_unit
+    #   - test_coverage
+    #   - test_int
     uses:  modusbox/github-actions-node/.github/workflows/createReleaseTagJob.yml@main
     secrets:
       GIT_KEY: ${{ secrets.PSO_GIT_KEY }}
