@@ -54,13 +54,13 @@ jobs:
   notify_release_tag:
     needs:
       - release_tag
-    # if: always() && (needs.release_tag.result == 'failure')
-    if: failure()
+    if: ${{ always() && (needs.release_tag.result == 'failure') }}
+    # if: failure()
     # uses:  modusbox/github-actions-node/.github/workflows/notiyReleaseJob.yml@main
     uses:  ./.github/workflows/notiyReleaseJob.yml
     with:
       CONDITION: failure
-      JOB_STATUS: 
+      JOB_STATUS: ${{ needs.release_tag.result }}
       TYPE: tag
       RELEASE_VERSION: v${{ needs.release_tag.outputs.VERSION }}
       RELEASE_URL: ${{ github.server_url }}/${{ github.repository }}/releases/tag/v${{ needs.release_tag.outputs.VERSION }}

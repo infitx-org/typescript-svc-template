@@ -57,6 +57,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Post to a Slack channel
+      env:
+        JOB_STATUS: ${{ inputs.JOB_STATUS }}
+      run: |
+        echo "JOB_STATUS=$JOB_STATUS"
+    - name: Post to a Slack channel
       # if: ${{ github.action_status == inputs.CONDITION || inputs.CONDITION == 'always' }}
       id: slack
       uses: slackapi/slack-github-action@v1.19.0
