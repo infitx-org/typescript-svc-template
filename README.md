@@ -1,5 +1,13 @@
 # typescript-svc-template
 
+## TODO
+
+- Implement Functional Tests using TTK as an example
+  - Implement example API Service using API First Approach
+- Implement Functional Tests using UI test framework as an example
+  - Implement example Web-page
+- Implement publish NPM library
+
 ## Configuration
 
 Here are the options that can be configured through environment variables.
