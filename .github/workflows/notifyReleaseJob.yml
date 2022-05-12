@@ -105,7 +105,7 @@ jobs:
                         "type": "section",
                         "text": {
                             "type": "mrkdwn",
-                            "text": "Status: *${{ job.status }}* @ ${{ inputs.CHANGE_URL }}"
+                            "text": "Status: *${{ inputs.JOB_STATUS }}* @ ${{ inputs.CHANGE_URL }}"
                         },
                         "accessory": {
                             "type": "button",
