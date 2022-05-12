@@ -76,7 +76,7 @@ jobs:
       - release_gh
       - publish_image
     if: ${{ always() }} # Here we report on the final state of the workflow!
-    uses:  modusbox/github-actions-node/.github/workflows/notiyReleaseJob.yml@main
+    uses:  modusbox/github-actions-node/.github/workflows/notifyReleaseJob.yml@main
     # uses:  ./.github/workflows/notifyReleaseJob.yml
     with:
       JOB_STATUS: ${{ (needs.release_tag.result  == 'success') && (needs.release_gh.result  == 'success') && (needs.publish_image.result  == 'success') }}
