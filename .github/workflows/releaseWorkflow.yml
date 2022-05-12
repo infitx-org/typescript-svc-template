@@ -45,23 +45,21 @@ jobs:
       GIT_KEY: ${{ secrets.PSO_GIT_KEY }}
       GIT_USER: ${{ secrets.PSO_GIT_USER }}
       GIT_EMAIL: ${{ secrets.PSO_GIT_EMAIL }}
-      # SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
-      # SLACK_CHANEL: ${{ secrets.SLACK_CHANNEL_PSO_RELEASE }}
 
-  notify_release_tag_on_failure:
-    needs:
-      - release_tag
-    if: ${{ always() && (needs.release_tag.result == 'failure') }} # Here we report only if 'release_tag' job failed
-    # uses:  modusbox/github-actions-node/.github/workflows/notiyReleaseJob.yml@main
-    uses:  ./.github/workflows/notifyReleaseJob.yml
-    with:
-      JOB_STATUS: ${{ needs.release_tag.result }}
-      TYPE: tag
-      RELEASE_VERSION: v${{ needs.release_tag.outputs.VERSION }}
-      RELEASE_URL: ${{ github.server_url }}/${{ github.repository }}/releases/tag/v${{ needs.release_tag.outputs.VERSION }}
-    secrets:
-      SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
-      SLACK_CHANEL: ${{ secrets.SLACK_CHANNEL_PSO_RELEASE }}
+  # notify_release_tag_on_failure:
+  #   needs:
+  #     - release_tag
+  #   if: ${{ always() && (needs.release_tag.result == 'failure') }} # Here we report only if 'release_tag' job failed
+  #   # uses:  modusbox/github-actions-node/.github/workflows/notiyReleaseJob.yml@main
+  #   uses:  ./.github/workflows/notifyReleaseJob.yml
+  #   with:
+  #     JOB_STATUS: ${{ needs.release_tag.result }}
+  #     TYPE: tag
+  #     RELEASE_VERSION: v${{ needs.release_tag.outputs.VERSION }}
+  #     RELEASE_URL: ${{ github.server_url }}/${{ github.repository }}/releases/tag/v${{ needs.release_tag.outputs.VERSION }}
+  #   secrets:
+  #     SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+  #     SLACK_CHANEL: ${{ secrets.SLACK_CHANNEL_PSO_RELEASE }}
 
   release_gh:
     needs:
@@ -72,21 +70,21 @@ jobs:
     secrets:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  notify_release_gh_on_failure:
-    needs:
-      - release_tag
-      - release_gh
-    if: ${{ always() && (needs.release_gh.result == 'failure') }} # Here we report only if 'release_gh' job failed
-    # uses:  modusbox/github-actions-node/.github/workflows/notiyReleaseJob.yml@main
-    uses:  ./.github/workflows/notifyReleaseJob.yml
-    with:
-      JOB_STATUS: ${{ needs.release_tag.result }}
-      TYPE: Github Release
-      RELEASE_VERSION: v${{ needs.release_tag.outputs.VERSION }}
-      RELEASE_URL: ${{ github.server_url }}/${{ github.repository }}/releases/tag/v${{ needs.release_tag.outputs.VERSION }}
-    secrets:
-      SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
-      SLACK_CHANEL: ${{ secrets.SLACK_CHANNEL_PSO_RELEASE }}
+  # notify_release_gh_on_failure:
+  #   needs:
+  #     - release_tag
+  #     - release_gh
+  #   if: ${{ always() && (needs.release_gh.result == 'failure') }} # Here we report only if 'release_gh' job failed
+  #   # uses:  modusbox/github-actions-node/.github/workflows/notiyReleaseJob.yml@main
+  #   uses:  ./.github/workflows/notifyReleaseJob.yml
+  #   with:
+  #     JOB_STATUS: ${{ needs.release_tag.result }}
+  #     TYPE: Github Release
+  #     RELEASE_VERSION: v${{ needs.release_tag.outputs.VERSION }}
+  #     RELEASE_URL: ${{ github.server_url }}/${{ github.repository }}/releases/tag/v${{ needs.release_tag.outputs.VERSION }}
+  #   secrets:
+  #     SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+  #     SLACK_CHANEL: ${{ secrets.SLACK_CHANNEL_PSO_RELEASE }}
 
   publish_image:
     needs:
@@ -104,17 +102,17 @@ jobs:
   # publich_lib:
     # .. TBD
 
-  notify_publish_image:
+  notify:
     needs:
       - release_tag
       - release_gh
       - publish_image
-    if: ${{ always() && (needs.publish_image.result) }} # Here we report on the final state of the workflow!
+    if: ${{ always() }} # Here we report on the final state of the workflow!
     # uses:  modusbox/github-actions-node/.github/workflows/notiyReleaseJob.yml@main
     uses:  ./.github/workflows/notifyReleaseJob.yml
     with:
-      JOB_STATUS: ${{ needs.release_tag.result }}
-      TYPE: Image Release
+      JOB_STATUS: ${{ (needs.release_tag.result  == 'success') && (needs.release_gh.result  == 'success') && (needs.publish_image.result  == 'success') }}
+      TYPE: Release
       RELEASE_VERSION: v${{ needs.release_tag.outputs.VERSION }}
       RELEASE_URL: ${{ github.server_url }}/${{ github.repository }}/releases/tag/v${{ needs.release_tag.outputs.VERSION }}
     secrets:
