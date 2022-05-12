@@ -41,9 +41,6 @@ jobs:
     #   - test_coverage
     #   - test_int
     uses:  modusbox/github-actions-node/.github/workflows/createReleaseTagJob.yml@main
-    # uses:  ./.github/workflows/createReleaseTagJob.yml
-    # with:
-    #   CONDITION: always
     secrets:
       GIT_KEY: ${{ secrets.PSO_GIT_KEY }}
       GIT_USER: ${{ secrets.PSO_GIT_USER }}
@@ -55,11 +52,9 @@ jobs:
     needs:
       - release_tag
     if: ${{ always() && (needs.release_tag.result == 'failure') }}
-    # if: failure()
     # uses:  modusbox/github-actions-node/.github/workflows/notiyReleaseJob.yml@main
     uses:  ./.github/workflows/notifyReleaseJob.yml
     with:
-      CONDITION: failure
       JOB_STATUS: ${{ needs.release_tag.result }}
       TYPE: tag
       RELEASE_VERSION: v${{ needs.release_tag.outputs.VERSION }}
@@ -68,58 +63,60 @@ jobs:
       SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
       SLACK_CHANEL: ${{ secrets.SLACK_CHANNEL_PSO_RELEASE }}
 
-  # release_gh:
-  #   needs:
-  #     - release_tag
-  #   uses:  modusbox/github-actions-node/.github/workflows/createReleaseGHJob.yml@main
-  #   with:
-  #     RELEASE_VERSION: v${{ needs.release_tag.outputs.VERSION }}
-  #   secrets:
-  #     GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  release_gh:
+    needs:
+      - release_tag
+    uses:  modusbox/github-actions-node/.github/workflows/createReleaseGHJob.yml@main
+    with:
+      RELEASE_VERSION: v${{ needs.release_tag.outputs.VERSION }}
+    secrets:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  # notify_release_gh:
-  #   needs:
-  #     - release_tag
-  #     - release_gh
-  #   uses:  modusbox/github-actions-node/.github/workflows/notiyReleaseJob.yml@main
-  #   with:
-  #     CONDITION: always
-  #     TYPE: Github Release
-  #     RELEASE_VERSION: v${{ needs.release_tag.outputs.VERSION }}
-  #     RELEASE_URL: ${{ github.server_url }}/${{ github.repository }}/releases/tag/v${{ needs.release_tag.outputs.VERSION }}
-  #   secrets:
-  #     SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
-  #     SLACK_CHANEL: ${{ secrets.SLACK_CHANNEL_PSO_RELEASE }}
+  notify_release_gh:
+    needs:
+      - release_tag
+      - release_gh
+    if: ${{ always() && (needs.release_gh.result == 'failure') }}
+    uses:  modusbox/github-actions-node/.github/workflows/notiyReleaseJob.yml@main
+    with:
+      JOB_STATUS: ${{ needs.release_tag.result }}
+      TYPE: Github Release
+      RELEASE_VERSION: v${{ needs.release_tag.outputs.VERSION }}
+      RELEASE_URL: ${{ github.server_url }}/${{ github.repository }}/releases/tag/v${{ needs.release_tag.outputs.VERSION }}
+    secrets:
+      SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+      SLACK_CHANEL: ${{ secrets.SLACK_CHANNEL_PSO_RELEASE }}
 
-  # publish_image:
-  #   needs:
-  #     - release_tag
-  #     - release_gh
-  #   uses:  ./.github/workflows/publishImageJob.yml
-  #   with:
-  #     RELEASE_VERSION: v${{ needs.release_tag.outputs.VERSION }}
-  #     RELEASE_URL: ${{ github.server_url }}/${{ github.repository }}/releases/tag/v${{ needs.release_tag.outputs.VERSION }}
-  #   secrets:
-  #     USER: ${{ github.actor }}
-  #     PASSWORD: ${{ secrets.GITHUB_TOKEN }}
-  #     SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
-  #     SLACK_CHANEL: ${{ secrets.SLACK_CHANNEL_PSO_RELEASE }}
+  publish_image:
+    needs:
+      - release_tag
+      - release_gh
+    uses:  ./.github/workflows/publishImageJob.yml
+    with:
+      RELEASE_VERSION: v${{ needs.release_tag.outputs.VERSION }}
+      RELEASE_URL: ${{ github.server_url }}/${{ github.repository }}/releases/tag/v${{ needs.release_tag.outputs.VERSION }}
+    secrets:
+      USER: ${{ github.actor }}
+      PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+      SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+      SLACK_CHANEL: ${{ secrets.SLACK_CHANNEL_PSO_RELEASE }}
 
   # TODO: publish npm library and add instructions
   # publich_lib:
     # .. TBD
 
-  # notify_publish_image:
-  #   needs:
-  #     - release_tag
-  #     - release_gh
-  #     - publish_image
-  #   uses:  modusbox/github-actions-node/.github/workflows/notiyReleaseJob.yml@main
-  #   with:
-  #     CONDITION: always
-  #     TYPE: Image Release
-  #     RELEASE_VERSION: v${{ needs.release_tag.outputs.VERSION }}
-  #     RELEASE_URL: ${{ github.server_url }}/${{ github.repository }}/releases/tag/v${{ needs.release_tag.outputs.VERSION }}
-  #   secrets:
-  #     SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
-  #     SLACK_CHANEL: ${{ secrets.SLACK_CHANNEL_PSO_RELEASE }}
+  notify_publish_image:
+    needs:
+      - release_tag
+      - release_gh
+      - publish_image
+    if: ${{ always() }}
+    uses:  modusbox/github-actions-node/.github/workflows/notiyReleaseJob.yml@main
+    with:
+      JOB_STATUS: ${{ needs.release_tag.result }}
+      TYPE: Image Release
+      RELEASE_VERSION: v${{ needs.release_tag.outputs.VERSION }}
+      RELEASE_URL: ${{ github.server_url }}/${{ github.repository }}/releases/tag/v${{ needs.release_tag.outputs.VERSION }}
+    secrets:
+      SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+      SLACK_CHANEL: ${{ secrets.SLACK_CHANNEL_PSO_RELEASE }}

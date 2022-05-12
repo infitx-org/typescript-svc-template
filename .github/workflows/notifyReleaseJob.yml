@@ -20,11 +20,6 @@ on:
         type: string
         required: false
         default: ${{ github.repository }}
-      CONDITION:
-        description: 'Github step condition, e.g. success, failure, always'
-        type: string
-        required: false
-        default: always
       CHANGE_URL:
         description: 'URL for commit or pr'
         type: string
@@ -36,10 +31,10 @@ on:
         required: false
         default: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
       JOB_STATUS:
-        description: 'The current status of the job. Possible values are success, failure, or cancelled.'
+        description: 'The job status used for sending notifications. Possible values are "success", "failure", or "cancelled".'
         type: string
         required: false
-        default: ${{ job.status }}
+        default: success
       CUSTOM_MSG:
         description: 'Optional custom message'
         type: string
@@ -57,14 +52,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Post to a Slack channel
-      env:
-        JOB_STATUS: ${{ inputs.JOB_STATUS }}
-      run: |
-        echo "JOB_STATUS=$JOB_STATUS"
-    - name: Post to a Slack channel
-      # if: ${{ github.action_status == inputs.CONDITION || inputs.CONDITION == 'always' }}
       id: slack
       uses: slackapi/slack-github-action@v1.19.0
+      env:
+        SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
       with:
         # Slack channel id, channel name, or user id to post message.
         # See also: https://api.slack.com/methods/chat.postMessage#channels
@@ -133,5 +124,3 @@ jobs:
               }
             ]
           }
-      env:
-        SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
