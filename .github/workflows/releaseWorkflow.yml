@@ -84,7 +84,7 @@ jobs:
     uses:  modusbox/github-actions-node/.github/workflows/notifyReleaseJob.yml@main
     with:
       # IS_SUCCESS: ${{ (needs.release_tag.result  == 'success') && (needs.release_gh.result  == 'success') && (needs.publish_image.result  == 'success') }}
-      JOB_STATUS: ${{ github.action_status }}
+      JOB_STATUS: ${{ needs.publish_image.result }}
       TYPE: Release
       RELEASE_VERSION: v${{ needs.release_tag.outputs.VERSION }}
       RELEASE_URL: ${{ github.server_url }}/${{ github.repository }}/releases/tag/v${{ needs.release_tag.outputs.VERSION }}
