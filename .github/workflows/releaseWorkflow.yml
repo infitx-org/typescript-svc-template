@@ -72,7 +72,7 @@ jobs:
       PASSWORD: ${{ secrets.GITHUB_TOKEN }}
 
   # TODO: publish npm library and add instructions
-  # publich_lib:
+  # publish_lib:
     # .. TBD
 
   notify:
