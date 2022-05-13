@@ -1,5 +1,5 @@
 {
-  "name": "typescript-svc-template",
+  "name": "@modusbox/typescript-svc-template",
   "version": "0.0.87",
   "description": "Template for typescript nodejs projects",
   "license": "Apache-2.0",
@@ -58,5 +58,8 @@
     "scripts": {
       "postchangelog": "npx replace '\\[mojaloop/#(\\d+)\\]\\(https://github.com/mojaloop/(.*)/issues/(\\d+)\\)' '[mojaloop/#$1](https://github.com/mojaloop/project/issues/$1)' CHANGELOG.md"
     }
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/modusbox"
   }
 }
