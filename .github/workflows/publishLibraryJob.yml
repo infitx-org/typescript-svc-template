@@ -10,9 +10,6 @@
 # - looks like you'll need to manually make the published image public by visiting:
 #   https://github.com/orgs/{{ your organisation }}/packages
 
-# TODO:
-# - delete created images from the repository when a release is deleted/unpublished?
-
 name: Publish NPM library
 
 on:
@@ -32,40 +29,12 @@ on:
         type: string
         default: '@modusbox'
         required: false
-    #   RELEASE_URL:
-    #     description: 'Image Repository'
-    #     type: string
-    #     required: false
-    #   REPOSITORY:
-    #     description: 'Image Repository'
-    #     type: string
-    #     default: ghcr.io
-    #     required: false
-    #   IMAGE:
-    #     description: 'Image Repository'
-    #     type: string
-    #     default: ${{ github.repository }}
-    #     required: false
-    #   VENDOR:
-    #     description: 'Image Repository'
-    #     type: string
-    #     default: ModusBox Inc.
-    #     required: false
-    #   LICENSE:
-    #     description: 'Image Repository'
-    #     type: string
-    #     default: Apache-2.0
-    #     required: false
     secrets:
       NODE_AUTH_TOKEN:
         description: 'Node Auth Token'
         required: true
       
 
-# name: Publish package to GitHub Packages
-# on:
-#   release:
-#     types: [created]
 jobs:
   build:
     runs-on: ubuntu-latest 
