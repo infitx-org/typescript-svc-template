@@ -72,9 +72,16 @@ jobs:
       PASSWORD: ${{ secrets.GITHUB_TOKEN }}
 
   # TODO: publish npm library and add instructions
-  # publish_lib:
-    # .. TBD
-
+  publish_lib:
+    needs:
+      - release_tag
+      - release_gh
+    uses: ./.github/workflows/publishLibraryJob.yml
+    with:
+      RELEASE_VERSION: v${{ needs.release_tag.outputs.VERSION }}
+      # RELEASE_URL: ${{ github.server_url }}/${{ github.repository }}/releases/tag/v${{ needs.release_tag.outputs.VERSION }}
+    secrets:
+      NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   notify:
     needs:
       - release_tag

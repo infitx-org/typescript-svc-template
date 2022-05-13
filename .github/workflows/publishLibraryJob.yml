@@ -1,0 +1,130 @@
+# Prerequisites for this action:
+# - need to enable "improved container support":
+#   https://docs.github.com/en/packages/guides/enabling-improved-container-support
+# - need to add an access token to secrets (in this case called CR_PAT), probably good to do this
+#   at organisation level. This access token needs to be a personal access token at the time of
+#   writing. This works, because the organisation policy gives organisation members permission to
+#   publish packages.
+#   Note this outstanding issue:
+#   https://github.community/t/cannot-create-pat-with-scope-write-packages-without-repo-scope/154300
+# - looks like you'll need to manually make the published image public by visiting:
+#   https://github.com/orgs/{{ your organisation }}/packages
+
+# TODO:
+# - delete created images from the repository when a release is deleted/unpublished?
+
+name: Publish NPM library
+
+on:
+  workflow_call:
+    # inputs:
+    #   RELEASE_VERSION:
+    #     description: 'Release version, e.g. v{{version}}'
+    #     type: string
+    #     required: true
+    #   RELEASE_LABEL:
+    #     description: 'Release label, e.g. latest, snapshot'
+    #     type: string
+    #     default: latest
+    #     required: false
+    #   RELEASE_URL:
+    #     description: 'Image Repository'
+    #     type: string
+    #     required: false
+    #   REPOSITORY:
+    #     description: 'Image Repository'
+    #     type: string
+    #     default: ghcr.io
+    #     required: false
+    #   IMAGE:
+    #     description: 'Image Repository'
+    #     type: string
+    #     default: ${{ github.repository }}
+    #     required: false
+    #   VENDOR:
+    #     description: 'Image Repository'
+    #     type: string
+    #     default: ModusBox Inc.
+    #     required: false
+    #   LICENSE:
+    #     description: 'Image Repository'
+    #     type: string
+    #     default: Apache-2.0
+    #     required: false
+    secrets:
+      NODE_AUTH_TOKEN:
+        description: 'Node Auth Token'
+        required: true
+      
+
+# name: Publish package to GitHub Packages
+# on:
+#   release:
+#     types: [created]
+jobs:
+  build:
+    runs-on: ubuntu-latest 
+    permissions: 
+      contents: read
+      packages: write 
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ inputs.RELEASE_VERSION }}
+      - name: Read .nvmrc
+        run: echo ::set-output name=NVMRC::$(cat .nvmrc)
+        id: nvm
+      - name: Setup Node@${{ steps.nvm.outputs.NVMRC }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: '${{ steps.nvm.outputs.NVMRC }}'
+          registry-url: 'https://npm.pkg.github.com'
+          # Defaults to the user or organization that owns the workflow file
+          scope: '@modusbox'
+      - run: npm ci
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
+
+
+# jobs:
+#   build-and-push-image:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout
+#         uses: actions/checkout@v3
+#         with:
+#           ref: ${{ inputs.RELEASE_VERSION }}
+#       - name: Docker meta
+#         id: meta
+#         uses: docker/metadata-action@v4
+#         with:
+#           images: ${{ inputs.REPOSITORY }}/${{ github.repository }}
+#           labels: |
+#             org.opencontainers.image.vendor=${{ inputs.VENDOR }}
+#             org.opencontainers.image.licenses=${{ inputs.LICENSE }}
+#             org.opencontainers.image.version=${{ inputs.RELEASE_VERSION }}
+#             org.opencontainers.image.source=${{ inputs.RELEASE_URL }}
+#           tags: |
+#             # set latest tag for master branch
+#             type=raw,value=latest,enable=${{ github.ref == format('refs/heads/{0}', 'main') }}
+#       - name: Set up Docker Buildx
+#         uses: docker/setup-buildx-action@v2
+#       - name: Log in to the Container registry
+#         uses: docker/login-action@v2
+#         with:
+#           registry: ${{ inputs.REPOSITORY }}
+#           username: ${{ secrets.USER }}
+#           password: ${{ secrets.PASSWORD }}
+#       - name: Build and push
+#         id: docker_build
+#         uses: docker/build-push-action@v3
+#         with:
+#           push: true
+#           context: .
+#           file: Dockerfile
+#           tags: ${{ inputs.REPOSITORY }}/${{ inputs.IMAGE }}:${{ inputs.RELEASE_LABEL }},${{ inputs.REPOSITORY }}/${{ inputs.IMAGE }}:${{ inputs.RELEASE_VERSION }}
+#           labels: ${{ steps.meta.outputs.labels }}
+#       - name: Image digest
+#         run: echo ${{ steps.docker_build.outputs.digest }}
