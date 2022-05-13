@@ -17,11 +17,11 @@ name: Publish NPM library
 
 on:
   workflow_call:
-    # inputs:
-    #   RELEASE_VERSION:
-    #     description: 'Release version, e.g. v{{version}}'
-    #     type: string
-    #     required: true
+    inputs:
+      RELEASE_VERSION:
+        description: 'Release version, e.g. v{{version}}'
+        type: string
+        required: true
     #   RELEASE_LABEL:
     #     description: 'Release label, e.g. latest, snapshot'
     #     type: string
