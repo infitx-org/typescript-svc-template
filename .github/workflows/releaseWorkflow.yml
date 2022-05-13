@@ -59,6 +59,7 @@ jobs:
     secrets:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+  # ATTENTION: Choose this when you are building a service
   publish_image:
     needs:
       - release_tag
@@ -71,7 +72,7 @@ jobs:
       USER: ${{ github.actor }}
       PASSWORD: ${{ secrets.GITHUB_TOKEN }}
 
-  # TODO: publish npm library and add instructions
+  # ATTENTION: Choose this when you are creating a NPM library
   publish_lib:
     needs:
       - release_tag
@@ -87,7 +88,9 @@ jobs:
     needs:
       - release_tag
       - release_gh
+      # ATTENTION: Choose one or both of the below depending on the type of project
       - publish_image
+      - publish_lib
     if: ${{ always() }} # Here we report on the final state of the workflow!
     uses: modusbox/github-actions-node/.github/workflows/notifyReleaseJob.yml@main
     with:
