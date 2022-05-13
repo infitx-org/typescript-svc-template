@@ -88,7 +88,6 @@ jobs:
           # Defaults to the user or organization that owns the workflow file
           scope: ${{ inputs.REGISTRY_SCOPE}}
       - run: npm ci
-      # - run: npm login --registry=${{ inputs.REGISTRY_URL }}
-      - run: npm publish --registry=${{ inputs.REGISTRY_URL }}
+      - run: npm publish --registry=${{ inputs.REGISTRY_URL }} --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
