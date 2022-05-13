@@ -25,3 +25,6 @@ jobs:
 
   test_int:
     uses: modusbox/github-actions-node/.github/workflows/testIntJob.yml@main
+
+  test_func:
+    uses: modusbox/github-actions-node/.github/workflows/testFuncJob.yml@main
