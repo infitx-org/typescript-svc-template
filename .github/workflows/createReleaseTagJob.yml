@@ -83,7 +83,7 @@ jobs:
       - name: Push the release @ v${{ env.RELEASE_TAG }}
         run: |
           git push --follow-tags
-      - name: Set Job Outputs 
+      - name: Set Outputs 
         id: output-changes
         run: |
           echo "::set-output name=version::${{ env.RELEASE_TAG }}"
@@ -91,6 +91,6 @@ jobs:
           echo "::set-output name=file::${{ env.ARTEFACT_FILE }}"
       - name: Print Outputs
         run: |
-          echo "version: ${{ steps.output-changes.outputs.version }}"
-          echo "changes: ${{ steps.output-changes.outputs.changes }}"
-          echo "file: ${{ steps.output-changes.outputs.file }}"
+          echo "VERSION: ${{ steps.output-changes.outputs.version }}"
+          echo "RELEASE_CHANGE_ARTEFACT: ${{ steps.output-changes.outputs.changes }}"
+          echo "RELEASE_CHANGE_FILENAME: ${{ steps.output-changes.outputs.file }}"
