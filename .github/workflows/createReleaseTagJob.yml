@@ -69,6 +69,7 @@ jobs:
         with:
           name: diff-changes
           path: /tmp/changes
+          if-no-files-found: error
       - name: Release info
         run: |
           echo "CHANGES INCLUDED IN THIS TAGGED RELEASE:"

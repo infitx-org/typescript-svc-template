@@ -27,7 +27,7 @@ jobs:
       - uses: actions/download-artifact@v3
         with:
           name: diff-changes
-          path: /tmp/changes
+          path: /tmp/
       - name: Release info
         run: |
           echo "CHANGES INCLUDED IN THIS TAGGED RELEASE:"
