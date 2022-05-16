@@ -15,7 +15,7 @@
  *  limitations under the License                                             *
  ******************************************************************************/
 
-import MathLib from './lib/math';
+import { MathLib } from './lib/math';
 
 /* Instructions
  * 
@@ -35,5 +35,6 @@ console.log(`3x3=${MathLib.mul(3, 3)}`);
 //* LIBRARY: {
 
 export default MathLib;
+export * from './lib/math';
 
 //* }

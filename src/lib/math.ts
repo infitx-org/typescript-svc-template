@@ -21,7 +21,7 @@
  * 
  */
 
-const MathLib = {
+export const MathLib = {
     add: (x: number, y: number): number => {
         return x + y;
     },
@@ -30,5 +30,3 @@ const MathLib = {
         return x * y;
     },
 };
-
-export default MathLib;
