@@ -28,7 +28,7 @@ jobs:
         run: |
           echo "RELEASE_CHANGES="
           echo "${{ inputs.RELEASE_DESCRIPTION }}"
-          echo "RELEASE_TAG=${{ inputs.RELEASE_VERSION }}
+          echo "RELEASE_TAG=${{ inputs.RELEASE_VERSION }}"
       - name: Create Release @${{ inputs.RELEASE_VERSION }}
         id: create_release
         uses: actions/create-release@v1
