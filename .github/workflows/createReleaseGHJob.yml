@@ -30,6 +30,9 @@ jobs:
           path: /tmp/changes
       - name: Release info
         run: |
+          echo "CHANGES INCLUDED IN THIS TAGGED RELEASE:"
+          cat /tmp/changes
+          echo "------------------------------"
           echo "RELEASE_CHANGES="
           echo "${{ inputs.RELEASE_DESCRIPTION }}"
           echo "RELEASE_TAG=${{ inputs.RELEASE_VERSION }}"
