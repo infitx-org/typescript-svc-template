@@ -15,10 +15,12 @@ on:
     outputs:
       VERSION:
         description: "Tagged release version"
-        value: ${{ jobs.release.outputs.VERSION }}
+        value: steps.output-version.outputs.version
+        # value: ${{ jobs.release.outputs.VERSION }}
       CHANGES:
         description: "Changelog diff between versions"
-        value: ${{ jobs.release.outputs.CHANGES }}
+        value: steps.output-changes.outputs.changes
+        # value: ${{ jobs.release.outputs.CHANGES }}
 
 jobs:
   release:
