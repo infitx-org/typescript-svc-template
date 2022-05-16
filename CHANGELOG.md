@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 0.0.137 (2022-05-16)
+
+
+### Bug Fixes
+
+* typo fix ([4293155](https://github.com/modusbox/typescript-svc-template/commit/4293155a0d419a9fff6534a0cf9cd04dbdb9388a))
+
 ### 0.0.136 (2022-05-16)
 
 ### 0.0.135 (2022-05-16)
