@@ -22,7 +22,7 @@
  */
 
 import { expect } from "chai";
-import MathLib from "../../../src/lib/math";
+import { MathLib } from "../../../src/lib/math";
 
 describe ('MathLib', () => {
   describe("test add function", () => {
