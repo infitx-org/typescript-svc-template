@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.96](https://github.com/modusbox/typescript-svc-template/compare/v0.0.95...v0.0.96) (2022-05-16)
+
+
+### Bug Fixes
+
+* fixed unit tests ([5283932](https://github.com/modusbox/typescript-svc-template/commit/5283932108818d18fa6d2368386bbf6212262685))
+* updated main in package & reworked exports ([9067590](https://github.com/modusbox/typescript-svc-template/commit/9067590cf6f210e5bc1077e4f4d6a3ce7c49c01f))
+
 ### 0.0.95 (2022-05-16)
 
 ### 0.0.94 (2022-05-13)
