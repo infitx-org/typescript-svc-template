@@ -26,9 +26,7 @@ jobs:
           ref: ${{ inputs.RELEASE_VERSION }}
       - name: Release info
         run: |
-          echo "RELEASE_CHANGES<<EOF"
-          echo "${{ inputs.RELEASE_DESCRIPTION }}"
-          echo "EOF"
+          echo "RELEASE_CHANGES=${{ inputs.RELEASE_DESCRIPTION }}"
           echo "RELEASE_TAG=${{ inputs.RELEASE_VERSION }}
       - name: Create Release @${{ inputs.RELEASE_VERSION }}
         id: create_release
