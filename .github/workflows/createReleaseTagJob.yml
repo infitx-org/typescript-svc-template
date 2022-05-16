@@ -83,7 +83,8 @@ jobs:
       - name: Push the release @ v${{ env.RELEASE_TAG }}
         run: |
           git push --follow-tags
-      - id: output-changes
+      - name: Set Job Outputs 
+        id: output-changes
         run: |
           echo "::set-output name=version::${{ env.RELEASE_TAG }}"
           echo "::set-output name=changes::${{ env.ARTEFACT_NAME }}"
