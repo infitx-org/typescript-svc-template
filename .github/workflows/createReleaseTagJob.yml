@@ -15,18 +15,17 @@ on:
     outputs:
       VERSION:
         description: "Tagged release version"
-        value: ${{ steps.output-version.outputs.version }}
-        # value: ${{ jobs.release.outputs.VERSION }}
+        value: ${{ jobs.release.outputs.VERSION }}
       CHANGES:
         description: "Changelog diff between versions"
-        value: ${{ steps.output-changes.outputs.changes }}
-        # value: ${{ jobs.release.outputs.CHANGES }}
+        value: ${{ jobs.release.outputs.CHANGES }}
 
 jobs:
   release:
     runs-on: ubuntu-latest
     outputs:
       VERSION: ${{ steps.output-version.outputs.version }}
+      CHANGES: ${{ steps.output-version.outputs.changes }}
     steps:
       - name: Install dependencies
         run: |
