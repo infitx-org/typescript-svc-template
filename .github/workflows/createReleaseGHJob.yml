@@ -24,6 +24,10 @@ jobs:
         uses: actions/checkout@v3
         with:
           ref: ${{ inputs.RELEASE_VERSION }}
+      - name: Release info
+        run: |
+          echo "RELEASE_CHANGES=${{}}}"
+          echo "RELEASE_TAG=${{ inputs.RELEASE_DESCRIPTION }}
       - name: Create Release @${{ inputs.RELEASE_VERSION }}
         id: create_release
         uses: actions/create-release@v1
