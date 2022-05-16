@@ -1,6 +1,6 @@
 {
   "name": "@modusbox/typescript-svc-template",
-  "version": "0.0.94",
+  "version": "0.0.95",
   "description": "Template for typescript nodejs projects",
   "license": "Apache-2.0",
   "author": "ModusBox",
@@ -9,7 +9,7 @@
     "Miguel de Barros <miguel.debarros@modusbox.com>"
   ],
   "main": "src/index.ts",
-  "files":[
+  "files": [
     "/dist",
     "README.md",
     "LICENSE",
