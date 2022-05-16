@@ -58,8 +58,8 @@ jobs:
     uses: ./.github/workflows/createReleaseGHJob.yml
     with:
       RELEASE_VERSION: v${{ needs.release_tag.outputs.VERSION }}
-      # RELEASE_DESCRIPTION: ${{ needs.release_tag.outputs.CHANGES }}
-      RELEASE_DESCRIPTION: 'test'
+      RELEASE_DESCRIPTION: ${{ needs.release_tag.outputs.CHANGES }}
+      # RELEASE_DESCRIPTION: 'test'
     secrets:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
