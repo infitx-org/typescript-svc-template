@@ -31,6 +31,7 @@ jobs:
       - name: Release info
         run: |
           echo "CHANGES INCLUDED IN THIS TAGGED RELEASE:"
+          ls -l /tmp/changes
           cat /tmp/changes
           echo "------------------------------"
           echo "RELEASE_CHANGES="
