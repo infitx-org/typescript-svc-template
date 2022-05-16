@@ -16,6 +16,9 @@ on:
       VERSION:
         description: "Tagged release version"
         value: ${{ jobs.release.outputs.VERSION }}
+      CHANGES:
+        description: "Changelog diff between versions"
+        value: ${{ jobs.release.outputs.CHANGES }}
 
 jobs:
   release:
