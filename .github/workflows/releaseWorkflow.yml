@@ -10,42 +10,41 @@ on:
 ##
 
 jobs:
-  # test_lint:
-  #   uses: modusbox/github-actions-node/.github/workflows/testLintJob.yml@main
+  test_lint:
+    uses: modusbox/github-actions-node/.github/workflows/testLintJob.yml@main
 
-  # test_dependencies:
-  #   uses: modusbox/github-actions-node/.github/workflows/testDependencyJob.yml@main
+  test_dependencies:
+    uses: modusbox/github-actions-node/.github/workflows/testDependencyJob.yml@main
 
-  # test_audit:
-  #   uses: modusbox/github-actions-node/.github/workflows/testAuditJob.yml@main
+  test_audit:
+    uses: modusbox/github-actions-node/.github/workflows/testAuditJob.yml@main
 
-  # test_license:
-  #   uses: modusbox/github-actions-node/.github/workflows/testLicenseJob.yml@main
+  test_license:
+    uses: modusbox/github-actions-node/.github/workflows/testLicenseJob.yml@main
 
-  # test_unit:
-  #   uses: modusbox/github-actions-node/.github/workflows/testUnitJob.yml@main
+  test_unit:
+    uses: modusbox/github-actions-node/.github/workflows/testUnitJob.yml@main
 
-  # test_coverage:
-  #   uses: modusbox/github-actions-node/.github/workflows/testCoverageJob.yml@main
+  test_coverage:
+    uses: modusbox/github-actions-node/.github/workflows/testCoverageJob.yml@main
 
-  # test_int:
-  #   uses: modusbox/github-actions-node/.github/workflows/testIntJob.yml@main
+  test_int:
+    uses: modusbox/github-actions-node/.github/workflows/testIntJob.yml@main
 
-  # test_func:
-  #   uses: modusbox/github-actions-node/.github/workflows/testFuncJob.yml@main
+  test_func:
+    uses: modusbox/github-actions-node/.github/workflows/testFuncJob.yml@main
 
   release_tag:
-    # needs:
-    #   - test_lint
-    #   - test_dependencies
-    #   - test_audit
-    #   - test_license
-    #   - test_unit
-    #   - test_coverage
-    #   - test_int
-    #   - test_func
+    needs:
+      - test_lint
+      - test_dependencies
+      - test_audit
+      - test_license
+      - test_unit
+      - test_coverage
+      - test_int
+      - test_func
     uses: modusbox/github-actions-node/.github/workflows/createReleaseTagJob.yml@main
-    # uses: ./.github/workflows/createReleaseTagJob.yml
     secrets:
       GIT_KEY: ${{ secrets.PSO_GIT_KEY }}
       GIT_USER: ${{ secrets.PSO_GIT_USER }}
@@ -55,7 +54,6 @@ jobs:
     needs:
       - release_tag
     uses: modusbox/github-actions-node/.github/workflows/createReleaseGHJob.yml@main
-    # uses: ./.github/workflows/createReleaseGHJob.yml
     with:
       RELEASE_VERSION: v${{ needs.release_tag.outputs.VERSION }}
       RELEASE_CHANGE_ARTEFACT: ${{ needs.release_tag.outputs.RELEASE_CHANGE_ARTEFACT }}
@@ -64,43 +62,43 @@ jobs:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   # ATTENTION: Choose this when you are building a service
-  # publish_image:
-  #   needs:
-  #     - release_tag
-  #     - release_gh
-  #   uses: modusbox/github-actions-node/.github/workflows/publishImageJob.yml@main
-  #   with:
-  #     RELEASE_VERSION: v${{ needs.release_tag.outputs.VERSION }}
-  #     RELEASE_URL: ${{ github.server_url }}/${{ github.repository }}/releases/tag/v${{ needs.release_tag.outputs.VERSION }}
-  #   secrets:
-  #     USER: ${{ github.actor }}
-  #     PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+  publish_image:
+    needs:
+      - release_tag
+      - release_gh
+    uses: modusbox/github-actions-node/.github/workflows/publishImageJob.yml@main
+    with:
+      RELEASE_VERSION: v${{ needs.release_tag.outputs.VERSION }}
+      RELEASE_URL: ${{ github.server_url }}/${{ github.repository }}/releases/tag/v${{ needs.release_tag.outputs.VERSION }}
+    secrets:
+      USER: ${{ github.actor }}
+      PASSWORD: ${{ secrets.GITHUB_TOKEN }}
 
   # # ATTENTION: Choose this when you are creating a NPM library
-  # publish_lib:
-  #   needs:
-  #     - release_tag
-  #     - release_gh
-  #   uses: ./.github/workflows/publishLibraryJob.yml
-  #   with:
-  #     RELEASE_VERSION: v${{ needs.release_tag.outputs.VERSION }}
-  #   secrets:
-  #     NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  publish_lib:
+    needs:
+      - release_tag
+      - release_gh
+    uses: ./.github/workflows/publishLibraryJob.yml
+    with:
+      RELEASE_VERSION: v${{ needs.release_tag.outputs.VERSION }}
+    secrets:
+      NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  # notify:
-  #   needs:
-  #     - release_tag
-  #     - release_gh
-  #     # ATTENTION: Choose one or both of the below depending on the type of project
-  #     - publish_image
-  #     - publish_lib
-  #   if: ${{ always() }} # Here we report on the final state of the workflow!
-  #   uses: modusbox/github-actions-node/.github/workflows/notifyReleaseJob.yml@main
-  #   with:
-  #     JOB_STATUS: ${{ ((needs.release_tag.result  == 'success') && (needs.release_gh.result  == 'success') && (needs.publish_image.result  == 'success') && (needs.publish_lib.result  == 'success')) && 'success' || 'failed' }}
-  #     TYPE: Release
-  #     RELEASE_VERSION: ${{ ((needs.release_tag.result  == 'success') && (needs.release_gh.result  == 'success') && (needs.publish_image.result  == 'success') && (needs.publish_lib.result  == 'success')) && format('v{0}', needs.release_tag.outputs.VERSION) || 'n/a' }}
-  #     RELEASE_URL: ${{ ((needs.release_tag.result  == 'success') && (needs.release_gh.result  == 'success') && (needs.publish_image.result  == 'success') && (needs.publish_lib.result  == 'success')) && format('{0} {1}/{2}/releases/tag/v{3}', ':shipit:', github.server_url, github.repository, needs.release_tag.outputs.VERSION) || ':fire:' }}
-  #   secrets:
-  #     SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
-  #     SLACK_CHANEL: ${{ secrets.SLACK_CHANNEL_PSO_RELEASE }}
+  notify:
+    needs:
+      - release_tag
+      - release_gh
+      # ATTENTION: Choose one or both of the below depending on the type of project
+      - publish_image
+      - publish_lib
+    if: ${{ always() }} # Here we report on the final state of the workflow!
+    uses: modusbox/github-actions-node/.github/workflows/notifyReleaseJob.yml@main
+    with:
+      JOB_STATUS: ${{ ((needs.release_tag.result  == 'success') && (needs.release_gh.result  == 'success') && (needs.publish_image.result  == 'success') && (needs.publish_lib.result  == 'success')) && 'success' || 'failed' }}
+      TYPE: Release
+      RELEASE_VERSION: ${{ ((needs.release_tag.result  == 'success') && (needs.release_gh.result  == 'success') && (needs.publish_image.result  == 'success') && (needs.publish_lib.result  == 'success')) && format('v{0}', needs.release_tag.outputs.VERSION) || 'n/a' }}
+      RELEASE_URL: ${{ ((needs.release_tag.result  == 'success') && (needs.release_gh.result  == 'success') && (needs.publish_image.result  == 'success') && (needs.publish_lib.result  == 'success')) && format('{0} {1}/{2}/releases/tag/v{3}', ':shipit:', github.server_url, github.repository, needs.release_tag.outputs.VERSION) || ':fire:' }}
+    secrets:
+      SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+      SLACK_CHANEL: ${{ secrets.SLACK_CHANNEL_PSO_RELEASE }}
