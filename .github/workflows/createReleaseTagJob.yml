@@ -54,9 +54,14 @@ jobs:
       - name: Fetch changelog
         run: |
           git diff --no-indent-heuristic main~1 HEAD CHANGELOG.md | sed -n '/^+[^+]/ s/^+//p' > /tmp/changes
+          
+          CHANGES=$(cat <<EOF
+          $(cat /tmp/changes)
+          EOF)
 
           echo 'RELEASE_CHANGES<<EOF' >> $GITHUB_ENV
-          cat /tmp/changes >> $GITHUB_ENV
+          # cat /tmp/changes >> $GITHUB_ENV
+          echo "$CHANGES" >> $GITHUB_ENV
           echo 'EOF' >> $GITHUB_ENV
 
           echo "RELEASE_TAG=$(cat package-lock.json | jq -r .version)" >> $GITHUB_ENV
