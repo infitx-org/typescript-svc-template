@@ -89,5 +89,4 @@ The automated CI-CD release process will then publish the snapshot artifact.
 
 ## npmrc
 
-TODO
-...
+TODO...
