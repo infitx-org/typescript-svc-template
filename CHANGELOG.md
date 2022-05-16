@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.140](https://github.com/modusbox/typescript-svc-template/compare/v0.0.139...v0.0.140) (2022-05-16)
+
+
+### Features
+
+* typo3 ([20fcfb9](https://github.com/modusbox/typescript-svc-template/commit/20fcfb97d24afee18f8b9c96978242b88aa7904c))
+
+
+### Bug Fixes
+
+* typo1 ([4c898bc](https://github.com/modusbox/typescript-svc-template/commit/4c898bc3bc016134c954ab3e79f60b563df4f48a))
+* typo2 ([bdbca65](https://github.com/modusbox/typescript-svc-template/commit/bdbca6532da7ce8d95aceba65363ab2eb907eb9e))
+
 ### 0.0.139 (2022-05-16)
 
 
