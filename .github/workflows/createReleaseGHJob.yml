@@ -11,7 +11,7 @@ on:
         description: 'Uploaded Artefact containing the Changelog diff between releases'
         type: string
         required: true
-      RELEASE_CHANGE_FILE:
+      RELEASE_CHANGE_FILENAME:
         description: 'Name of file referenced from Uploaded Artefact containing the Changelog diff between releases'
         type: string
         required: true
@@ -35,7 +35,7 @@ jobs:
       - name: Release info
         run: |
           echo "CHANGES INCLUDED IN THIS TAGGED RELEASE:"
-          cat /tmp//${{ inputs.RELEASE_CHANGE_FILE }}
+          cat /tmp//${{ inputs.RELEASE_CHANGE_FILENAME }}
           echo "------------------------------"
           echo "RELEASE_CHANGES="
           echo "${{ inputs.RELEASE_DESCRIPTION }}"
@@ -49,7 +49,7 @@ jobs:
           tag_name: ${{ inputs.RELEASE_VERSION }}
           release_name: Release ${{ inputs.RELEASE_VERSION }}
           # body: ${{ inputs.RELEASE_DESCRIPTION }}
-          body_path: /tmp//${{ inputs.RELEASE_CHANGE_FILE }}
+          body_path: /tmp//${{ inputs.RELEASE_CHANGE_FILENAME }}
           draft: false
           prerelease: false
       - name: Upload Release Asset
