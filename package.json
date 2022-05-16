@@ -9,7 +9,15 @@
     "Miguel de Barros <miguel.debarros@modusbox.com>"
   ],
   "main": "src/index.ts",
+  "files":[
+    "/dist",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
   "scripts": {
+    "prepare": "npx husky install",
+    "prepublishOnly": "npm run build",
     "pretest": "npm run build",
     "test": "npm run test:unit",
     "test:unit": "npx jest --testMatch '**/test/unit/**/*.test.ts'",
@@ -25,7 +33,6 @@
     "audit:resolve": "echo 'TBD' && exit 1",
     "audit:check": "npm audit",
     "clean": "rm -rf ./dist",
-    "prepare": "npx husky install",
     "dep:check": "npx ncu -e 2",
     "dep:update": "npx ncu -u",
     "release": "standard-version --no-verify --releaseCommitMessageFormat 'chore(release): {{currentTag}} [skip ci]'",
