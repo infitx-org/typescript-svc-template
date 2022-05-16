@@ -25,7 +25,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       VERSION: ${{ steps.output-version.outputs.version }}
-      CHANGES: ${{ steps.output-version.outputs.changes }}
+      CHANGES: ${{ steps.output-changes.outputs.changes }}
     steps:
       - name: Install dependencies
         run: |
