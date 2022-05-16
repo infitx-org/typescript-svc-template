@@ -34,11 +34,9 @@ jobs:
           path: /tmp/
       - name: Release info
         run: |
-          echo "CHANGES INCLUDED IN THIS TAGGED RELEASE:"
-          cat /tmp//${{ inputs.RELEASE_CHANGE_FILENAME }}
+          echo "RELEASE_CHANGE_ARTEFACT/RELEASE_CHANGE_FILENAME contents:"
+          cat /tmp/${{ inputs.RELEASE_CHANGE_FILENAME }}
           echo "------------------------------"
-          echo "RELEASE_CHANGES="
-          echo "${{ inputs.RELEASE_DESCRIPTION }}"
           echo "RELEASE_TAG=${{ inputs.RELEASE_VERSION }}"
       - name: Create Release @${{ inputs.RELEASE_VERSION }}
         id: create_release
@@ -48,7 +46,7 @@ jobs:
         with:
           tag_name: ${{ inputs.RELEASE_VERSION }}
           release_name: Release ${{ inputs.RELEASE_VERSION }}
-          # body: ${{ inputs.RELEASE_DESCRIPTION }}
+          # body: "" # optional, body_path used instead.
           body_path: /tmp//${{ inputs.RELEASE_CHANGE_FILENAME }}
           draft: false
           prerelease: false
