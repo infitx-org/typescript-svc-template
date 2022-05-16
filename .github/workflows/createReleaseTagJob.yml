@@ -13,13 +13,13 @@ on:
         description: 'User email address'
         required: true
     outputs:
-      VERSION:
-        description: "Tagged release version"
-        value: steps.output-version.outputs.version
+      VERSION: ${{ steps.output-version.outputs.version }}
+        # description: "Tagged release version"
+        # value: steps.output-version.outputs.version
         # value: ${{ jobs.release.outputs.VERSION }}
-      CHANGES:
-        description: "Changelog diff between versions"
-        value: steps.output-changes.outputs.changes
+      CHANGES: ${{ steps.output-changes.outputs.changes }}
+        # description: "Changelog diff between versions"
+        # value: steps.output-changes.outputs.changes
         # value: ${{ jobs.release.outputs.CHANGES }}
 
 jobs:
