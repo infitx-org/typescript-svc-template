@@ -44,8 +44,8 @@ jobs:
     #   - test_coverage
     #   - test_int
     #   - test_func
-    # uses: modusbox/github-actions-node/.github/workflows/createReleaseTagJob.yml@main
-    uses: ./.github/workflows/createReleaseTagJob.yml
+    uses: modusbox/github-actions-node/.github/workflows/createReleaseTagJob.yml@main
+    # uses: ./.github/workflows/createReleaseTagJob.yml
     secrets:
       GIT_KEY: ${{ secrets.PSO_GIT_KEY }}
       GIT_USER: ${{ secrets.PSO_GIT_USER }}
