@@ -8,7 +8,7 @@ on:
         type: string
         required: true
       RELEASE_DESCRIPTION:
-        description: 'Release information, e.g. v{{version}}'
+        description: 'Release description'
         type: string
         required: false
     secrets:
