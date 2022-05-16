@@ -56,7 +56,7 @@ jobs:
           echo 'RELEASE_CHANGES<<EOF' >> $GITHUB_ENV
           cat /tmp/changes >> $GITHUB_ENV
           echo 'EOF' >> $GITHUB_ENV
-          echo "RELEASE_TAG='$(cat package-lock.json | jq -r .version)'" >> $GITHUB_ENV
+          echo "RELEASE_TAG=$(cat package-lock.json | jq -r .version)" >> $GITHUB_ENV
       - name: Release info
         run: |
           echo "CHANGES INCLUDED IN THIS TAGGED RELEASE:"
