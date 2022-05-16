@@ -44,8 +44,8 @@ jobs:
     #   - test_coverage
     #   - test_int
     #   - test_func
-    uses: modusbox/github-actions-node/.github/workflows/createReleaseTagJob.yml@main
-    # uses: ./.github/workflows/createReleaseTagJob.yml
+    # uses: modusbox/github-actions-node/.github/workflows/createReleaseTagJob.yml@main
+    uses: ./.github/workflows/createReleaseTagJob.yml
     secrets:
       GIT_KEY: ${{ secrets.PSO_GIT_KEY }}
       GIT_USER: ${{ secrets.PSO_GIT_USER }}
@@ -54,9 +54,11 @@ jobs:
   release_gh:
     needs:
       - release_tag
-    uses: modusbox/github-actions-node/.github/workflows/createReleaseGHJob.yml@main
+    # uses: modusbox/github-actions-node/.github/workflows/createReleaseGHJob.yml@main
+    uses: ./.github/workflows/createReleaseGHJob.yml
     with:
       RELEASE_VERSION: v${{ needs.release_tag.outputs.VERSION }}
+      RELEASE_DESCRIPTION: ${{ needs.release_tag.outputs.CHANGES }}
     secrets:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
