@@ -16,16 +16,24 @@ on:
       VERSION:
         description: "Tagged release version"
         value: ${{ jobs.release.outputs.VERSION }}
-      CHANGES:
-        description: "Changelog diff between versions"
-        value: ${{ jobs.release.outputs.CHANGES }}
+      RELEASE_CHANGE_ARTEFACT:
+        description: "Uploaded Artefact containing the Changelog diff between releases"
+        value: ${{ jobs.release.outputs.ARTEFACT_NAME }}
+      RELEASE_CHANGE_FILENAME:
+        description: "Uploaded Artefact containing the Changelog diff between releases"
+        value: ${{ jobs.release.outputs.ARTEFACT_FILE }}
+
+env:
+  ARTEFACT_NAME: release-changes
+  ARTEFACT_FILE: changes
 
 jobs:
   release:
     runs-on: ubuntu-latest
     outputs:
-      VERSION: ${{ steps.output-version.outputs.version }}
-      CHANGES: ${{ steps.output-changes.outputs.changes }}
+      VERSION: ${{ steps.output-changes.outputs.version }}
+      ARTEFACT_NAME: ${{ steps.output-changes.outputs.changes }}
+      ARTEFACT_FILE: ${{ steps.output-changes.outputs.file }}
     steps:
       - name: Install dependencies
         run: |
@@ -53,37 +61,30 @@ jobs:
           npm run release
       - name: Fetch changelog
         run: |
-          git diff --no-indent-heuristic main~1 HEAD CHANGELOG.md | sed -n '/^+[^+]/ s/^+//p' > /tmp/changes
-          
-          CHANGES=$(cat <<EOF
-          $(cat /tmp/changes)
-          EOF)
+          git diff --no-indent-heuristic main~1 HEAD CHANGELOG.md | sed -n '/^+[^+]/ s/^+//p' > /tmp/${{ env.ARTEFACT_FILE }}
 
           echo 'RELEASE_CHANGES<<EOF' >> $GITHUB_ENV
-          # cat /tmp/changes >> $GITHUB_ENV
-          echo "$CHANGES" >> $GITHUB_ENV
+          cat /tmp/${{ env.ARTEFACT_FILE }} >> $GITHUB_ENV
           echo 'EOF' >> $GITHUB_ENV
 
           echo "RELEASE_TAG=$(cat package-lock.json | jq -r .version)" >> $GITHUB_ENV
       - uses: actions/upload-artifact@v3
         with:
-          name: diff-changes
-          path: /tmp/changes
+          name: ${{ env.ARTEFACT_NAME }}
+          path: /tmp/${{ env.ARTEFACT_FILE }}
           if-no-files-found: error
       - name: Release info
         run: |
           echo "CHANGES INCLUDED IN THIS TAGGED RELEASE:"
-          cat /tmp/changes
+          cat /tmp/${{ env.ARTEFACT_FILE }}
           echo "------------------------------"
           echo "RELEASE_CHANGES=$RELEASE_CHANGES"
           echo "RELEASE_TAG=$RELEASE_TAG"
       - name: Push the release @ v${{ env.RELEASE_TAG }}
         run: |
           git push --follow-tags
-      - id: output-version
-        run: echo "::set-output name=version::${{ env.RELEASE_TAG }}"
       - id: output-changes
-        run: echo "::set-output name=changes::${{ env.RELEASE_CHANGES }}"
-      - name: display string
         run: |
-          echo "The string is: ${{ steps.output-changes.outputs.changes }}"
+          echo "::set-output name=version::${{ env.RELEASE_TAG }}"
+          echo "::set-output name=changes::${{ env.ARTEFACT_NAME }}"
+          echo "::set-output name=file::${{ env.CHANGE_FILE }}"
