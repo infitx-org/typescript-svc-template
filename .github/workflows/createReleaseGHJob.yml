@@ -35,6 +35,7 @@ jobs:
       - name: Release info
         run: |
           echo "RELEASE_CHANGE_ARTEFACT/RELEASE_CHANGE_FILENAME contents:"
+          ls -l /tmp/
           cat /tmp/${{ inputs.RELEASE_CHANGE_FILENAME }}
           echo "------------------------------"
           echo "RELEASE_TAG=${{ inputs.RELEASE_VERSION }}"
