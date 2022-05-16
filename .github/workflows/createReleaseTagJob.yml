@@ -73,5 +73,4 @@ jobs:
       - id: output-version
         run: echo "::set-output name=version::${{ env.RELEASE_TAG }}"
       - id: output-changes
-        # run: echo "::set-output name=changes::${{ env.RELEASE_CHANGES }}"
-        run: echo "::set-output name=changes::'test1224324'"
+        run: echo "::set-output name=changes::${{ env.RELEASE_CHANGES }}"
