@@ -89,9 +89,14 @@ The automated CI-CD release process will then publish the snapshot artifact.
 
 ## npmrc
 
-While using `@modusbox` specific libraries need to make below entry in this file. 
+ModusBox libraries are officially hosted on Github: https://github.com/orgs/modusbox/packages
 
-```
+To correctly resolve `@modusbox/*` specific libraries, one needs to add the below entry in an [.npmrc](./.npmrc) file in your NodeJS's project root folder.
+
+```file
 @modusbox:registry=https://npm.pkg.github.com
 ```
-This will make sure `npm install` knows from where to fetch those packages
+
+This will allow `npm install` to correctly fetch dependencies from [ModusBox's NPM registry hosted on GitHub](https://github.com/orgs/modusbox/packages).
+
+If the [.npmrc](./.npmrc) is not configured as such, the `@modusbox/*` dependencies will be pulled from the standard NPM registries.
