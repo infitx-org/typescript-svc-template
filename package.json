@@ -1,6 +1,6 @@
 {
   "name": "@modusbox/typescript-svc-template",
-  "version": "0.0.146",
+  "version": "0.0.147-snapshot.0",
   "description": "Template for typescript nodejs projects",
   "license": "Apache-2.0",
   "author": "ModusBox",
@@ -36,7 +36,7 @@
     "dep:check": "npx ncu -e 2",
     "dep:update": "npx ncu -u",
     "release": "npx standard-version --no-verify --releaseCommitMessageFormat 'chore(release): {{currentTag}} [skip ci]'",
-    "snapshot": "npx standard-version --no-verify --skip.changelog --prerelease snapshot --releaseCommitMessageFormat 'chore(snapshot): {{currentTag}}'",
+    "snapshot": "npx standard-version --no-verify --prerelease snapshot --releaseCommitMessageFormat 'chore(snapshot): {{currentTag}}'",
     "backend:start": "echo 'PLACEHOLDER' for starting backend dependencies",
     "backend:stop": "echo 'PLACEHOLDER for stopping backend dependencies'",
     "backend:restart": "echo 'PLACEHOLDER for restarting backend dependencies'"
