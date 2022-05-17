@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.152](https://github.com/modusbox/typescript-svc-template/compare/v0.0.151...v0.0.152) (2022-05-17)
+
+
+### Chore
+
+* removed todo from main readme ([a6fdd9c](https://github.com/modusbox/typescript-svc-template/commit/a6fdd9c0a87fda2efbf07833f3596228168de62c))
+
 ### [0.0.151](https://github.com/modusbox/typescript-svc-template/compare/v0.0.150...v0.0.151) (2022-05-17)
 
 
