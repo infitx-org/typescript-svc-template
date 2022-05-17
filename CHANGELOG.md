@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.148](https://github.com/modusbox/typescript-svc-template/compare/v0.0.147...v0.0.148) (2022-05-17)
+
+
+### Chores
+
+* updates to versionrc - included ci & build types ([195b4b9](https://github.com/modusbox/typescript-svc-template/commit/195b4b988e52d2cb12d8bfaa893efe9944493743))
+
 ### [0.0.147](https://github.com/modusbox/typescript-svc-template/compare/v0.0.146...v0.0.147) (2022-05-17)
 
 
