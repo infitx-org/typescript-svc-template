@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.141](https://github.com/modusbox/typescript-svc-template/compare/v0.0.140...v0.0.141) (2022-05-17)
+
+
+### Features
+
+* added .npmrc ([a68a16c](https://github.com/modusbox/typescript-svc-template/commit/a68a16c3dd9a9d7394da16a1aeb856a639d95055))
+* merge master ([a4e1de5](https://github.com/modusbox/typescript-svc-template/commit/a4e1de581b9161c414503fe852e449f2dd1bf2d9))
+* merge master ([e504965](https://github.com/modusbox/typescript-svc-template/commit/e50496520ebf163b8e086168533a884beed96cfd))
+* update dep ([f08f4a8](https://github.com/modusbox/typescript-svc-template/commit/f08f4a812927eedde71863621a86224852b83fac))
+
 ### [0.0.140](https://github.com/modusbox/typescript-svc-template/compare/v0.0.139...v0.0.140) (2022-05-16)
 
 
