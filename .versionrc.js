@@ -14,7 +14,7 @@ module.exports = {
     {type: "refactor", section: "Refactor", hidden: false},
     {type: "perf", section: "Performance", hidden: false},
     {type: "test", section: "Test", hidden: false},
-    {type: "ci", section: "Continuous Integration", hidden: false},
+    {type: "ci", section: "Continuous Integration", hidden: true},
     {type: "build", section: "Build", hidden: true}
   ]
 }
