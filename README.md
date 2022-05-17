@@ -89,4 +89,9 @@ The automated CI-CD release process will then publish the snapshot artifact.
 
 ## npmrc
 
-TODO...
+While using `@modusbox` specific libraries need to make below entry in this file. 
+
+```
+@modusbox:registry=https://npm.pkg.github.com
+```
+This will make sure `npm install` knows from where to fetch those packages
