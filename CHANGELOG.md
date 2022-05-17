@@ -2,6 +2,161 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.140](https://github.com/modusbox/typescript-svc-template/compare/v0.0.139...v0.0.140) (2022-05-16)
+
+
+### Features
+
+* typo3 ([20fcfb9](https://github.com/modusbox/typescript-svc-template/commit/20fcfb97d24afee18f8b9c96978242b88aa7904c))
+
+
+### Bug Fixes
+
+* typo1 ([4c898bc](https://github.com/modusbox/typescript-svc-template/commit/4c898bc3bc016134c954ab3e79f60b563df4f48a))
+* typo2 ([bdbca65](https://github.com/modusbox/typescript-svc-template/commit/bdbca6532da7ce8d95aceba65363ab2eb907eb9e))
+
+### 0.0.139 (2022-05-16)
+
+
+### Bug Fixes
+
+* typo1 ([7098a93](https://github.com/modusbox/typescript-svc-template/commit/7098a9347230c6d626809fc7ff5cae9920889f5a))
+
+### 0.0.138 (2022-05-16)
+
+
+### Bug Fixes
+
+* fix1 ([8cfa69e](https://github.com/modusbox/typescript-svc-template/commit/8cfa69e84d620d5bfc142ad444b729360c9e83ab))
+
+### 0.0.137 (2022-05-16)
+
+
+### Bug Fixes
+
+* typo fix ([4293155](https://github.com/modusbox/typescript-svc-template/commit/4293155a0d419a9fff6534a0cf9cd04dbdb9388a))
+
+### 0.0.136 (2022-05-16)
+
+### 0.0.135 (2022-05-16)
+
+
+### Features
+
+* test ([8890f07](https://github.com/modusbox/typescript-svc-template/commit/8890f07ce95341f4adeb44254bbe111b0a60a01e))
+
+### 0.0.134 (2022-05-16)
+
+
+### Features
+
+* test ([d5edb3f](https://github.com/modusbox/typescript-svc-template/commit/d5edb3f27f54b962aed35a4719017eb3f5096bfa))
+
+### 0.0.133 (2022-05-16)
+
+
+### Bug Fixes
+
+* cleanup ([67e8093](https://github.com/modusbox/typescript-svc-template/commit/67e8093b06bb6156096299ded3ab9ad1a7401bf9))
+
+### 0.0.132 (2022-05-16)
+
+
+### Features
+
+* test ([ba1c98d](https://github.com/modusbox/typescript-svc-template/commit/ba1c98d48965082614abf7f6ca3a44bf0044d30e))
+
+### 0.0.131 (2022-05-16)
+
+
+### Features
+
+* test ([05a2eb2](https://github.com/modusbox/typescript-svc-template/commit/05a2eb22bee0aa4ae5eac6de7b0d6ef26e792353))
+
+### 0.0.130 (2022-05-16)
+
+
+### Features
+
+* test ([aedb47a](https://github.com/modusbox/typescript-svc-template/commit/aedb47a3c48b968e2e25df4fd71994e2b8c6d5ac))
+
+### 0.0.129 (2022-05-16)
+
+
+### Features
+
+* test ([bd6d279](https://github.com/modusbox/typescript-svc-template/commit/bd6d2792a51b74568082e1455c5b4a05e3e034cc))
+
+### 0.0.128 (2022-05-16)
+
+
+### Features
+
+* test ([bee48dc](https://github.com/modusbox/typescript-svc-template/commit/bee48dc30e3fa6529d3ceca315b5ffeca84c7daa))
+
+### 0.0.127 (2022-05-16)
+
+
+### Features
+
+* test ([33b231f](https://github.com/modusbox/typescript-svc-template/commit/33b231f292584e28d8cbcb4beb90bab721257cd6))
+
+### 0.0.126 (2022-05-16)
+
+
+### Features
+
+* test ([a30dee7](https://github.com/modusbox/typescript-svc-template/commit/a30dee7573a596fcba4f1931ca772a33f62a9c84))
+
+### 0.0.125 (2022-05-16)
+
+
+### Features
+
+* test ([734f5eb](https://github.com/modusbox/typescript-svc-template/commit/734f5eb4340227c9f22812de377ec99134cef5e4))
+
+### 0.0.124 (2022-05-16)
+
+
+### Features
+
+* test ([9d58a4f](https://github.com/modusbox/typescript-svc-template/commit/9d58a4facc3bf8c68cc7050e8136b90ca85d09b7))
+
+### 0.0.123 (2022-05-16)
+
+
+### Features
+
+* test ([1f5a052](https://github.com/modusbox/typescript-svc-template/commit/1f5a05225644c89fdbfe83be8e0e69950af20027))
+
+### 0.0.122 (2022-05-16)
+
+
+### Features
+
+* test ([243d1ea](https://github.com/modusbox/typescript-svc-template/commit/243d1ea784fc4a2e84e3311b63dab6f11025b3e5))
+
+### 0.0.121 (2022-05-16)
+
+
+### Features
+
+* test ([180c58d](https://github.com/modusbox/typescript-svc-template/commit/180c58d5f6e53b0bfcfbb73e8eca8f3a2e84156c))
+
+### 0.0.120 (2022-05-16)
+
+
+### Features
+
+* test ([b36a20e](https://github.com/modusbox/typescript-svc-template/commit/b36a20ec535e83b93304b08bc1515df06bdc4ff6))
+
+### 0.0.119 (2022-05-16)
+
+
+### Features
+
+* test ([fe75f84](https://github.com/modusbox/typescript-svc-template/commit/fe75f846136e7903c6821c1884712ccb353842a7))
+
 ### 0.0.118 (2022-05-16)
 
 
