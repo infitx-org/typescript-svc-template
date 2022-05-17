@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.151](https://github.com/modusbox/typescript-svc-template/compare/v0.0.150...v0.0.151) (2022-05-17)
+
+
+### Chore
+
+* added comment to prWorkflow with link to re-usable workflow jobs ([ac96dd5](https://github.com/modusbox/typescript-svc-template/commit/ac96dd5b40318d34a8db634007a17b1ab4709a0f))
+
 ### [0.0.150](https://github.com/modusbox/typescript-svc-template/compare/v0.0.149...v0.0.150) (2022-05-17)
 
 
