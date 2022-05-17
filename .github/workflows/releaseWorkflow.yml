@@ -11,28 +11,28 @@ on:
 
 jobs:
   test_lint:
-    uses: modusbox/github-actions-node/.github/workflows/testLintJob.yml@main
+    uses: modusbox/github-actions-node/.github/workflows/testLintJob.yml@v0.0.1
 
   test_dependencies:
-    uses: modusbox/github-actions-node/.github/workflows/testDependencyJob.yml@main
+    uses: modusbox/github-actions-node/.github/workflows/testDependencyJob.yml@v0.0.1
 
   test_audit:
-    uses: modusbox/github-actions-node/.github/workflows/testAuditJob.yml@main
+    uses: modusbox/github-actions-node/.github/workflows/testAuditJob.yml@v0.0.1
 
   test_license:
-    uses: modusbox/github-actions-node/.github/workflows/testLicenseJob.yml@main
+    uses: modusbox/github-actions-node/.github/workflows/testLicenseJob.yml@v0.0.1
 
   test_unit:
-    uses: modusbox/github-actions-node/.github/workflows/testUnitJob.yml@main
+    uses: modusbox/github-actions-node/.github/workflows/testUnitJob.yml@v0.0.1
 
   test_coverage:
-    uses: modusbox/github-actions-node/.github/workflows/testCoverageJob.yml@main
+    uses: modusbox/github-actions-node/.github/workflows/testCoverageJob.yml@v0.0.1
 
   test_int:
-    uses: modusbox/github-actions-node/.github/workflows/testIntJob.yml@main
+    uses: modusbox/github-actions-node/.github/workflows/testIntJob.yml@v0.0.1
 
   test_func:
-    uses: modusbox/github-actions-node/.github/workflows/testFuncJob.yml@main
+    uses: modusbox/github-actions-node/.github/workflows/testFuncJob.yml@v0.0.1
 
   release_tag:
     needs:
@@ -44,7 +44,7 @@ jobs:
       - test_coverage
       - test_int
       - test_func
-    uses: modusbox/github-actions-node/.github/workflows/createReleaseTagJob.yml@main
+    uses: modusbox/github-actions-node/.github/workflows/createReleaseTagJob.yml@v0.0.1
     secrets:
       GIT_KEY: ${{ secrets.PSO_GIT_KEY }}
       GIT_USER: ${{ secrets.PSO_GIT_USER }}
@@ -53,7 +53,7 @@ jobs:
   release_gh:
     needs:
       - release_tag
-    uses: modusbox/github-actions-node/.github/workflows/createReleaseGHJob.yml@main
+    uses: modusbox/github-actions-node/.github/workflows/createReleaseGHJob.yml@v0.0.1
     with:
       RELEASE_VERSION: v${{ needs.release_tag.outputs.VERSION }}
       RELEASE_CHANGE_ARTEFACT: ${{ needs.release_tag.outputs.RELEASE_CHANGE_ARTEFACT }}
@@ -66,7 +66,7 @@ jobs:
     needs:
       - release_tag
       - release_gh
-    uses: modusbox/github-actions-node/.github/workflows/publishImageJob.yml@main
+    uses: modusbox/github-actions-node/.github/workflows/publishImageJob.yml@v0.0.1
     with:
       RELEASE_VERSION: v${{ needs.release_tag.outputs.VERSION }}
       RELEASE_URL: ${{ github.server_url }}/${{ github.repository }}/releases/tag/v${{ needs.release_tag.outputs.VERSION }}
@@ -79,7 +79,7 @@ jobs:
     needs:
       - release_tag
       - release_gh
-    uses: modusbox/github-actions-node/.github/workflows/publishLibraryJob.yml@main
+    uses: modusbox/github-actions-node/.github/workflows/publishLibraryJob.yml@v0.0.1
     with:
       RELEASE_VERSION: v${{ needs.release_tag.outputs.VERSION }}
     secrets:
@@ -93,7 +93,7 @@ jobs:
       - publish_image
       - publish_lib
     if: ${{ always() }} # Here we report on the final state of the workflow!
-    uses: modusbox/github-actions-node/.github/workflows/notifyReleaseJob.yml@main
+    uses: modusbox/github-actions-node/.github/workflows/notifyReleaseJob.yml@v0.0.1
     with:
       JOB_STATUS: ${{ ((needs.release_tag.result  == 'success') && (needs.release_gh.result  == 'success') && (needs.publish_image.result  == 'success') && (needs.publish_lib.result  == 'success')) && 'success' || 'failed' }}
       TYPE: Release
