@@ -2,6 +2,32 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.147](https://github.com/modusbox/typescript-svc-template/compare/v0.0.146...v0.0.147) (2022-05-17)
+
+
+### Bug Fixes
+
+* fixed snapshot script in package to not generate changelog ([9678f45](https://github.com/modusbox/typescript-svc-template/commit/9678f45c2132a3d3600ebaef7e4cbcc5368e6a8b))
+
+
+### Documentation
+
+* cleanup ([b419fd6](https://github.com/modusbox/typescript-svc-template/commit/b419fd63d786a75198a996ac6648b0f9cfcf994d))
+
+
+### Chore
+
+* added .versionrc.js ([7879beb](https://github.com/modusbox/typescript-svc-template/commit/7879beb13d9397cf90e087ba7dd060957c5597db))
+* removed snapshots from changelog ([27db1cb](https://github.com/modusbox/typescript-svc-template/commit/27db1cb0b310736db7ace23fd51bf167463e28c7))
+* removed standard-version config from package.json as its handled by .versionrc.js ([2705e3c](https://github.com/modusbox/typescript-svc-template/commit/2705e3c5478df89f8b29f2ff92317dd7e9ddd910))
+* **snapshot:** 0.0.147-snapshot.0 ([10f61f4](https://github.com/modusbox/typescript-svc-template/commit/10f61f40df0f3c1f03f8b880a6aceea7524da344))
+* **snapshot:** 0.0.147-snapshot.1 ([184bdfb](https://github.com/modusbox/typescript-svc-template/commit/184bdfbf99fc259dcbc093ad2f49130b3cc65821))
+* **snapshot:** 0.0.147-snapshot.2 ([b30e546](https://github.com/modusbox/typescript-svc-template/commit/b30e54604b7fb1c6b63608c13880dac0add8233a))
+* **snapshot:** 0.0.147-snapshot.3 ([66446a6](https://github.com/modusbox/typescript-svc-template/commit/66446a61701ff06ff690d39ab6f7168acd013f56))
+* test ([dd4e55e](https://github.com/modusbox/typescript-svc-template/commit/dd4e55e8826f26c0662d40becc4ef5db512608c3))
+* updated .versionrc ([485e13d](https://github.com/modusbox/typescript-svc-template/commit/485e13d3a55159797fd8a56fc63811abf2ef8eaa))
+* updated .versionrc.js ([47b19d5](https://github.com/modusbox/typescript-svc-template/commit/47b19d554b37f9489fbb8920991e65a698f36eca))
+
 ### [0.0.146](https://github.com/modusbox/typescript-svc-template/compare/v0.0.145...v0.0.146) (2022-05-17)
 
 ### [0.0.145](https://github.com/modusbox/typescript-svc-template/compare/v0.0.144...v0.0.145) (2022-05-17)
