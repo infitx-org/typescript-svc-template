@@ -8,7 +8,7 @@ module.exports = {
   types: [
     {type: "feat", section: "Features", hidden: false},
     {type: "fix", section: "Bug Fixes", hidden: false},
-    {type: "chore", section: "Chores", hidden: false},
+    {type: "chore", section: "Chore", hidden: false},
     {type: "docs", section: "Documentation", hidden: false},
     {type: "style", section: "Style", hidden: false},
     {type: "refactor", section: "Refactor", hidden: false},
