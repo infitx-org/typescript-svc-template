@@ -6,7 +6,8 @@
   - Implement example API Service using API First Approach
 - Implement Functional Tests using UI test framework as an example
   - Implement example Web-page
-- Implement publish NPM library
+- ~Implement publish NPM library~
+- Include release changes in slack notifications when release is successful
 
 ## Configuration
 
