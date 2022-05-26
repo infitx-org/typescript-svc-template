@@ -59,3 +59,7 @@ npm start
 ```bash
 npm test
 ```
+
+## Husky and .git are expected to be on the same directory, otherwise configure per Custom Directory at:
+
+https://typicode.github.io/husky/#/?id=custom-directory
