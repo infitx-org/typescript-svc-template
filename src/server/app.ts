@@ -15,27 +15,27 @@
  *  limitations under the License                                             *
  ******************************************************************************/
 
-import { MathLib } from './lib/math';
-require('./server');
+import express, { Application } from 'express';
+import swaggerUi from 'swagger-ui-express';
+// import Router from "./routes";
+import { RegisterRoutes } from './generated-routes/routes';
 
-/* Instructions
- * 
- * 1. Choose one of the following styles below, either an APPLICATION or a LIBRARY
- * 2. Removed the application block and comments.
- * 
- */
+import swaggerSpec from './interface/swagger.json';
 
-//* APPLICATION: {
+export const app: Application = express();
 
-console.log(`1+1=${MathLib.add(1, 1)}`);
+app.use(express.json());
+app.use(express.static('public'));
 
-console.log(`3x3=${MathLib.mul(3, 3)}`);
+app.use(
+    '/docs',
+    swaggerUi.serve,
+    swaggerUi.setup(undefined, {
+        swaggerOptions: {
+            spec: swaggerSpec,
+        },
+    }),
+);
 
-//* }
-
-//* LIBRARY: {
-
-export default MathLib;
-export * from './lib/math';
-
-//* }
+// app.use(Router);
+RegisterRoutes(app);

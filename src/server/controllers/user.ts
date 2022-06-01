@@ -15,27 +15,42 @@
  *  limitations under the License                                             *
  ******************************************************************************/
 
-import { MathLib } from './lib/math';
-require('./server');
+import {
+    Body,
+    Controller,
+    Get,
+    Path,
+    Post,
+    Query,
+    Route,
+    SuccessResponse,
+} from 'tsoa';
+import { User } from '../models';
+import { UsersService, UserCreationParams } from '../services/users';
 
-/* Instructions
- * 
- * 1. Choose one of the following styles below, either an APPLICATION or a LIBRARY
- * 2. Removed the application block and comments.
- * 
- */
+@Route('users')
+export class UsersController extends Controller {
+    @Get('{userId}')
+    public async getUser(
+        @Path() userId: number,
+    ): Promise<User | null> {
+        return new UsersService().get(userId);
+    }
 
-//* APPLICATION: {
+    @Get()
+    public async getUsers(
+        @Query() name?: string,
+    ): Promise<Array<User>> {
+        return new UsersService().getUsers(name);
+    }
 
-console.log(`1+1=${MathLib.add(1, 1)}`);
-
-console.log(`3x3=${MathLib.mul(3, 3)}`);
-
-//* }
-
-//* LIBRARY: {
-
-export default MathLib;
-export * from './lib/math';
-
-//* }
+    @SuccessResponse('201', 'Created') // Custom success response
+    @Post()
+    public async createUser(
+        @Body() requestBody: UserCreationParams,
+    ): Promise<User> {
+        this.setStatus(201); // set return status 201
+        const newUser: User = new UsersService().create(requestBody);
+        return newUser;
+    }
+}

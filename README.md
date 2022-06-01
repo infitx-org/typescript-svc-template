@@ -59,3 +59,6 @@ npm start
 ```bash
 npm test
 ```
+
+## References
+https://tsoa-community.github.io/docs/getting-started.html
