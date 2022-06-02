@@ -1,0 +1,20 @@
+version: "3.7"
+
+services:
+  example_users_api_service:
+    image: typescript-svc-template:local
+    build:
+     context: .
+     target: builder
+    ports:
+      - "8000:8000"
+    command:
+      - sh
+      - -c
+      - "npm start"
+
+networks:
+  default:
+    name: test-net
+
+

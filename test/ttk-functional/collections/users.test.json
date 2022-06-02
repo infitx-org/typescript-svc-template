@@ -1,0 +1,137 @@
+{
+  "test_cases": [
+    {
+      "id": 1,
+      "name": "Happy Path",
+      "requests": [
+        {
+          "id": 1,
+          "description": "Create a user",
+          "apiVersion": {
+            "minorVersion": 1,
+            "majorVersion": 0,
+            "type": "example_users_api_0.1"
+          },
+          "operationPath": "/users",
+          "path": "/users",
+          "method": "post",
+          "body": {
+            "email": "test1@test.com",
+            "name": "test1",
+            "phoneNumbers": [
+              "1234567890"
+            ]
+          },
+          "tests": {
+            "assertions": [
+              {
+                "id": 1,
+                "description": "Status is 201",
+                "exec": [
+                  "expect(response.status).to.equal(201)"
+                ]
+              },
+              {
+                "id": 2,
+                "description": "Response contains id",
+                "exec": [
+                  "expect(response.body).to.have.property('id');"
+                ]
+              },
+              {
+                "id": 3,
+                "description": "Email in the response is same as request",
+                "exec": [
+                  "expect(response.body.email).to.equal('{$request.body.email}');"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "id": 2,
+          "description": "Get the new user",
+          "apiVersion": {
+            "minorVersion": 1,
+            "majorVersion": 0,
+            "type": "example_users_api_0.1"
+          },
+          "operationPath": "/users/{userId}",
+          "path": "/users/{$prev.1.response.body.id}",
+          "method": "get",
+          "params": {
+            "userId": "{$prev.1.response.body.id}"
+          },
+          "tests": {
+            "assertions": [
+              {
+                "id": 1,
+                "description": "Status is 200",
+                "exec": [
+                  "expect(response.status).to.equal(200)"
+                ]
+              },
+              {
+                "id": 2,
+                "description": "Response contains id which is same as the request parameter",
+                "exec": [
+                  "expect(response.body.id).to.equal({$request.params.userId});"
+                ]
+              },
+              {
+                "id": 3,
+                "description": "Email in the response is same as the email created in previous request",
+                "exec": [
+                  "expect(response.body.email).to.equal('{$prev.1.request.body.email}');"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "id": 3,
+          "description": "Get all users",
+          "apiVersion": {
+            "minorVersion": 1,
+            "majorVersion": 0,
+            "type": "example_users_api_0.1"
+          },
+          "operationPath": "/users",
+          "path": "/users",
+          "method": "get",
+          "queryParams": {
+            "name": "test1"
+          },
+          "tests": {
+            "assertions": [
+              {
+                "id": 1,
+                "description": "Status is 200",
+                "exec": [
+                  "expect(response.status).to.equal(200)"
+                ]
+              },
+              {
+                "id": 2,
+                "description": "Response should contain the previously created user",
+                "exec": [
+                  "expect(response.body).to.include.deep.members([",
+                  "  {",
+                  "    id: {$prev.1.response.body.id},",
+                  "    status: '{$prev.1.response.body.status}',",
+                  "    name: '{$prev.1.response.body.name}',",
+                  "    email: '{$prev.1.response.body.email}',",
+                  "    phoneNumbers: [",
+                  "      '{$prev.1.response.body.phoneNumbers[0]}'",
+                  "    ]",
+                  "  }",
+                  "]);"
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

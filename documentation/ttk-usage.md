@@ -11,7 +11,9 @@ graph LR;
 ```
 
 In this case, we need to run the new service with all its dependencies and execute TTK tests against it.
-The following are the steps:
+
+### Adding TTK functional tests
+
 - Include the openapi specification of the new service in TTK
   - Create a directory `Ex: new-dev-service` in the folder `spec_files/api_definitions` and place the new API definition in `api_spec.yaml`
   - In `system_config.json`, add it to the parameter `API_DEFINITIONS`
@@ -23,6 +25,14 @@ The following are the steps:
 - Prepare a test case to test the required endpoints of the new service
 - If you want to parameterise some values, prepare a TTK environment file
 - Run the test case file with TTK CLI using the environment file
+
+### Running TTK functional tests
+
+- Run `docker-compose up` from root directory
+- Run `docker-compose up` from `test/ttk-functional` directory
+- Run `npm run test:func`
+- You should see the `Passed percentage` as  `100%`
+
 
 ## Scenario 2 (Mocking a service for development / for integration and functional tests)
 

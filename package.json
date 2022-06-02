@@ -24,6 +24,7 @@
     "test:unit": "npx jest --testMatch '**/test/unit/**/*.test.ts'",
     "test:coverage": "npm run test:unit -- --coverage",
     "test:int": "npx jest --testMatch '**/test/int/**/*.test.ts'",
+    "test:func": "npx ml-ttk-cli -i test/ttk-functional/collections -e test/ttk-functional/environments/default-env.json --report-format html --report-target file://ttk-report.html",
     "build": "npx tsc",
     "watch": "npx tsc -w",
     "start": "npm run start:no-build",
@@ -56,6 +57,7 @@
   },
   "dependencies": {
     "express": "^4.18.1",
+    "multer": "^1.4.5-lts.1",
     "swagger-ui-express": "^4.4.0",
     "tslib": "^2.4.0",
     "tsoa": "^4.1.0"
@@ -63,9 +65,11 @@
   "devDependencies": {
     "@commitlint/cli": "^17.0.2",
     "@commitlint/config-conventional": "^17.0.2",
+    "@mojaloop/ml-testing-toolkit-client-lib": "^0.0.3",
     "@types/chai": "^4.3.1",
     "@types/express": "^4.17.13",
     "@types/jest": "^28.1.0",
+    "@types/multer": "^1.4.7",
     "@types/node": "^17.0.38",
     "@types/swagger-ui-express": "^4.1.3",
     "chai": "^4.3.6",
