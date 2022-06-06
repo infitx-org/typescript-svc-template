@@ -35,20 +35,19 @@ services:
       timeout: 10s
       retries: 3
 
-  mojaloop-testing-toolkit-ui:
-    image: mojaloop/ml-testing-toolkit-ui:v13.5.5
-    ports:
-      - "6060:6060"
-    environment:
-      - API_BASE_URL=http://localhost:5050
-      - AUTH_ENABLED=FALSE
-    command:
-      - sh
-      - /usr/share/nginx/start.sh
+  # mojaloop-testing-toolkit-ui:
+  #   image: mojaloop/ml-testing-toolkit-ui:v13.5.5
+  #   ports:
+  #     - "6060:6060"
+  #   environment:
+  #     - API_BASE_URL=http://localhost:5050
+  #     - AUTH_ENABLED=FALSE
+  #   command:
+  #     - sh
+  #     - /usr/share/nginx/start.sh
 
   ttk-functional-tests:
-    # image: mojaloop/ml-testing-toolkit:v14.0.2
-    image: mojaloop/ml-testing-toolkit-client-lib:v0.0.5
+    image: mojaloop/ml-testing-toolkit-client-lib:v0.0.6
     volumes:
       - "./collections:/opt/app/collections"
       - "./environments:/opt/app/environments"
