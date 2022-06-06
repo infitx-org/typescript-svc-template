@@ -1,6 +1,6 @@
 {
   "VERSION": 1,
-  "CALLBACK_ENDPOINT": "http://example_users_api_service:8000",
+  "CALLBACK_ENDPOINT": "http://example-users-api-service:8000",
   "CALLBACK_RESOURCE_ENDPOINTS": {
     "enabled": false,
     "endpoints": []

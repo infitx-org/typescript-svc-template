@@ -1,7 +1,7 @@
 version: "3.7"
 
 services:
-  example_users_api_service:
+  example-users-api-service:
     image: typescript-svc-template:local
     build:
      context: .
