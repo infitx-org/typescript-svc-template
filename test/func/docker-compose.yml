@@ -21,7 +21,7 @@ services:
     image: mojaloop/ml-testing-toolkit:v14.0.2
     volumes:
       - "./spec_files:/opt/mojaloop-testing-toolkit/spec_files"
-      - "./secrets:/opt/mojaloop-testing-toolkit/secrets"
+      ## TODO: Try to mount the spec file of the new service inside spec_files folder
     ports:
       - "5000:5000"
       - "5050:5050"
@@ -51,6 +51,7 @@ services:
     volumes:
       - "./collections:/opt/app/collections"
       - "./environments:/opt/app/environments"
+    ## TODO: Mount result folder and store the html report, store it as artifact in the github actions
     depends_on:
       mojaloop-testing-toolkit:
         condition: service_healthy
@@ -60,7 +61,7 @@ services:
     command:
       - sh
       - -c
-      - "npm run cli -- -u http://mojaloop-testing-toolkit:5050 -i collections -e environments/default-env.json"
+      - "npm run cli -- -u http://mojaloop-testing-toolkit:5050 -l 2 -i collections -e environments/default-env.json"
 
 networks:
   default:
