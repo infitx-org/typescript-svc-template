@@ -13,6 +13,29 @@ services:
       - -c
       - "npm start"
 
+  mock-service:
+    image: mojaloop/ml-testing-toolkit:v14.0.2
+    volumes:
+      - "./mock-service/spec_files:/opt/mojaloop-testing-toolkit/spec_files"
+    ports:
+      - "8500:5000"
+      - "8550:5050"
+    command:
+      - sh
+      - -c
+      - "npm start"
+
+  # mock-service-ttk-ui:
+  #   image: mojaloop/ml-testing-toolkit-ui:v13.5.5
+  #   ports:
+  #     - "8660:6060"
+  #   environment:
+  #     - API_BASE_URL=http://localhost:8550
+  #     - AUTH_ENABLED=FALSE
+  #   command:
+  #     - sh
+  #     - /usr/share/nginx/start.sh
+
 networks:
   default:
     name: test-net
