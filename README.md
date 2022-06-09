@@ -28,7 +28,9 @@ This will allow `npm install` to correctly fetch dependencies from [ModusBox's N
 
 If the [.npmrc](./.npmrc) is not configured as such, the `@modusbox/*` dependencies will be pulled from the standard NPM registries.
 
-### Install dependencies
+### Install
+
+Command to install dependencies:
 
 ```bash
 npm install
@@ -48,13 +50,13 @@ Command to LIVE transpile Typescript into JS live when any changes are made to t
 npm run watch
 ```
 
-## Running Locally
+## Run
 
 ```bash
 npm start
 ```
 
-## Running Tests
+## Test
 
 ```bash
 npm test
