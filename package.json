@@ -8,6 +8,10 @@
     "Shashikant Hirugade <shashikant.hirugade@modusbox.com>",
     "Miguel de Barros <miguel.debarros@modusbox.com>"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/modusbox/typescript-svc-template"
+  },
   "main": "dist/index.js",
   "files": [
     "/dist",
