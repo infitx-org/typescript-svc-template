@@ -76,7 +76,7 @@ services:
     volumes:
       - "./collections:/opt/app/collections"
       - "./environments:/opt/app/environments"
-    ## TODO: Mount result folder and store the html report, store it as artifact in the github actions
+      - "./reports:/opt/app/reports"
     depends_on:
       mojaloop-testing-toolkit:
         condition: service_healthy
@@ -86,7 +86,7 @@ services:
     command:
       - sh
       - -c
-      - "npm run cli -- -u http://mojaloop-testing-toolkit:5050 -l 2 -i collections -e environments/default-env.json"
+      - "npm run cli -- -u http://mojaloop-testing-toolkit:5050 -l 2 -i collections -e environments/default-env.json --report-format html --report-target file://reports/latest.html"
 
 networks:
   default:

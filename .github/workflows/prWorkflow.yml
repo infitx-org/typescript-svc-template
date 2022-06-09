@@ -44,5 +44,7 @@ jobs:
           node-version: '${{ steps.nvm.outputs.NVMRC }}'
       - run: npm ci
       - run: npm run test:func
-    ## TODO: Store the report as artifact
-    ## and get the github actions URL for this artifact and set that to output variable (may be not possible)
+      - uses: actions/upload-artifact@v3
+        with:
+          name: test-func-reports
+          path: test/func/reports/*
