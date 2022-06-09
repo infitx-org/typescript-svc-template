@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.153](https://github.com/modusbox/typescript-svc-template/compare/v0.0.152...v0.0.153) (2022-06-09)
+
+
+### Features
+
+* **jira/MBP-359:** process-enhance template repository to include standard license test check ([9193751](https://github.com/modusbox/typescript-svc-template/commit/9193751d2191cb63cd5ac342a40aa4bb9061fa78))
+* **jira/MBP-359:** process-enhance template repository to include standard license test check ([a2ff01b](https://github.com/modusbox/typescript-svc-template/commit/a2ff01b05fefa397adca6986962a995392b7df82))
+
+
+### Chore
+
+* added repo to package.json ([782c1e1](https://github.com/modusbox/typescript-svc-template/commit/782c1e153ab220b415808ae28cb05f08c655f33a))
+
 ### [0.0.152](https://github.com/modusbox/typescript-svc-template/compare/v0.0.151...v0.0.152) (2022-05-17)
 
 
