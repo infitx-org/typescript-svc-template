@@ -8,6 +8,7 @@ WORKDIR /opt/app
 # Copy basic files for installing dependencies
 COPY tsconfig.json package.json package-lock.json tsoa.json /opt/app/
 COPY src /opt/app/src
+COPY config /opt/app/config
 
 RUN npm install
 

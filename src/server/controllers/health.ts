@@ -15,28 +15,20 @@
  *  limitations under the License                                             *
  ******************************************************************************/
 
-import { MathLib } from './lib/math';
-require('./server');
+import {
+    Controller,
+    Get,
+    Route,
+} from 'tsoa';
+import { Health } from '../models';
+import { HealthService } from '../services/health';
 
-/* Instructions
- * 
- * 1. Choose one of the following styles below, either an APPLICATION or a LIBRARY
- * 2. Removed the application block and comments.
- * 
- */
+@Route('health')
+export class HealthController extends Controller {
 
-//* APPLICATION: {
+    @Get()
+    public async getHealth(): Promise<Health> {
+        return new HealthService().getHealth();
+    }
 
-console.log(`1+1=${MathLib.add(1, 1)}`);
-
-console.log(`3x3=${MathLib.mul(3, 3)}`);
-
-
-//* }
-
-//* LIBRARY: {
-
-export default MathLib;
-export * from './lib/math';
-
-//* }
+}
