@@ -83,4 +83,5 @@ docs/
 **/*IGNORE*
 
 # TTK reports
-test/func/reports/*
+test/func/reports/*.html
+test/func/reports/*.json
