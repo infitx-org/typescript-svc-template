@@ -97,8 +97,6 @@ An example structure of the TTK files are provided in the directory `test/func`
   ```
   You should see the `Passed percentage` as  `100%`
 
-TODO:
-- Add documentation about config using `convict` lib
+TODO: Add documentation about config using `convict` lib
 
-- For Swagger UI https://github.com/stoplightio/elements
-TODO: Choose one swagger UI and remove the other.
+TODO: Choose one swagger UI and remove the other. https://github.com/stoplightio/elements
