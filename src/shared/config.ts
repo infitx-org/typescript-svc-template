@@ -16,7 +16,7 @@
  ******************************************************************************/
 
 import Convict from 'convict';
-import path from 'path'
+import path from 'path';
 
 export interface MockServiceConfig {
   HOST: string

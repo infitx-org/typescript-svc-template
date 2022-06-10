@@ -15,18 +15,33 @@
  *  limitations under the License                                             *
  ******************************************************************************/
 
-import express, { Application } from 'express';
+import Express, { Application } from 'express';
+import OpenAPIBackend from 'openapi-backend';
+import type { Request } from 'openapi-backend';
 import swaggerUi from 'swagger-ui-express';
-// import Router from "./routes";
-import { RegisterRoutes } from './generated-routes/routes';
+import path from 'path';
 
-import swaggerSpec from './interface/swagger.json';
+import Handlers from './handlers';
 
-export const app: Application = express();
+const YAML = require('yamljs');
+const swaggerSpec = YAML.load(path.join(__dirname, './interface/api.yaml'));
 
-app.use(express.json());
-app.use(express.static('public'));
+export const app: Application = Express();
 
+// API Docs
+app.get('(/doc/*)|(/doc)', (_req, res) => {
+  return res.sendFile('static-doc/index.html', { root: __dirname });
+});
+
+app.get('/static-doc/:filePath(*)', (req, res) => {
+  return res.sendFile(path.join('static-doc', req.params.filePath), { root: __dirname });
+});
+
+app.get('/interface/:filePath(*)', (req, res) => {
+  return res.sendFile(path.join('interface', req.params.filePath), { root: __dirname });
+});
+
+app.use(Express.static('public'));
 app.use(
     '/docs',
     swaggerUi.serve,
@@ -37,5 +52,22 @@ app.use(
     }),
 );
 
-// app.use(Router);
-RegisterRoutes(app);
+// API middle wares
+
+app.use(Express.json());
+
+// define api
+const api = new OpenAPIBackend({
+  definition: path.join(__dirname, './interface/api.yaml'),
+  handlers: {
+    ...Handlers,
+    validationFail: async (c, _req: Express.Request, res: Express.Response) =>
+      res.status(400).json({ err: c.validation.errors }),
+    notFound: async (_c, _req: Express.Request, res: Express.Response) => res.status(404).json({ err: 'not found' }),
+  },
+});
+
+api.init();
+
+// use as express middleware
+app.use((req, res) => api.handleRequest(req as Request, req, res));

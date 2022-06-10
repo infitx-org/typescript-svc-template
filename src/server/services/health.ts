@@ -3,7 +3,6 @@ import { Health } from '../models';
 import Config from '../../shared/config';
 
 export class HealthService {
-
     public async getHealth(): Promise<Health> {
         let mockServerResponse
         let status: 'OK' | 'ERROR' = 'OK'
@@ -19,7 +18,6 @@ export class HealthService {
             errors.push(err.message);
             console.log(`Error contacting mock server ${err.message}`);
           }
-        
         }
         return {
             status,

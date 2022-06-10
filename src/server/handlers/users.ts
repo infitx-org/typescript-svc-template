@@ -15,42 +15,35 @@
  *  limitations under the License                                             *
  ******************************************************************************/
 
-import {
-    Body,
-    Controller,
-    Get,
-    Path,
-    Post,
-    Query,
-    Route,
-    SuccessResponse,
-} from 'tsoa';
+import { Context, Document } from 'openapi-backend';
+import Express from 'express';
 import { User } from '../models';
-import { UsersService, UserCreationParams } from '../services/users';
+import { UsersService } from '../services/users';
 
-@Route('users')
-export class UsersController extends Controller {
-    @Get('{userId}')
-    public async getUser(
-        @Path() userId: number,
-    ): Promise<User | null> {
-        return new UsersService().get(userId);
-    }
+export default {
+    createUser: async (c: Context<Document>, _req: Express.Request, res: Express.Response) => {
+      const newUser: User = new UsersService().create(c.request.body);
+      return res.status(201).json(newUser);
+    },
+    getUser: async (c: Context<Document>, _req: Express.Request, res: Express.Response) =>
+    {
+      const user = new UsersService().get(+c.request.params?.userId);
+      if (user) {
+        return res.status(200).json(user);
+      } else {
+        return res.status(404).send();
+      }
 
-    @Get()
-    public async getUsers(
-        @Query() name?: string,
-    ): Promise<Array<User>> {
-        return new UsersService().getUsers(name);
-    }
-
-    @SuccessResponse('201', 'Created') // Custom success response
-    @Post()
-    public async createUser(
-        @Body() requestBody: UserCreationParams,
-    ): Promise<User> {
-        this.setStatus(201); // set return status 201
-        const newUser: User = new UsersService().create(requestBody);
-        return newUser;
-    }
+    },
+    getUsers: async (c: Context<Document>, _req: Express.Request, res: Express.Response) =>
+    {
+      if (c.request.query?.name) {
+        const users = new UsersService().getUsers(c.request.query.name + '');
+        return res.status(200).json(users);
+      } else {
+        const users = new UsersService().getAll();
+        return res.status(200).json(users);
+      }
+    },
 }
+

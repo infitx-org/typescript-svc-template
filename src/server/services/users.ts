@@ -2,7 +2,6 @@ import { User } from '../models';
 
 const users: Array<User> = [];
 
-// A post request should not contain an id.
 export type UserCreationParams = Pick<User, 'email' | 'name' | 'phoneNumbers'>;
 
 export class UsersService {

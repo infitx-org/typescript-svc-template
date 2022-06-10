@@ -96,3 +96,9 @@ An example structure of the TTK files are provided in the directory `test/func`
   npm run test:func
   ```
   You should see the `Passed percentage` as  `100%`
+
+TODO:
+- Add documentation about config using `convict` lib
+
+- For Swagger UI https://github.com/stoplightio/elements
+TODO: Choose one swagger UI and remove the other.
