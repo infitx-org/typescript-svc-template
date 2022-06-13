@@ -21,11 +21,10 @@
  * 
  */
 
-import { expect } from "chai";
 import axios from 'axios';
 import ApiServer from "../../src/server";
 
-const PORT = 8000;
+const PORT = 5000;
 axios.defaults.baseURL = `http://localhost:${PORT}`;
 
 const newSampleUser1 = {
@@ -46,56 +45,55 @@ let newUserId: number
 
 describe ('API Server', () => {
   describe("Health Endpoint", () => {
-    it("Start the API Server", () => {
-      expect(() => ApiServer.startServer(PORT)).not.to.throw();
+    it("Start the API Server", async () => {
+      await expect(ApiServer.startServer(PORT)).resolves.toBe(undefined)
     });
     it("Get Health Endpoint", async () => {
       const response = await axios.get('/health');
-      expect(response.data).to.haveOwnProperty('status')
-      expect(response.data.status).to.equal('OK')
+      expect(response.data).toHaveProperty('status')
+      expect(response.data.status).toEqual('OK')
     });
-    it("Stop the API Server", () => {
-      expect(() => ApiServer.stopServer()).not.to.throw();
+    it("Stop the API Server", async () => {
+      await expect(ApiServer.stopServer()).resolves.toBe(undefined)
     });
   });
   describe("Users Endpoint", () => {
-    it("Start the API Server", () => {
-      expect(() => ApiServer.startServer(PORT)).not.to.throw();
+    it("Start the API Server", async () => {
+      await expect(ApiServer.startServer(PORT)).resolves.toBe(undefined)
     });
     it("Create a user", async () => {
       const response = await axios.post('/users', newSampleUser1);
-      expect(response.status).to.equal(201)
-      expect(response.data).to.haveOwnProperty('id')
+      expect(response.status).toEqual(201)
+      expect(response.data).toHaveProperty('id')
       newUserId = response.data.id
-      expect(response.data).to.haveOwnProperty('email')
-      expect(response.data).to.haveOwnProperty('name')
-      expect(response.data.email).to.equal(newSampleUser1.email)
-      expect(response.data.name).to.equal(newSampleUser1.name)
+      expect(response.data).toHaveProperty('email')
+      expect(response.data).toHaveProperty('name')
+      expect(response.data.email).toEqual(newSampleUser1.email)
+      expect(response.data.name).toEqual(newSampleUser1.name)
     });
     it("Get the new user", async () => {
       const response = await axios.get(`/users/${newUserId}`);
-      expect(response.status).to.equal(200)
-      expect(response.data).to.haveOwnProperty('id')
-      expect(response.data).to.haveOwnProperty('email')
-      expect(response.data).to.haveOwnProperty('name')
-      expect(response.data.email).to.equal(newSampleUser1.email)
-      expect(response.data.name).to.equal(newSampleUser1.name)
+      expect(response.status).toEqual(200)
+      expect(response.data).toHaveProperty('id')
+      expect(response.data).toHaveProperty('email')
+      expect(response.data).toHaveProperty('name')
+      expect(response.data.email).toEqual(newSampleUser1.email)
+      expect(response.data.name).toEqual(newSampleUser1.name)
     });
     it("Create another user", async () => {
       const response = await axios.post('/users', newSampleUser2);
-      expect(response.status).to.equal(201)
-      expect(response.data).to.haveOwnProperty('id')
-      expect(response.data).to.haveOwnProperty('email')
-      expect(response.data).to.haveOwnProperty('name')
-      expect(response.data.email).to.equal(newSampleUser2.email)
-      expect(response.data.name).to.equal(newSampleUser2.name)
+      expect(response.status).toEqual(201)
+      expect(response.data).toHaveProperty('id')
+      expect(response.data).toHaveProperty('email')
+      expect(response.data).toHaveProperty('name')
+      expect(response.data.email).toEqual(newSampleUser2.email)
+      expect(response.data.name).toEqual(newSampleUser2.name)
     });
     it("Get all the users", async () => {
       const response = await axios.get(`/users`);
-      expect(response.status).to.equal(200);
-      expect(response.data).to.be.an.instanceof(Array);
-      // expect(Array.isArray(response.data)).to.equal(true);
-      expect(response.data.length).to.equal(2)
+      expect(response.status).toEqual(200);
+      expect(Array.isArray(response.data)).toEqual(true);
+      expect(response.data.length).toEqual(2)
       const users = response.data.map((item: any) => {
         return {
           email: item.email,
@@ -103,10 +101,10 @@ describe ('API Server', () => {
           phoneNumbers: item.phoneNumbers
         }
       })
-      expect(users).to.have.deep.members([newSampleUser1, newSampleUser2])
+      expect(users).toEqual([newSampleUser1, newSampleUser2])
     });
-    it("Stop the API Server", () => {
-      expect(() => ApiServer.stopServer()).not.to.throw();
+    it("Stop the API Server", async () => {
+      await expect(ApiServer.stopServer()).resolves.toBe(undefined)
     });
   });
 

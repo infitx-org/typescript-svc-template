@@ -3,16 +3,22 @@ import { app } from './app';
 
 let serverInstance: Server
 
-function startServer (port: number) {
-  serverInstance = app.listen(port, () => {
+const startServer = async (port: number) : Promise<void> => {
+  return new Promise((resolve) => {
+    serverInstance = app.listen(port, () => {
       console.log('Server is running on port', port);
-  });
+      resolve();
+    });
+  })
 }
 
-function stopServer () {
-  serverInstance.close(() => {
-    console.log('Server is stopped');
-  });
+const stopServer = async () : Promise<void> => {
+  return new Promise(resolve => {
+    serverInstance.close(() => {
+      console.log('Server is stopped');
+      resolve();
+    });
+  })
 }
 
 export default {
