@@ -16,7 +16,7 @@
  ******************************************************************************/
 
 import { MathLib } from './lib/math';
-import apiServer from './server';
+import ApiServer from './server';
 
 /* Instructions
  * 
@@ -33,7 +33,7 @@ console.log(`3x3=${MathLib.mul(3, 3)}`);
 
 
 const port = process.env.PORT || 8000;
-apiServer.startServer(+port)
+ApiServer.startServer(+port)
 
 //* }
 
