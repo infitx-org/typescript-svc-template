@@ -30,12 +30,12 @@ export const app: Application = Express();
 
 // API Docs
 app.get('(/doc/*)|(/doc)', (_req, res) => {
-  return res.sendFile('static-doc/index.html', { root: __dirname });
+  return res.sendFile('static-files/index.html', { root: __dirname });
 });
 
-app.get('/static-doc/:filePath(*)', (req, res) => {
-  return res.sendFile(path.join('static-doc', req.params.filePath), { root: __dirname });
-});
+// app.get('/static-files/:filePath(*)', (req, res) => {
+//   return res.sendFile(path.join('static-files', req.params.filePath), { root: __dirname });
+// });
 
 app.get('/interface/:filePath(*)', (req, res) => {
   return res.sendFile(path.join('interface', req.params.filePath), { root: __dirname });
