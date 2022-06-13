@@ -23,6 +23,7 @@
 
 import { expect } from "chai";
 import MathLib from "../../src/index";
+jest.mock('../../src/server');
 
 describe ('MathLib', () => {
   describe("test add function", () => {

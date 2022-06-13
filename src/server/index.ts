@@ -1,7 +1,11 @@
 import { app } from './app';
 
-const port = process.env.PORT || 8000;
+function startServer (port: number) {
+  app.listen(port, () => {
+      console.log('Server is running on port', port);
+  });
+}
 
-app.listen(port, () => {
-    console.log('Server is running on port', port);
-});
+export default {
+  startServer
+}
