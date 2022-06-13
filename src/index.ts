@@ -33,7 +33,7 @@ console.log(`3x3=${MathLib.mul(3, 3)}`);
 
 
 const port = process.env.PORT || 8000;
-ApiServer.startServer(+port)
+ApiServer.startServer(+port);
 
 //* }
 

@@ -23,14 +23,14 @@ import path from 'path';
 
 import Handlers from './handlers';
 
-const YAML = require('yamljs');
+import YAML from 'yamljs';
 const swaggerSpec = YAML.load(path.join(__dirname, './interface/api.yaml'));
 
 export const app: Application = Express();
 
 // API Docs
 app.get('(/doc/*)|(/doc)', (_req, res) => {
-  return res.sendFile('static-files/index.html', { root: __dirname });
+    return res.sendFile('static-files/index.html', { root: __dirname });
 });
 
 // app.get('/static-files/:filePath(*)', (req, res) => {
@@ -38,7 +38,7 @@ app.get('(/doc/*)|(/doc)', (_req, res) => {
 // });
 
 app.get('/interface/:filePath(*)', (req, res) => {
-  return res.sendFile(path.join('interface', req.params.filePath), { root: __dirname });
+    return res.sendFile(path.join('interface', req.params.filePath), { root: __dirname });
 });
 
 app.use(Express.static('public'));
@@ -58,13 +58,13 @@ app.use(Express.json());
 
 // define api
 const api = new OpenAPIBackend({
-  definition: path.join(__dirname, './interface/api.yaml'),
-  handlers: {
-    ...Handlers,
-    validationFail: async (c, _req: Express.Request, res: Express.Response) =>
-      res.status(400).json({ err: c.validation.errors }),
-    notFound: async (_c, _req: Express.Request, res: Express.Response) => res.status(404).json({ err: 'not found' }),
-  },
+    definition: path.join(__dirname, './interface/api.yaml'),
+    handlers: {
+        ...Handlers,
+        validationFail: async (c, _req: Express.Request, res: Express.Response) =>
+            res.status(400).json({ err: c.validation.errors }),
+        notFound: async (_c, _req: Express.Request, res: Express.Response) => res.status(404).json({ err: 'not found' }),
+    },
 });
 
 api.init();

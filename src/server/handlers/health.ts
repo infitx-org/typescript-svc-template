@@ -21,8 +21,8 @@ import { Health } from '../models';
 import { HealthService } from '../services/health';
 
 export default {
-  getHealth: async (_c: Context<Document>, _req: Express.Request, res: Express.Response) => {
-    const health: Health = await new HealthService().getHealth()
-    return res.status(200).json(health);
-  },
-}
+    getHealth: async (_c: Context<Document>, _req: Express.Request, res: Express.Response) => {
+        const health: Health = await new HealthService().getHealth();
+        return res.status(200).json(health);
+    },
+};

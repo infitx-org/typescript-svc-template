@@ -22,28 +22,25 @@ import { UsersService } from '../services/users';
 
 export default {
     createUser: async (c: Context<Document>, _req: Express.Request, res: Express.Response) => {
-      const newUser: User = new UsersService().create(c.request.body);
-      return res.status(201).json(newUser);
+        const newUser: User = new UsersService().create(c.request.body);
+        return res.status(201).json(newUser);
     },
-    getUser: async (c: Context<Document>, _req: Express.Request, res: Express.Response) =>
-    {
-      const user = new UsersService().get(+c.request.params?.userId);
-      if (user) {
-        return res.status(200).json(user);
-      } else {
-        return res.status(404).send();
-      }
+    getUser: async (c: Context<Document>, _req: Express.Request, res: Express.Response) => {
+        const user = new UsersService().get(+c.request.params?.userId);
+        if(user) {
+            return res.status(200).json(user);
+        } else {
+            return res.status(404).send();
+        }
 
     },
-    getUsers: async (c: Context<Document>, _req: Express.Request, res: Express.Response) =>
-    {
-      if (c.request.query?.name) {
-        const users = new UsersService().getUsers(c.request.query.name + '');
-        return res.status(200).json(users);
-      } else {
-        const users = new UsersService().getAll();
-        return res.status(200).json(users);
-      }
+    getUsers: async (c: Context<Document>, _req: Express.Request, res: Express.Response) => {
+        if(c.request.query?.name) {
+            const users = new UsersService().getUsers(c.request.query.name + '');
+            return res.status(200).json(users);
+        } else {
+            const users = new UsersService().getAll();
+            return res.status(200).json(users);
+        }
     },
-}
-
+};

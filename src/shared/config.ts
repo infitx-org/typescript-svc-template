@@ -19,52 +19,52 @@ import Convict from 'convict';
 import path from 'path';
 
 export interface MockServiceConfig {
-  HOST: string
-  PORT: number
+    HOST: string
+    PORT: number
 }
 
 // interface to represent service configuration
 export interface ServiceConfig {
-  ENV: string
-  MOCK_SERVICE: MockServiceConfig
-  GET_DATA_FROM_MOCK_SERVICE: boolean
+    ENV: string
+    MOCK_SERVICE: MockServiceConfig
+    GET_DATA_FROM_MOCK_SERVICE: boolean
 }
 
 // Declare configuration schema, default values and bindings to environment variables
 const config = Convict<ServiceConfig>({
-  ENV: {
-    doc: 'The application environment.',
-    format: ['production', 'development', 'test', 'integration', 'e2e'],
-    default: 'development',
-    env: 'NODE_ENV'
-  },
-  MOCK_SERVICE: {
-    HOST: {
-      doc: 'The Hostname/IP address of mock service.',
-      format: '*',
-      default: '0.0.0.0',
-      env: 'MOCK_SERVICE_HOST'
+    ENV: {
+        doc: 'The application environment.',
+        format: ['production', 'development', 'test', 'integration', 'e2e'],
+        default: 'development',
+        env: 'NODE_ENV',
     },
-    PORT: {
-      doc: 'The port of mock service.',
-      format: 'port',
-      default: 3001,
-      env: 'MOCK_SERVICE_PORT'
-    }
-  },
-  GET_DATA_FROM_MOCK_SERVICE: {
-    doc: 'Whether to connect to mock service and get the sample data.',
-    format: 'Boolean',
-    default: false,
-    env: 'GET_DATA_FROM_MOCK_SERVICE'
-  }
-})
+    MOCK_SERVICE: {
+        HOST: {
+            doc: 'The Hostname/IP address of mock service.',
+            format: '*',
+            default: '0.0.0.0',
+            env: 'MOCK_SERVICE_HOST',
+        },
+        PORT: {
+            doc: 'The port of mock service.',
+            format: 'port',
+            default: 3001,
+            env: 'MOCK_SERVICE_PORT',
+        },
+    },
+    GET_DATA_FROM_MOCK_SERVICE: {
+        doc: 'Whether to connect to mock service and get the sample data.',
+        format: 'Boolean',
+        default: false,
+        env: 'GET_DATA_FROM_MOCK_SERVICE',
+    },
+});
 
 // Load environment dependent configuration
-const env = config.get('ENV')
-config.loadFile(path.join(__dirname, `/../../config/${env}.json`))
+const env = config.get('ENV');
+config.loadFile(path.join(__dirname, `/../../config/${env}.json`));
 
 // Perform configuration validation
-config.validate({ allowed: 'strict' })
+config.validate({ allowed: 'strict' });
 
-export default config
+export default config;
