@@ -55,6 +55,7 @@
     "eslint-config-airbnb-typescript": "^17.0.0",
     "husky": "^8.0.1",
     "jest": "^28.1.0",
+    "npm-audit-resolver": "3.0.0-7",
     "npm-check-updates": "^13.0.0",
     "standard-version": "^9.5.0",
     "ts-jest": "^28.0.2",
