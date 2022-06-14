@@ -30,7 +30,7 @@
     "start:build": "npm run build && npm run start:no-build",
     "lint": "npx eslint --ext .js,.ts src --color",
     "lint:fix": "npm run lint -- --fix",
-    "audit:resolve": "echo 'TBD' && exit 1",
+    "audit:resolve": "npx resolve-audit",
     "audit:check": "npm audit",
     "clean": "rm -rf ./dist",
     "dep:check": "npx ncu -e 2",
