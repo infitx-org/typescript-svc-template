@@ -26,6 +26,7 @@ export interface MockServiceConfig {
 // interface to represent service configuration
 export interface ServiceConfig {
     ENV: string
+    PORT: number
     MOCK_SERVICE: MockServiceConfig
     GET_DATA_FROM_MOCK_SERVICE: boolean
 }
@@ -37,6 +38,12 @@ const config = Convict<ServiceConfig>({
         format: ['production', 'development', 'test', 'integration', 'e2e'],
         default: 'development',
         env: 'NODE_ENV',
+    },
+    PORT: {
+        doc: 'The port of the API server.',
+        format: 'port',
+        default: 8000,
+        env: 'PORT',
     },
     MOCK_SERVICE: {
         HOST: {

@@ -15,31 +15,30 @@
  *  limitations under the License                                             *
  ******************************************************************************/
 
-import { MathLib } from './lib/math';
-import ApiServer from './server';
-import Config from './shared/config';
-/* Instructions
- * 
- * 1. Choose one of the following styles below, either an APPLICATION or a LIBRARY
- * 2. Removed the application block and comments.
- * 
- */
+import { Server } from 'http';
+import ApiServer from '../../../src/server';
+import Config from '../../../src/shared/config';
 
-//* APPLICATION: {
+jest.mock('../../../src/server/app', () => {
+    return {
+        app: {
+            listen: (_port: number, callbackFn: any) => { callbackFn(); return Server; }
+        }
+    }
+});
+jest.mock('http', () => {
+    return {
+        Server: {
+            close: (callbackFn: any) => { callbackFn(); }
+        }
+    }
+});
 
-console.log(`1+1=${MathLib.add(1, 1)}`);
-
-console.log(`3x3=${MathLib.mul(3, 3)}`);
-
-
-const port = Config.get('PORT');
-ApiServer.startServer(+port);
-
-//* }
-
-//* LIBRARY: {
-
-export default MathLib;
-export * from './lib/math';
-
-//* }
+describe("Start and Stop API Server", () => {
+    test("startServer should return a resolved promise", async () => {
+        await expect(ApiServer.startServer(Config.get('PORT'))).resolves.toBe(undefined);
+    });
+    test("stopServer should return a resolved promise", async () => {
+        await expect(ApiServer.stopServer()).resolves.toBe(undefined);
+    });
+});

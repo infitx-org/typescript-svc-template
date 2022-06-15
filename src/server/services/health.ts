@@ -12,7 +12,7 @@ export class HealthService {
             console.log('Requesting mock server to get sample response');
             try {
                 const response = await axios.get('/pet/findByTags');
-                mockServerResponse = response.data;
+                mockServerResponse = response?.data;
             } catch (err: any) {
                 status = 'ERROR';
                 errors.push(err.message);
