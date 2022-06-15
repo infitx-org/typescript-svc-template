@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.154](https://github.com/modusbox/typescript-svc-template/compare/v0.0.153...v0.0.154) (2022-06-15)
+
+
+### Chore
+
+* add npm-audit-resolver dep ([2c11643](https://github.com/modusbox/typescript-svc-template/commit/2c11643700ada8b784e66b4613d2750fcbd24bef))
+* update audit resolve and check scripts and update deps ([88c47cb](https://github.com/modusbox/typescript-svc-template/commit/88c47cbdb6b968c861b1b3c4f0e83be73989732c))
+* update audit resolve script ([6f041fd](https://github.com/modusbox/typescript-svc-template/commit/6f041fd1ffe0517127015578dfd9b3576adf31ea))
+
 ### [0.0.153](https://github.com/modusbox/typescript-svc-template/compare/v0.0.152...v0.0.153) (2022-06-09)
 
 
