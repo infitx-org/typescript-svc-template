@@ -2,6 +2,48 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.155](https://github.com/modusbox/typescript-svc-template/compare/v0.0.154...v0.0.155) (2022-06-16)
+
+
+### Features
+
+* added an express server with swagger generator ([c45c939](https://github.com/modusbox/typescript-svc-template/commit/c45c9391f45e92acd9bd92e691e53c0b467bdef3))
+* added functional TTK ([f603602](https://github.com/modusbox/typescript-svc-template/commit/f6036021463d2dd4e648d0055627a45916534d52))
+* added mock service powered by ttk ([8ebc73b](https://github.com/modusbox/typescript-svc-template/commit/8ebc73b92f1e15336061cc92b34d96aaaad1fbf7))
+* added test chart ([2da6c40](https://github.com/modusbox/typescript-svc-template/commit/2da6c403c3b72e0e286e2a2bbbb9ee511f5a9e95))
+* added TTK report as artifact in github actions ([ffe2e15](https://github.com/modusbox/typescript-svc-template/commit/ffe2e15da1716441a4833080899644cfe019f14a))
+
+
+### Bug Fixes
+
+* addressed some PR comments ([1aff226](https://github.com/modusbox/typescript-svc-template/commit/1aff2264f85b5141ef3d5926d929d8bed6b55bad))
+* dependencies ([2e09fa4](https://github.com/modusbox/typescript-svc-template/commit/2e09fa4f4179c5d15ff9959425d9a563e558970c))
+* fixed docker image ([06b76ec](https://github.com/modusbox/typescript-svc-template/commit/06b76ecdcbbb2ba168b1fdeb1f4508969fa70cdf))
+* fixed npm build by installing ajv ([5933f3b](https://github.com/modusbox/typescript-svc-template/commit/5933f3bf3ba650de47b7d77f2746f6bef7a4afb3))
+* func test pipeline ([ea8fd67](https://github.com/modusbox/typescript-svc-template/commit/ea8fd6773ce00d470ec8428cfe7e42e7fcbe0a82))
+* integration tests ([8b5b174](https://github.com/modusbox/typescript-svc-template/commit/8b5b17403e380c8ebe6bedebf1fc4dd97a495d3d))
+* lint ([8a0a5a1](https://github.com/modusbox/typescript-svc-template/commit/8a0a5a1fe8c2ffc64602db7810666f5d62581430))
+* removed second option for swagger UI ([1f06721](https://github.com/modusbox/typescript-svc-template/commit/1f0672192ee9281185475b1296deb2d496040df0))
+* some fixes in func test cicd job ([21f8676](https://github.com/modusbox/typescript-svc-template/commit/21f8676b27e95636a889fbedabf642e8b2c2ec7b))
+* unit test ([6e15912](https://github.com/modusbox/typescript-svc-template/commit/6e15912940809a848777991dfd935cd8c608cd66))
+* unit test jest config ([dac7e02](https://github.com/modusbox/typescript-svc-template/commit/dac7e02e60a7ece4b7f50829ff50fffa186f2045))
+* updated package-lock.json ([cf03c93](https://github.com/modusbox/typescript-svc-template/commit/cf03c93960274d9bb61581dbb5959099214dbedf))
+
+
+### Chore
+
+* added fspiop spec to mockserver ([79f101f](https://github.com/modusbox/typescript-svc-template/commit/79f101fd9ebbe6670f77c85883c256ebf55d1464))
+* added integration tests ([80f3aeb](https://github.com/modusbox/typescript-svc-template/commit/80f3aeb9d5439cfc4fec83c007505d0ab99e7579))
+* added some documentation ([4bced82](https://github.com/modusbox/typescript-svc-template/commit/4bced8237cbe880e751fb4c2431d481cfebd7e1c))
+* added unit tests to meet coverage ([033fa8e](https://github.com/modusbox/typescript-svc-template/commit/033fa8ec8d42c8ddff7add66400f39f4a1038a29))
+* fix comments and documentation ([aee5fce](https://github.com/modusbox/typescript-svc-template/commit/aee5fce03b388badc539d15e691518b8603e6288))
+* merge branch 'main' ([dba2f2c](https://github.com/modusbox/typescript-svc-template/commit/dba2f2cec17eb2220e48bcf70ec095743a65bde0))
+* modified ttk doc ([4652277](https://github.com/modusbox/typescript-svc-template/commit/4652277d990495fc1c50ecae1001b81824578c19))
+* renamed-ttk-func-tests folder ([214c74b](https://github.com/modusbox/typescript-svc-template/commit/214c74b1ef8eb3c4ab5ba1a0ef319e44da5027a8))
+* updated dependencies ([8a4905f](https://github.com/modusbox/typescript-svc-template/commit/8a4905ff70fac82ca3160a6cd39c276a18855956))
+* updated the version of all jobs in CICD ([9f2b2f3](https://github.com/modusbox/typescript-svc-template/commit/9f2b2f32e956c0854555cdb42d021a6d92c7f6c2))
+* updated versions in release job ([d476c23](https://github.com/modusbox/typescript-svc-template/commit/d476c2384474185f35ca4f3a2fd53f7efe7428c9))
+
 ### [0.0.154](https://github.com/modusbox/typescript-svc-template/compare/v0.0.153...v0.0.154) (2022-06-15)
 
 
