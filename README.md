@@ -72,28 +72,7 @@ npm test
 
 ## Functional Testing using Mojaloop Testing Toolkit (TTK)
 
-We can use TTK to perform functional tests on a new JSON based RestAPI service.
-
-```mermaid
-graph LR;
-  TTK_CLI(TTK CLI)-->TTK_FUNC(TTK Service);
-  TTK_FUNC-->NEW_SVC[New Service];
-```
-
-In this case, we need to run the new service with all its dependencies and execute TTK tests against it.
 Please refer this [documentation](./test/func/README.md) to learn more about functional tests.
-
-### Running functional tests
-
-An example structure of the TTK files are provided in the directory `test/func`. Using docker-compose.yaml file provided in the folder, we can start the required services and execute the tests automatically.
-
-Use the following command to execute sample functional tests against the example api service.
-
-```
-npm run test:func
-```
-
-You should see the `Passed percentage` as  `100%`
 
 ## API server
 

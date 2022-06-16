@@ -25,7 +25,6 @@ export interface MockServiceConfig {
 
 // interface to represent service configuration
 export interface ServiceConfig {
-    ENV: string
     PORT: number
     MOCK_SERVICE: MockServiceConfig
     GET_DATA_FROM_MOCK_SERVICE: boolean
@@ -33,12 +32,6 @@ export interface ServiceConfig {
 
 // Declare configuration schema, default values and bindings to environment variables
 const config = Convict<ServiceConfig>({
-    ENV: {
-        doc: 'The application environment.',
-        format: ['production', 'development', 'test', 'integration', 'e2e'],
-        default: 'development',
-        env: 'NODE_ENV',
-    },
     PORT: {
         doc: 'The port of the API server.',
         format: 'port',
@@ -67,9 +60,8 @@ const config = Convict<ServiceConfig>({
     },
 });
 
-// Load environment dependent configuration
-const env = config.get('ENV');
-config.loadFile(path.join(__dirname, `/../../config/${env}.json`));
+// Load configuration
+config.loadFile(path.join(__dirname, '/../../config/default.json'));
 
 // Perform configuration validation
 config.validate({ allowed: 'strict' });
