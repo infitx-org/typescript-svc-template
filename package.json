@@ -86,7 +86,7 @@
     "jest": "^28.1.1",
     "nodemon": "^2.0.16",
     "npm-audit-resolver": "3.0.0-7",
-    "npm-check-updates": "^14.0.0",
+    "npm-check-updates": "^14.0.1",
     "standard-version": "^9.5.0",
     "supertest": "^6.2.3",
     "ts-jest": "^28.0.5",
