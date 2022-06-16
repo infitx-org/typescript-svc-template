@@ -13,6 +13,12 @@ graph LR;
   style TTK_FUNC stroke-dasharray: 5 5
 ```
 
-If a dependent service is still under development or too big to be run in the test harness, we can use TTK to mock that service. Please follow this documentation to create rules in TTK to get intended responses / callbacks from the mocked service.
+If a dependent service is still under development or too big to be run in the test harness, we can use TTK to mock that service. Please use the example template for TTK configuration files provided in this folder and import the necessary API specifications and create rules as needed.
 
-In this case, its preferable to run two separate TTK services. One for mocking and one for functional tests.
+_Note: In this case, its preferable to run two separate TTK services. One for mocking and one for functional tests._
+
+## Sample APIs
+
+The following sample APIs are provided with this template.
+- __FSPIOP 1.0__ This is asynchronous API which can be used to simulate a `mojaloop` switch or a `DFSP`. You need to configure `CALLBACK_ENDPOINT` in TTK to get callbacks.
+- __petstore__ This is a sample for synchronous API.

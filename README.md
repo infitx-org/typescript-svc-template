@@ -6,11 +6,19 @@ Refer to [CONTRIBUTING.md](./CONTRIBUTING.md) for information on how to contribu
 
 ## Configuration
 
-Here are the options that can be configured through environment variables.
+This service uses [Convict](https://github.com/mozilla/node-convict/blob/master/packages/convic) library for managing configuration. Using `Convict`, we can specify the configuration using `json` files and through the environment variable.
 
-| Environment variable | Description | Example values |
-| -------------------- | ----------- | ------ |
-| ...   | ... | ... |
+The precedence order is explained in this [section](https://github.com/mozilla/node-convict/blob/master/packages/convict/README.md#precedence-order).
+
+You can have a look at the environment variables in the `config` folder.
+
+Here are the options that can be configured through environment variables.
+| Environment variable | Description | Example values | Default value |
+| -------------------- | ----------- | ----------- | ------ |
+| PORT | The port of the API server | 0 to 65535 | 8000 |
+MOCK_SERVICE_HOST | The Hostname/IP address of mock service | | mock-service-host |
+MOCK_SERVICE_PORT | The port of mock service | 0 to 65535 | 3001 |
+GET_DATA_FROM_MOCK_SERVICE | Whether to connect to mock service and get the sample data | true,false | false |
 
 ## Pre-requisites
 
@@ -86,7 +94,5 @@ npm run test:func
 
 You should see the `Passed percentage` as  `100%`
 
-
-TODO: Add documentation about config using `convict` lib
 
 TODO: Choose one swagger UI and remove the other. https://github.com/stoplightio/elements

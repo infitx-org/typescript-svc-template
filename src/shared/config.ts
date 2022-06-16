@@ -49,7 +49,7 @@ const config = Convict<ServiceConfig>({
         HOST: {
             doc: 'The Hostname/IP address of mock service.',
             format: '*',
-            default: '0.0.0.0',
+            default: 'mock-service-host',
             env: 'MOCK_SERVICE_HOST',
         },
         PORT: {
