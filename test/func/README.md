@@ -86,6 +86,19 @@ npm run test:func
 
 You should see the `Passed percentage` as  `100%`
 
+- Include the openapi specification of the new service in TTK
+  - Create a directory `Ex: new-dev-service` in the folder `spec_files/api_definitions` and place the new API definition in `api_spec.yaml`
+  - In `system_config.json`, add it to the parameter `API_DEFINITIONS`
+  - Remove the unnecessary API definitions from `spec_files/api_definitions` and `system_config.json`
+- Configure TTK
+  - Set the parameter `CALLBACK_ENDPOINT` in `user_config.json` to point to proper hostname and port of the new service.
+- Run the new service and its dependencies in the background
+- Run TTK service in the background
+- Prepare a test case to test the required endpoints of the new service
+- If you want to parameterize some values, prepare a TTK environment file
+- Run the test case file with TTK CLI using the environment file
+
+
 
 TODO: Add documentation about config using `convict` lib
 
