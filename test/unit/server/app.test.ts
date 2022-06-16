@@ -24,11 +24,6 @@ import request from 'supertest';
 import { app } from '../../../src/server/app';
 
 describe("Test the docs endpoints", () => {
-    test("/doc endpoint should work", async () => {
-        const response = await request(app).get("/doc");
-        expect(response.statusCode).toBe(200);
-        expect(response).toHaveProperty('text');
-    });
     test("/docs should be redirected to /docs/", async () => {
         const response = await request(app).get("/docs");
         expect(response.statusCode).toBe(301);
@@ -41,14 +36,6 @@ describe("Test the docs endpoints", () => {
         expect(response).toHaveProperty('text');
     });
 
-});
-
-describe("Test the /interface endpoint", () => {
-    test("/interface endpoint should work", async () => {
-        const response = await request(app).get("/interface/api.yaml");
-        expect(response.statusCode).toBe(200);
-        expect(response).toHaveProperty('text');
-    });
 });
 
 describe("Test the unknown endpoint", () => {

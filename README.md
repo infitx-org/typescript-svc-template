@@ -79,10 +79,4 @@ Please refer this [documentation](./test/func/README.md) to learn more about fun
 An example API server is implemented using `express` library.
 Swagger (OpenAPI) validation is added to the express middleware. All the requests will be validated against the API specification in the swagger file. This is to support API first development approach.
 
-The following are the URLs for swagger UI and yaml file.
-
-TODO: Remove one of the options below for swagger UI
-http://localhost:8000/doc
-http://localhost:8000/docs
-
-http://localhost:8000/interface/api.yaml
+The URL for the swagger UI is http://localhost:8000/docs
