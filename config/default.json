@@ -1,0 +1,8 @@
+{
+    "PORT": 8000,
+    "MOCK_SERVICE": {
+        "HOST": "localhost",
+        "PORT": 8500
+    },
+    "GET_DATA_FROM_MOCK_SERVICE": false
+}

@@ -21,23 +21,23 @@
  * 
  */
 
-import { expect } from "chai";
 import MathLib from "../../src/index";
+jest.mock('../../src/server');
 
 describe ('MathLib', () => {
   describe("test add function", () => {
     it("should return 15 for add(10,5)", () => {
-      expect(MathLib.add(10, 5)).to.equal(15);
+      expect(MathLib.add(10, 5)).toEqual(15);
     });
   
     it("should return 5 for add(2,3)", () => {
-      expect(MathLib.add(2, 3)).to.equal(5);
+      expect(MathLib.add(2, 3)).toEqual(5);
     });
   });
 
   describe("test mul function", () => {
     it("should return 15 for mul(3,5)", () => {
-      expect(MathLib.mul(3, 5)).to.equal(15);
+      expect(MathLib.mul(3, 5)).toEqual(15);
     });
   });
 })

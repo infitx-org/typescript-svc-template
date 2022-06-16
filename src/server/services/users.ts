@@ -15,29 +15,39 @@
  *  limitations under the License                                             *
  ******************************************************************************/
 
-/* Example
- * 
- * This is an example Jest test for the MathLib example module.
- * 
- */
+import { User } from '../models';
 
-import { expect } from "chai";
-import MathLib from "../../src/index";
+const users: Array<User> = [];
 
-describe ('MathLib', () => {
-  describe("test add function", () => {
-    it("should return 15 for add(10,5)", () => {
-      expect(MathLib.add(10, 5)).to.equal(15);
-    });
-  
-    it("should return 5 for add(2,3)", () => {
-      expect(MathLib.add(2, 3)).to.equal(5);
-    });
-  });
+export type UserCreationParams = Pick<User, 'email' | 'name' | 'phoneNumbers'>;
 
-  describe("test mul function", () => {
-    it("should return 15 for mul(3,5)", () => {
-      expect(MathLib.mul(3, 5)).to.equal(15);
-    });
-  });
-})
+export class UsersService {
+
+    // Get a user with id
+    public get(id: number): User | null {
+        const foundUser = users.find(user => user.id === id);
+        if(!foundUser) return null;
+        return foundUser;
+    }
+
+    // Get the users filtering by name
+    public getUsers(name?: string): Array<User> {
+        return users.filter(user => user.name === name);
+    }
+
+    // Create a new user with random id
+    public create(userCreationParams: UserCreationParams): User {
+        const user: User = {
+            id: Math.floor(Math.random() * 10000), // Random
+            status: 'Happy',
+            ...userCreationParams,
+        };
+        users.push(user);
+        return user; 
+    }
+
+    // Get all users
+    public getAll(): Array<User> {
+        return users;
+    }
+}

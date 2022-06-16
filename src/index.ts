@@ -16,7 +16,8 @@
  ******************************************************************************/
 
 import { MathLib } from './lib/math';
-
+import ApiServer from './server';
+import Config from './shared/config';
 /* Instructions
  * 
  * 1. Choose one of the following styles below, either an APPLICATION or a LIBRARY
@@ -29,6 +30,10 @@ import { MathLib } from './lib/math';
 console.log(`1+1=${MathLib.add(1, 1)}`);
 
 console.log(`3x3=${MathLib.mul(3, 3)}`);
+
+// Start API server
+const port = Config.get('PORT');
+ApiServer.startServer(+port);
 
 //* }
 

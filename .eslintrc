@@ -96,7 +96,8 @@
         "error", 
         {
           "js": "never",
-          "ts": "never"
+          "ts": "never",
+          "json": "ignore"
         }
       ]
     }
