@@ -17,7 +17,7 @@
 
 /* Example
  * 
- * This is an example Jest test for the MathLib example module.
+ * This is an example Jest integration test for testing express based API server.
  * 
  */
 

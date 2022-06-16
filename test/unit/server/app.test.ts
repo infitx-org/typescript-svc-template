@@ -17,7 +17,7 @@
 
 /* Example
  * 
- * This is an example Jest test for express app.
+ * This is an example Jest unit test for express app.
  * 
  */
 import request from 'supertest';

@@ -37,7 +37,6 @@
     "start:build": "npm run build && npm run start:no-build",
     "start:ts-node": "ts-node src/index.ts",
     "dev": "nodemon",
-    "swagger": "tsoa spec-and-routes",
     "lint": "npx eslint --ext .js,.ts src --color",
     "lint:fix": "npm run lint -- --fix",
     "audit:resolve": "npx resolve-audit --production",

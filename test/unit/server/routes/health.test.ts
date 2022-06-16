@@ -15,11 +15,6 @@
  *  limitations under the License                                             *
  ******************************************************************************/
 
-/* Example
- * 
- * This is an example Jest test for the MathLib example module.
- * 
- */
 import request from 'supertest';
 import axios from 'axios';
 import { app } from '../../../../src/server/app';

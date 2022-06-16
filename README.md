@@ -81,6 +81,7 @@ graph LR;
 ```
 
 In this case, we need to run the new service with all its dependencies and execute TTK tests against it.
+Please refer this [documentation](./test/func/README.md) to learn more about functional tests.
 
 ### Running functional tests
 
@@ -94,5 +95,15 @@ npm run test:func
 
 You should see the `Passed percentage` as  `100%`
 
+## API server
 
-TODO: Choose one swagger UI and remove the other. https://github.com/stoplightio/elements
+An example API server is implemented using `express` library.
+Swagger (OpenAPI) validation is added to the express middleware. All the requests will be validated against the API specification in the swagger file. This is to support API first development approach.
+
+The following are the URLs for swagger UI and yaml file.
+
+TODO: Remove one of the options below for swagger UI
+http://localhost:8000/doc
+http://localhost:8000/docs
+
+http://localhost:8000/interface/api.yaml

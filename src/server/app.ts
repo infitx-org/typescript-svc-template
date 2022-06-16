@@ -20,27 +20,26 @@ import OpenAPIBackend from 'openapi-backend';
 import type { Request } from 'openapi-backend';
 import swaggerUi from 'swagger-ui-express';
 import path from 'path';
-
-import Handlers from './handlers';
-
 import YAML from 'yamljs';
-const swaggerSpec = YAML.load(path.join(__dirname, './interface/api.yaml'));
+import Handlers from './handlers';
 
 export const app: Application = Express();
 
-// API Docs
+// TODO: Remove an option among these for API documentation
+// API Docs - Option1 using https://github.com/stoplightio/elements
 app.get('(/doc/*)|(/doc)', (_req, res) => {
     return res.sendFile('static-files/index.html', { root: __dirname });
 });
-
+// If we want to host the js and css files in our service, we can download them and enable the following section.
 // app.get('/static-files/:filePath(*)', (req, res) => {
 //   return res.sendFile(path.join('static-files', req.params.filePath), { root: __dirname });
 // });
-
 app.get('/interface/:filePath(*)', (req, res) => {
     return res.sendFile(path.join('interface', req.params.filePath), { root: __dirname });
 });
 
+// API Docs - Option2 using swagger-ui-express
+const swaggerSpec = YAML.load(path.join(__dirname, './interface/api.yaml'));
 app.use(Express.static('public'));
 app.use(
     '/docs',
@@ -52,11 +51,11 @@ app.use(
     }),
 );
 
-// API middle wares
-
+// API middle-wares
+// To parse Json in the payload
 app.use(Express.json());
 
-// define api
+// API routes based on the swagger file
 const api = new OpenAPIBackend({
     definition: path.join(__dirname, './interface/api.yaml'),
     handlers: {
@@ -69,5 +68,5 @@ const api = new OpenAPIBackend({
 
 api.init();
 
-// use as express middleware
+// Passing the openAPI object as express middle-ware
 app.use((req, res) => api.handleRequest(req as Request, req, res));
