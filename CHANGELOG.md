@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.156](https://github.com/modusbox/typescript-svc-template/compare/v0.0.155...v0.0.156) (2022-06-17)
+
+
+### Chore
+
+* Add ATTENTION comment to point out that lib or image cmds should be selected ([946cc57](https://github.com/modusbox/typescript-svc-template/commit/946cc57f4349c4259da675ecc6f0bd0a2b0fd008))
+* Add ATTENTION comment to point out that lib or image cmds should be selected ([4fd9b13](https://github.com/modusbox/typescript-svc-template/commit/4fd9b135381a0d19bb39ab419f6366d423c8eaac))
+* update package deps ([a5a68cb](https://github.com/modusbox/typescript-svc-template/commit/a5a68cba9163acbe7a7816c61d83225657f24919))
+
 ### [0.0.155](https://github.com/modusbox/typescript-svc-template/compare/v0.0.154...v0.0.155) (2022-06-16)
 
 
